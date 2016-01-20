@@ -1,0 +1,28 @@
+{
+  "name": "voting-app",
+  "version": "1.0.0",
+  "description": "Sondage is a dynamic web app that allows users to create and share polls for any content they would like.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/chrisdziewa/voting-app.git"
+  },
+  "keywords": [
+    "voting",
+    "node",
+    "express",
+    "freecodecamp"
+  ],
+  "author": "Chris Dziewa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chrisdziewa/voting-app/issues"
+  },
+  "homepage": "https://github.com/chrisdziewa/voting-app",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
