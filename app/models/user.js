@@ -4,7 +4,10 @@ var userSchema = mongoose.Schema({
   username:  {
     type: String,
     required: true,
-    lowercase: true
+    unique: true,
+    index: {
+      unique: true
+    } 
   },
   email: {
     type: String,
@@ -14,7 +17,8 @@ var userSchema = mongoose.Schema({
   },
   password:  {
     type: String,
-    required: true
+    required: true,
+    select: false
   }
 });
 
