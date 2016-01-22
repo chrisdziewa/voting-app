@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const validate = require('mongoose-validator');
 const bcrypt = require('bcrypt');
 
-// Validations with mongoose validator
+//=== Validations with mongoose validator ====
 let usernameValidator = [
   validate({
     validator: 'isLength',
@@ -32,6 +32,7 @@ let passwordValidator = [
   })
 ];
 
+// ==== Schema Design ====
 
 let userSchema = mongoose.Schema({
   username:  {
@@ -57,18 +58,27 @@ let userSchema = mongoose.Schema({
   }
 });
 
-// Encrypt password on save
-userSchema.pre('save', next => {
-  let user = this;
+// ==== Before Save Middleware ====
 
+// Encrypt password on save
+// Use of function instead of ES6 since a bug prevented the function from running
+userSchema.pre('save', function(next) {
+  let user = this;
   bcrypt.genSalt(10, (err, salt) => {
     bcrypt.hash(user.password, salt, (err, hash) => {
+      if (err) {
+        return console.error(err);
+      }
       user.password = hash;
       next();
     });
   });
 });
 
+// ==== Methods ====
+userSchema.methods.comparePassword = (password) => {
+  return bcrypt.compareSync(password, user.password);
+}
 
 let User = mongoose.model('User', userSchema);
 
