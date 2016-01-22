@@ -64,6 +64,10 @@ let userSchema = mongoose.Schema({
 // Use of function instead of ES6 since a bug prevented the function from running
 userSchema.pre('save', function(next) {
   let user = this;
+
+  if (!user.isModified('password')) {
+    return next();
+  }
   bcrypt.genSalt(10, (err, salt) => {
     bcrypt.hash(user.password, salt, (err, hash) => {
       if (err) {
