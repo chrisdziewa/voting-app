@@ -27,7 +27,6 @@ module.exports = function(express, app) {
     else if (typeof req.body.choices !== 'object' || req.body.choices.length > 40) {
       return res.status(400).send('A poll can have a maximum of 40 options');
     }
-
     else if (typeof req.body.question !== 'string') {
       return res.status(400).send('Invalid question');
     }
