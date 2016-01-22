@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1/sondage');
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
