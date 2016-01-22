@@ -1,6 +1,7 @@
 'use strict';
 const User = require('../models/user');
 const _ = require('underscore');
+const authenticateRoute = require('../middleware/auth-middleware');
 
 // All routes are starting at /api/users/
 
@@ -43,7 +44,7 @@ module.exports = function(express, app) {
     });
   });
 
-  router.get('/:id', (req, res) => {
+  router.get('/:id', authenticateRoute,(req, res) => {
     let userId = req.params.id
     User.findById({_id: userId}, (err, user) => {
       if (err) {
@@ -59,7 +60,8 @@ module.exports = function(express, app) {
     });
   });
 
-  router.put('/:id', (req, res) => {
+  router.put('/:id', authenticateRoute,(req, res) => {
+    console.log(req.decoded);
     let userId = req.params.id;
     let validAttributes = _.pick(req.body, 'username', 'email', 'password');
     User.findById({_id: userId}, (err, user) => {
@@ -73,7 +75,7 @@ module.exports = function(express, app) {
         if (validAttributes.email) user.email = validAttributes.email;
         if (validAttributes.password) user.password = validAttributes.password;
       } else {
-        res.status(404).send('Could not find user with that id');
+        return res.status(404).send('Could not find user with that id');
       }
 
       // All is well, now save user
@@ -88,7 +90,7 @@ module.exports = function(express, app) {
     });
   });
 
-  router.delete('/:id', (req, res) => {
+  router.delete('/:id', authenticateRoute,(req, res) => {
     let userId = req.params.id;
 
     User.remove({_id: userId}, (err, obj) => {

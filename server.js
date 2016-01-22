@@ -25,8 +25,10 @@ app.get('/', (req, res) => {
 // ===== Import Routers ======
 const userRouter = require('./app/routes/user.routes')(express, app);
 const pollRouter = require('./app/routes/poll.routes')(express, app);
+const authRouter = require('./app/routes/auth.routes')(express, app);
 app.use('/api/users', userRouter);
 app.use('/api/polls', pollRouter);
+app.use('/api/', authRouter);
 
 
 app.listen(port, () => {
