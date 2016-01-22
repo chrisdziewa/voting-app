@@ -28,7 +28,15 @@ module.exports = function(express, app) {
 
     newUser.save((error, user) => {
       if (error) {
-        return res.status(500).json({success: false, message: error});
+        // Duplicate database value
+        if (error.code == 11000) {
+          if (/username/.test(error.message)) {
+            return res.status(500).json({success: false, message: 'User with that name already exists'});
+          }
+            return res.status(500).json({success: false, message: 'Email is already taken'});
+        } else {
+           return res.status(500).json({success: false, message: error});
+         }
       } else {
         res.json(user);
       }

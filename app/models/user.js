@@ -1,6 +1,7 @@
 'use strict';
 const mongoose = require('mongoose');
 const validate = require('mongoose-validator');
+const bcrypt = require('bcrypt');
 
 // Validations with mongoose validator
 let usernameValidator = [
@@ -49,12 +50,23 @@ let userSchema = mongoose.Schema({
     unique: true,
     validate: emailValidator
   },
-  password:  {
+  password: {
     type: String,
     required: true,
-    select: false,
-    validate: passwordValidator
+    select: false
   }
+});
+
+// Encrypt password on save
+userSchema.pre('save', next => {
+  let user = this;
+
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(user.password, salt, (err, hash) => {
+      user.password = hash;
+      next();
+    });
+  });
 });
 
 
