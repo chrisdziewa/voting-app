@@ -82,9 +82,15 @@ module.exports = function(express, app) {
       } 
       // Poll found now update it
       let choice = req.body.choice.trim();
-      if (poll.choices.hasOwnProperty(choice)) {
-        poll.choices[choice] = poll.choices[choice] + 1;
-      } else {
+
+      let newItem = true;
+      Object.keys(poll.choices).forEach((propertyName) => {
+        if (propertyName.toLowerCase() === choice.toLowerCase() && newItem) {
+          poll.choices[propertyName] = poll.choices[propertyName] + 1;  
+          newItem = false;
+        }
+      });
+      if (newItem) {
         poll.choices[choice] = 1;
       }
       Poll.update({_id: pollId}, poll, (err, obj) => {
