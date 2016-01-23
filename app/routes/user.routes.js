@@ -8,6 +8,7 @@ const authenticateRoute = require('../middleware/auth-middleware');
 module.exports = function(express, app) {
   let router = express.Router();
 
+  // => GET /api/users
   router.get('/', (req,res) => {
     User.find({}, (error, users) => {
       if (error) {
@@ -22,7 +23,7 @@ module.exports = function(express, app) {
     });
   });
 
-  // Create a new user
+  // Create a new user => POST /api/users
   router.post('/', (req,res) => {
     let validAttributes = _.pick(req.body, 'username', 'email', 'password');
     let newUser = new User(validAttributes);
@@ -39,11 +40,14 @@ module.exports = function(express, app) {
            return res.status(500).json({success: false, message: error});
          }
       } else {
-        res.json(user);
+        // Prevent password field from being returned in response
+        let displayUser = _.pick(user, '_id', 'username', 'email');
+        res.json(displayUser);
       }
     });
   });
 
+  // => GET /api/users/:id
   router.get('/:id', authenticateRoute,(req, res) => {
     let userId = req.params.id
     User.findById({_id: userId}, (err, user) => {
@@ -60,8 +64,8 @@ module.exports = function(express, app) {
     });
   });
 
+  // => PUT /api/users/:id
   router.put('/:id', authenticateRoute,(req, res) => {
-    console.log(req.decoded);
     let userId = req.params.id;
     let validAttributes = _.pick(req.body, 'username', 'email', 'password');
     User.findById({_id: userId}, (err, user) => {
@@ -90,6 +94,7 @@ module.exports = function(express, app) {
     });
   });
 
+  // => DELETE /api/users/:id
   router.delete('/:id', authenticateRoute,(req, res) => {
     let userId = req.params.id;
 

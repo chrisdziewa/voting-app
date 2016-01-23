@@ -2,15 +2,18 @@
 const User = require('../models/user');
 const config = require('../config/config');
 const jwt = require('jsonwebtoken');
+const authenticateRoute = require('../middleware/auth-middleware');
 
 module.exports = function(express, app) {
   let router = express.Router();
 
   router.post('/authenticate', (req, res) => {
+    if (!req.body.email || typeof req.body.email !== 'string') {
+      res.status(400).send('Bad data request');
+    }
     User.findOne({
       email: req.body.email.toLowerCase()
     }).select('username email password').exec((err, user) => {
-      console.log(user);
       if (err) {
         return res.status(500).send('An error occurred while authenticating user');
       }
@@ -29,13 +32,21 @@ module.exports = function(express, app) {
       }, config.privateKey, {
         expiresIn: '7d'
       });
-
-      res.json({
-        success: true,
-        message: 'Successfully logged in',
-        token: token
-      });
+      // set cookie for 7 days
+      res.cookie('auth_token', token, {maxAge: 604800000, path: "/"}).json({success: true,
+        message: 'Successfully logged in'});
     });
+  });
+
+  // Logout route
+  router.delete('/authenticate', authenticateRoute,(req, res) => {
+    if (req.decoded) {
+      res.cookie('auth_token', false, {maxAge: 1, path: "/"});
+      res.clearCookie('auth_token', {path: "/"});
+      res.send("You have successfully logged out");
+    } else {
+      res.status(400).send('There is no active session');
+    }
   });
 
   return router;

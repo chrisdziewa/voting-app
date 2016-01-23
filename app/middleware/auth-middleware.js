@@ -4,9 +4,14 @@ const jwt = require('jsonwebtoken');
 
 module.exports = function(req,res,next) {
     // check header or url params or post params for token
-    let token = req.body.token || req.param('token') || req.headers['x-access-token'];
-
-    // decode the token
+    let token = req.cookies.auth_token
+    if (token && typeof token === 'string') {
+      token = token.split(' ').join('');
+    }
+    else {
+      return res.status(401).send('Authentication failed');
+    }
+    //decode the token
     if (token) {
       // verify token and exp not reached
       jwt.verify(token, config.privateKey, (err, decoded) => {

@@ -5,12 +5,14 @@ const app = express();
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser');
 
 // Establish connection with MongoDB
 mongoose.connect('mongodb://127.0.0.1/sondage');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
