@@ -1,5 +1,6 @@
 'use strict';
 const User = require('../models/user');
+const Poll = require('../models/poll');
 const _ = require('underscore');
 const authenticateRoute = require('../middleware/auth-middleware');
 
@@ -12,7 +13,6 @@ module.exports = function(express, app) {
   router.get('/', (req,res) => {
     User.find({}, (error, users) => {
       if (error) {
-        console.log(error);
         return res.status(500).send('There was an error processing your request');
       } 
       if (users) {
@@ -54,15 +54,12 @@ module.exports = function(express, app) {
     let userId = req.params.id
     User.findById({_id: userId}, (err, user) => {
       if (err) {
-        res.status(500).send('Error completing your request');
-        return console.error(err);
-      } else {
-        if (user) {
-          res.json(user);
-        } else {
-          res.status(404).send("User not found");
-        }
+        return res.status(500).send('Error completing your request');
+      } 
+      else if (!user) {
+        return res.status(404).send("User not found");
       }
+        res.json(user);
     });
   });
 
@@ -72,7 +69,6 @@ module.exports = function(express, app) {
     let validAttributes = _.pick(req.body, 'username', 'email', 'password');
     User.findById({_id: userId}, (err, user) => {
       if (err) {
-        console.log(err);
         return res.status(500).send('There was an error completing your request');
       }
       if (user) {
@@ -87,7 +83,6 @@ module.exports = function(express, app) {
       // All is well, now save user
       user.save((err) => {
         if (err) {
-          console.log(err);
           res.status(500).send('Could not update user');
         } else {
           res.json({success: true, message: 'User has been updated!'});
@@ -102,7 +97,6 @@ module.exports = function(express, app) {
 
     User.remove({_id: userId}, (err, obj) => {
       if (err) {
-        console.log(err);
         return res.status(500).send('Could not delete user');
       }
       if (obj.result.n === 0) {
@@ -111,6 +105,65 @@ module.exports = function(express, app) {
       else {
         res.send('User has been deleted');
       }
+    });
+  });
+
+
+  // => GET /api/users/:id/polls
+  router.get('/:username/polls', (req, res) => {
+    let username = req.params.username;
+    if (typeof username !== 'string') {
+      return res.status(400).send('Could not process your request');
+    }
+    User.findOne({
+      lowercase_name: username.toLowerCase()
+    }, (err, user) => {
+      if (err) {
+        return res.status(500).send('Could not process your request');
+      }
+      else if (!user) {
+        return res.status(404).send('User does not exist');
+      } 
+      // User found now find their polls
+      Poll.find({
+        user_id: user._id
+      }, (err, polls) => {
+        if (err) {
+          res.status(500).send('Could not process your request');
+        } 
+        // send back polls to user
+        res.json(polls);
+      });
+    });
+  });
+
+  // => GET /api/users/:username/polls/:question
+  router.get('/:username/polls/:question', (req,res) => {
+    let username = req.params.username.toLowerCase();
+    let question = req.params.question;
+    User.findOne({lowercase_name: username}, (err, user) => {
+      if (err) {
+        return res.status(500).send('Could not process your request');
+      } 
+      else if (!user) {
+        return res.status(404).send('User does not exist');
+      } 
+      // user found, now look for the poll
+      let likeQuestion = new RegExp(question, 'i');
+
+      Poll.findOne({
+        question: likeQuestion,
+        user_id: user._id
+      }, (err, poll) => {
+        if (err) {
+          return res.status(500).send('Could not process your request');
+        } 
+        else if (!poll) {
+         return res.status(404).send('Could not find poll with that name');
+        }
+        // User's poll found, not send it in response
+        res.json(poll);
+      });
     });
   });
 
