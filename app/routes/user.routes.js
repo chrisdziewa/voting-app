@@ -32,10 +32,12 @@ module.exports = function(express, app) {
       if (error) {
         // Duplicate database value
         if (error.code == 11000) {
-          if (/username/.test(error.message)) {
+          if (/username/.test(error.message) || /lowercase_name/.test(error.message)) {
             return res.status(500).json({success: false, message: 'User with that name already exists'});
           }
-            return res.status(500).json({success: false, message: 'Email is already taken'});
+           else { 
+            return res.status(500).json({success: false, message: 'Email is already taken',  error: error.message});
+          }
         } else {
            return res.status(500).json({success: false, message: error});
          }

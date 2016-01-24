@@ -44,6 +44,11 @@ let userSchema = mongoose.Schema({
     },
     validate: usernameValidator
   },
+  lowercase_name: {
+    type: String,
+    unique: true,
+    select: false
+  },
   email: {
     type: String,
     required: true,
@@ -65,9 +70,14 @@ let userSchema = mongoose.Schema({
 userSchema.pre('save', function(next) {
   let user = this;
 
+  if (user.isModified('username') || user.isNew) {
+    user.lowercase_name = user.username.toLowerCase();
+  }
+
   if (!user.isModified('password')) {
     return next();
   }
+
   bcrypt.genSalt(10, (err, salt) => {
     bcrypt.hash(user.password, salt, (err, hash) => {
       if (err) {
