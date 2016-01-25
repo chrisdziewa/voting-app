@@ -6,9 +6,10 @@ const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const config = require('./app/config/config.js');
 
 // Establish connection with MongoDB
-mongoose.connect('mongodb://127.0.0.1/sondage');
+mongoose.connect(config.db.connectString);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
