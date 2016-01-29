@@ -15,6 +15,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+app.use(express.static('public'));
+
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
 db.once('open', () => {
@@ -22,7 +24,7 @@ db.once('open', () => {
 });
 
 app.get('/', (req, res) => {
-  res.send('Hello, world');
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 // ===== Import Routers ======
