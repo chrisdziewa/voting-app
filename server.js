@@ -35,7 +35,10 @@ app.use('/api/users', userRouter);
 app.use('/api/polls', pollRouter);
 app.use('/api/', authRouter);
 
-
+// For all other requests, use React Router
+app.get('*', function (request, response){
+  response.sendFile(__dirname + '/public/index.html');
+});
 
 app.listen(port, () => {
   console.log('Server running on port ' + port);
