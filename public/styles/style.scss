@@ -1,0 +1,48 @@
+/***** General Styling  *******/
+
+
+/**** Navigation Bar*****/
+
+.navbar-default .navbar-nav li a:hover {
+    background: rgba(180, 180, 180, .4);
+}
+
+
+/*****Welcome Banner Styling*****/
+
+.jumbotron {
+    background: rgba(0, 230, 220, .5);
+    text-align: center;
+    h1 {
+        text-shadow: 1px 1px 2px white;
+    }
+    .lead {
+        font-size: 1.6em;
+    }
+}
+
+
+/******* Form *******/
+
+.form-container {
+    border: 1px solid rgba(220, 220, 220, 1);
+    margin: 0 auto;
+    margin-top: 40px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+    text-align: center;
+    padding-bottom: 100px;
+    form {
+        margin: 0 auto;
+        width: 80%;
+        position: relative;
+    }
+}
+
+input[type="text"],
+input[type="password"] {
+    margin: 0 auto;
+    width: 100%;
+    margin-bottom: 10px;
+}
