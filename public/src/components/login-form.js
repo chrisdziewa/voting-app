@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 export default class SignupForm extends Component {
   render() {
     return (
-      <div className="container">
+      <div className="signup-page">
         <div className="form-container">
-          <h3>Sign into Your Account</h3>
+          <h3>Sign into your account</h3>
           <form>
             <div className="input-form-group">
               <label htmlFor="email" className="pull-left">Email</label>

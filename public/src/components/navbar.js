@@ -23,10 +23,10 @@ export default (props) => {
           <div id="navbar-collapse" className="collapse navbar-collapse">
               <ul className="nav navbar-nav navbar-right">
                 <li>
-                  <Link to="/signup">Sign Up</Link>
+                  <Link to="/signup">Sign up</Link>
                 </li>
                 <li>
-                  <a href="#">Login</a>
+                  <Link to="/login">Login</Link>
                 </li>
               </ul>
             </div>

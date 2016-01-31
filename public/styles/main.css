@@ -1,7 +1,16 @@
+/* grey background pattern from subtlepatterns.com */
 /***** General Styling  *******/
+body {
+  background: url("/img/blue-background.jpg");
+  background-position: cover;
+  background-repeat: no-repeat; }
+
 /**** Navigation Bar*****/
 .navbar-default .navbar-nav li a:hover {
-  background: rgba(180, 180, 180, 0.4); }
+  background: rgba(180, 180, 180, 0.5); }
+
+.navbar-default {
+  background: url(/img/grey.png); }
 
 /*****Welcome Banner Styling*****/
 .jumbotron {
@@ -18,9 +27,11 @@
 
 /******* Forms *******/
 .form-container {
-  border: 1px solid gainsboro;
-  margin: 0 auto;
-  margin-top: 40px;
+  border: 1px solid rgba(230, 230, 230, 0.4);
+  /*background-image: url(/img/grey.png);*/
+  background: rgba(250, 250, 250, 0.4);
+  margin: 50px auto 100px;
+  vertical-align: middle;
   width: 80%;
   max-width: 500px;
   position: relative;
@@ -30,21 +41,20 @@
     margin: 0 auto;
     width: 80%;
     position: relative; }
-
-input[type="text"],
-input[type="password"] {
-  margin: 0 auto;
-  width: 100%;
-  margin-bottom: 10px; }
-
-input[type="submit"] {
-  margin: 5px 0 10px; }
+    .form-container form input[type="text"],
+    .form-container form input[type="password"] {
+      margin: 0 auto;
+      width: 100%;
+      margin-bottom: 10px; }
+    .form-container form input[type="submit"] {
+      margin: 5px 0 10px; }
 
 /***** Footer *****/
 footer {
   position: absolute;
   width: 100%;
-  background: rgba(230, 230, 230, 0.7);
+  background: #285050;
+  background-image: url(/img/grey.png);
   bottom: 0;
   left: 0;
   padding: 20px 0 10px; }
