@@ -5,14 +5,18 @@
 
 /*****Welcome Banner Styling*****/
 .jumbotron {
-  background: rgba(0, 230, 220, 0.5);
-  text-align: center; }
+  background-image: url("/img/blue-background.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-align: center;
+  min-height: 300px; }
   .jumbotron h1 {
     text-shadow: 1px 1px 2px white; }
   .jumbotron .lead {
     font-size: 1.6em; }
 
-/******* Form *******/
+/******* Forms *******/
 .form-container {
   border: 1px solid gainsboro;
   margin: 0 auto;
@@ -32,3 +36,17 @@ input[type="password"] {
   margin: 0 auto;
   width: 100%;
   margin-bottom: 10px; }
+
+input[type="submit"] {
+  margin: 5px 0 10px; }
+
+/***** Footer *****/
+footer {
+  position: absolute;
+  width: 100%;
+  background: rgba(230, 230, 230, 0.7);
+  bottom: 0;
+  left: 0;
+  padding: 20px 0 10px; }
+  footer p {
+    text-align: center; }
