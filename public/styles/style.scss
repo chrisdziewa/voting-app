@@ -1,37 +1,34 @@
 /* grey background pattern from subtlepatterns.com */
 
+
 /***** General Styling  *******/
+
 body {
-  background: url('/img/blue-background.jpg');
-  background-position: cover;
-  background-repeat: no-repeat;
+    background: #67A798;
+    background-position: fill;
+    background-repeat: no-repeat;
+    padding-bottom: 20px;
+    background-image: -moz-linear-gradient(to top right, rgba(0,100,130,.8) 0%, #67A798 70%);
+    background-image: -webkit-linear-gradient(to top right, rgba(0,100,130,.8) 0%, #67A798 70%);
+    background-image: -ms-linear-gradient(to top right, rgba(0,100,130,.8) 0%, #67A798 70%);
+    background-image: -o-linear-gradient(to top right, rgba(0,100,130,.8) 0%, #67A798 70%);
+    background-image: linear-gradient(to top right, rgba(0,100,130,.8) 0%, #67A798 70%);
 }
+
 
 /**** Navigation Bar*****/
 
-.navbar-default .navbar-nav li a:hover {
-    background: rgba(180,180,180, .5);
+.navbar-inverse .navbar-nav li a:hover,
+.navbar-inverse .navbar-nav li.active a {
+    background: #67A798;
 }
 
 .navbar-default {
-  background: url(/img/grey.png);
+    background: url(/img/grey.png);
 }
 
-/*****Welcome Banner Styling*****/
-
-.jumbotron {
-    background-image: url('/img/blue-background.jpg'); 
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    text-align: center;
-    min-height: 300px;
-    h1 {
-        text-shadow: 1px 1px 2px white;
-    }
-    .lead {
-        font-size: 1.6em;
-    }
+.navbar-inverse {
+    background: rgba(40, 40, 40, 1);
 }
 
 
@@ -39,8 +36,8 @@ body {
 
 .form-container {
     border: 1px solid rgba(230, 230, 230, .4);
-    /*background-image: url(/img/grey.png);*/
-    background: rgba(250,250,250,.4);
+    background-image: url(/img/grey.png);
+    background: rgba(250, 250, 250, .4);
     margin: 50px auto 100px;
     vertical-align: middle;
     width: 80%;
@@ -59,24 +56,64 @@ body {
             margin-bottom: 10px;
         }
         input[type="submit"] {
-          margin: 5px 0 10px;
+            margin: 5px 0 10px;
         }
     }
 }
 
 
-/***** Footer *****/
-footer {
-  position: absolute;
-  width: 100%;
-  background: rgba(40,80,80,1);
-  background-image: url(/img/grey.png);
-  bottom: 0;
-  left: 0;
-  padding: 20px 0 10px;
-  p {
+/***** Home Page  Styling*****/
+
+.jumbotron {
+    background-image: url('/img/blue-background.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     text-align: center;
-  }
+    min-height: 300px;
+    margin-bottom: 0;
+    h1 {
+        text-shadow: 1px 1px 2px white;
+    }
+    .lead {
+        font-size: 1.6em;
+    }
+}
+
+.site-info-bar {
+    margin-top: 0;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background: rgba(40, 40, 40, 1);
+    min-height: 300px;
+    text-align: center;
+    h3 {
+        color: rgba(200, 200, 200, 1);
+    }
+    .info-icon {
+        font-size: 80px;
+        color: rgba(80, 150, 150, 1);
+    }
+    p {
+        color: rgba(200, 200, 200, 1);
+        text-align: left;
+        margin: 10px auto 10px;
+        max-width: 70%;
+    }
 }
 
 
+/***** Footer *****/
+
+footer {
+    position: absolute;
+    width: 100%;
+    background: rgba(40, 80, 80, 1);
+    background-image: url(/img/grey.png);
+    bottom: 0;
+    left: 0;
+    padding: 20px 0 10px;
+    p {
+        text-align: center;
+    }
+}

@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 export default (props) => {
   return (
     <div>
-      <nav className="navbar-default">
+      <nav className="navbar-inverse">
         <div className="container-fluid">
           <div className="navbar-header">
             <button 
