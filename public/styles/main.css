@@ -1,15 +1,22 @@
-/* grey background pattern from subtlepatterns.com */
 /***** General Styling  *******/
 html,
 body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
   background: #67A798;
-  background-position: fill;
-  background-repeat: no-repeat;
   background-image: -moz-linear-gradient(to top right, rgba(0, 100, 130, 0.8) 0%, #67A798 70%);
   background-image: -webkit-linear-gradient(to top right, rgba(0, 100, 130, 0.8) 0%, #67A798 70%);
   background-image: -ms-linear-gradient(to top right, rgba(0, 100, 130, 0.8) 0%, #67A798 70%);
   background-image: -o-linear-gradient(to top right, rgba(0, 100, 130, 0.8) 0%, #67A798 70%);
-  background-image: linear-gradient(to top right, rgba(0, 100, 130, 0.8) 0%, #67A798 70%); }
+  background-image: linear-gradient(to top right, rgba(0, 100, 130, 0.8) 0%, #67A798 70%);
+  background-attachment: fixed; }
+
+.app {
+  padding-bottom: 60px;
+  position: relative;
+  min-height: 100vh;
+  overflow: auto; }
 
 .main-content ul {
   list-style: none;
@@ -19,9 +26,6 @@ body {
 .navbar-inverse .navbar-nav li a:hover,
 .navbar-inverse .navbar-nav li.active a {
   background: #67A798; }
-
-.navbar-default {
-  background: url(/img/grey.png); }
 
 .navbar-inverse {
   background: #282828; }
@@ -56,8 +60,8 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   text-align: center;
-  min-height: 300px;
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  padding: 100px 0; }
   .jumbotron h1 {
     text-shadow: 1px 1px 2px white; }
   .jumbotron .lead {
@@ -65,11 +69,10 @@ body {
 
 .site-info-bar {
   margin-top: 0;
-  margin-bar: 0;
+  margin-bottom: 0;
   padding-top: 40px;
   padding-bottom: 40px;
   background: #282828;
-  min-height: 300px;
   text-align: center; }
   .site-info-bar h3 {
     color: #c8c8c8; }
@@ -98,6 +101,9 @@ body {
   width: 80%;
   margin: 10px auto; }
 
+.poll-content button {
+  margin-top: 10px; }
+
 input[type="radio"] {
   cursor: pointer; }
 
@@ -114,12 +120,14 @@ input[type="radio"] {
 
 /***** Footer *****/
 footer {
-  position: relative;
+  position: absolute;
   width: 100%;
   background: #285050;
   background-image: url(/img/grey.png);
   left: 0;
-  padding: 20px 0 10px;
+  bottom: 0;
+  height: 60px;
+  padding: 20px 0 0;
   margin: 0; }
   footer p {
     text-align: center; }

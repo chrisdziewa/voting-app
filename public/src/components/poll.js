@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import PollChoice from './poll-choice';
 
 export default class Poll extends Component {
+
   renderPollChoices() {
     if (typeof this.props.choices === 'undefined') {
       return null;
     }
     return this.props.choices.map(choice => {
-      return <li key={choice}><PollChoice choice={choice} /></li>
+      return <li key={choice}><PollChoice disabled={true} choice={choice} /></li>
     });
   }
 
@@ -16,7 +17,14 @@ export default class Poll extends Component {
       <div className="poll-content">
         <h3>{this.props.question}</h3>
         <ul>
-          {this.renderPollChoices()}
+          <form>
+            {this.renderPollChoices()}
+            <PollChoice disabled={false} />
+            <div className="input-form-group">
+              <button className="btn btn-primary form-control" type="submit">Vote</button>
+            </div>
+          </form>
+
         </ul>
       </div>
     );
