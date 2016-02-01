@@ -6,6 +6,7 @@ import Navbar from './components/navbar';
 import HomePage from './components/home-page';
 import SignupForm from './components/signup-form';
 import LoginForm from './components/login-form';
+import AllPolls from './containers/all-polls';
 import NoMatch from './components/404';
 
 export default (
@@ -13,6 +14,7 @@ export default (
       <IndexRoute component={HomePage} />
       <Route path="/signup" component={SignupForm} />
       <Route path="/login" component={LoginForm} />
+      <Route path="/polls" component={AllPolls} />
       <Route path="*" component={NoMatch}/>
     </Route>
 );

@@ -2,12 +2,11 @@
 
 
 /***** General Styling  *******/
-
+html,
 body {
     background: #67A798;
     background-position: fill;
     background-repeat: no-repeat;
-    padding-bottom: 20px;
     background-image: -moz-linear-gradient(to top right, rgba(0,100,130,.8) 0%, #67A798 70%);
     background-image: -webkit-linear-gradient(to top right, rgba(0,100,130,.8) 0%, #67A798 70%);
     background-image: -ms-linear-gradient(to top right, rgba(0,100,130,.8) 0%, #67A798 70%);
@@ -15,6 +14,10 @@ body {
     background-image: linear-gradient(to top right, rgba(0,100,130,.8) 0%, #67A798 70%);
 }
 
+.main-content ul {
+  list-style: none;
+  padding: 0;
+}
 
 /**** Navigation Bar*****/
 
@@ -67,7 +70,6 @@ body {
 .jumbotron {
     background-image: url('/img/blue-background.jpg');
     background-position: center;
-    background-size: cover;
     background-repeat: no-repeat;
     text-align: center;
     min-height: 300px;
@@ -82,6 +84,7 @@ body {
 
 .site-info-bar {
     margin-top: 0;
+    margin-bar: 0;
     padding-top: 40px;
     padding-bottom: 40px;
     background: rgba(40, 40, 40, 1);
@@ -103,16 +106,54 @@ body {
 }
 
 
+/***** Polls *****/
+
+.well.poll {
+  margin-top: 15px;
+  width: 70%;
+  margin: 15px auto;
+  text-align: center;
+}
+
+.poll-content ul {
+    width: 80%;
+    margin: 10px auto;
+}
+
+.poll-content h3 {
+    text-align: left;
+    width: 80%;
+    margin: 10px auto;
+}   
+
+input[type="radio"] {
+    cursor: pointer;
+}
+
+.poll-choice {
+    background: rgba(250,250,250,1);
+    cursor: pointer;
+}
+
+.choice-text[type="text"]:disabled {
+    background: rgba(250,250,250,1);
+    cursor: pointer;
+}
+
+.choice-text[type="text"]:disabled:focus {
+    background: rgba(220,220,220,1);
+}
+
 /***** Footer *****/
 
 footer {
-    position: absolute;
+    position: relative;
     width: 100%;
     background: rgba(40, 80, 80, 1);
     background-image: url(/img/grey.png);
-    bottom: 0;
     left: 0;
     padding: 20px 0 10px;
+    margin: 0;
     p {
         text-align: center;
     }
