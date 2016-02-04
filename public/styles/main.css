@@ -114,9 +114,10 @@ input[type="radio"] {
 .choice-text[type="text"]:disabled {
   background: #fafafa;
   cursor: pointer; }
-
-.choice-text[type="text"]:disabled:focus {
-  background: gainsboro; }
+  .choice-text[type="text"]:disabled:focus {
+    background: gainsboro; }
+  .choice-text[type="text"]:disabled:hover {
+    background: #f0f0f0; }
 
 /***** Footer *****/
 footer {

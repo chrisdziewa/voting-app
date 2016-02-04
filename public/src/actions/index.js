@@ -2,6 +2,8 @@ import axios from 'axios';
 
 export const FETCH_ALL_POLLS = 'FETCH_ALL_POLLS';
 export const FETCH_SINGLE_POLL = 'FETCH_SINGLE_POLL';
+export const UPDATE_VOTES = 'UPDATE_VOTES';
+export const LOGIN_USER = 'LOGIN_USER';
 const ROOT_URL = 'http://localhost:3000/api';
 
 export function fetchAllPolls() {
@@ -18,4 +20,16 @@ export function fetchSinglePoll(pollId) {
     type: FETCH_SINGLE_POLL,
     payload: request
   };
+}
+
+export function updateVotes(id, choice) {
+  const request = axios.put(`${ROOT_URL}/polls/${id}`, {choice: choice});
+  return {
+    type:  UPDATE_VOTES,
+    payload: request
+  }
+}
+
+export function loginUser(props) {
+
 }

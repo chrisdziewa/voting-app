@@ -1,34 +1,68 @@
 import React, { Component } from 'react';
 import PollChoice from './poll-choice';
 import PollResult from '../containers/poll-result';
+import { connect} from 'react-redux';
+import { updateVotes } from '../actions/index';
 
-export default class Poll extends Component {
+class Poll extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { showResult: false };
+    this.state = { 
+      showResult: false,
+      currentChoice: ''
+     };
   } 
+
+  handleChecked(choice) {
+    this.setState({
+      currentChoice: choice
+    });
+  }
 
   renderPollChoices() {
     if (typeof this.props.choices === 'undefined') {
       return null;
     }
     return this.props.choices.map(choice => {
-      return <li key={choice}><PollChoice disabled={true} choice={choice} /></li>
+      return <li key={choice}>
+        <PollChoice 
+          checkOption={this.handleChecked.bind(this)} 
+          disabled={true} 
+          choice={choice} 
+          currentChoice={this.state.currentChoice}
+        />
+      </li>
     });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    let data = this.state.currentChoice;
+    if (!data || !data.length > 0) {
+      return false;
+    }
+    this.props.updateVotes(this.props.id, data) 
+      .then(() => {
+        this.setState({
+          showResult: true
+        });
+      }); 
   }
 
   renderPoll() {
     return (
       <ul>
-        <form>
+        <form onSubmit={this.handleSubmit.bind(this)}>
           {this.renderPollChoices()}
-          <PollChoice disabled={false} />
+          <PollChoice 
+            disabled={false} 
+            checkOption={this.handleChecked.bind(this)} 
+            currentChoice={this.state.currentChoice}
+          />
           <div className="input-form-group">
             <button 
-              onClick={this.handleVoteClick.bind(this)}
               className="btn btn-primary form-control" 
-              type="submit"
             >
               Vote
             </button>
@@ -38,18 +72,10 @@ export default class Poll extends Component {
     );
   }
 
-  handleVoteClick(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    this.setState({
-      showResult: true
-    });
-  }
-
   renderPollResult() {
     // When clicked, change state to showResult and only show result
     return (
-      <PollResult id={this.props.id}/>
+      <PollResult id={this.props.id} />
     );
   }
 
@@ -62,3 +88,10 @@ export default class Poll extends Component {
     );
   }
 }
+
+export default connect(null, { updateVotes })(Poll);
+
+
+
+
+

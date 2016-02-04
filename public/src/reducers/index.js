@@ -3,7 +3,8 @@ import { reducer as formReducer } from 'redux-form';
 import PollsReducer from './reducer-polls';
 
 const rootReducer = combineReducers({
-  polls: PollsReducer
+  polls: PollsReducer,
+  form: formReducer
 });
 
 export default rootReducer;
