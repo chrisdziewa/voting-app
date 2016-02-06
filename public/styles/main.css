@@ -54,6 +54,13 @@ body {
     .form-container form input[type="submit"] {
       margin: 5px 0 10px; }
 
+div.form-group {
+  position: relative; }
+
+div.help-text.text-danger {
+  position: absolute;
+  top: 5px; }
+
 /***** Home Page  Styling*****/
 .jumbotron {
   background-image: url("/img/blue-background.jpg");

@@ -10,7 +10,7 @@ class Poll extends Component {
 
     this.state = { 
       showResult: false,
-      currentChoice: ''
+      currentChoice: null
      };
   } 
 
