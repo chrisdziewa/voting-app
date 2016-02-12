@@ -8,6 +8,19 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const config = require('./app/config/config.js');
 
+//==== Webpack development setup ====//
+const webpackConfig = require('./webpack.config.js');
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+
+const compiler = webpack(webpackConfig);
+
+app.use(webpackDevMiddleware(compiler, {noInfo: true, publicPath: webpackConfig.output.publicPath}));
+app.use(webpackHotMiddleware(compiler));
+
+//==== End Webpack Setup ==== //
+
 // Establish connection with MongoDB
 mongoose.connect(config.db.connectString);
 
@@ -17,7 +30,7 @@ app.use(cookieParser());
 
 app.use(express.static('public'));
 
-var db = mongoose.connection;
+const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
 db.once('open', () => {
   console.log('Connected to sondage database');

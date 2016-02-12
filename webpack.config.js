@@ -1,18 +1,25 @@
+var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-
 module.exports = {
+  devtool: 'inline-source-map',
   entry: [
+    'webpack-hot-middleware/public/src',
     './public/src/index.js'
   ],
   output: {
-    filename: "./public/bundle.js"
+    path: './public',
+    filename: "bundle.js",
+    publicPath: '/public/'
   },
   module: {
   loaders: [
     { 
       test: /\.jsx?$/, 
       exclude: ['node_modules', 'app'], 
-      loader: "babel-loader"
+      loader: "babel-loader",
+      query: {
+        presets: ["es2015", "react", "stage-1", "react-hmre"]
+      }
     },
     {
         test: /\.scss$/,
@@ -22,7 +29,10 @@ module.exports = {
   ]
 },
   plugins: [
-    new ExtractTextPlugin("./public/styles/main.css")
+    new ExtractTextPlugin("./public/styles/main.css"),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
   ],
   resolve: {
     extensions: ['', '.js', '.jsx', '.scss']
