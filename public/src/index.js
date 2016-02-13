@@ -11,7 +11,7 @@ import routes from './routes';
 import promise from 'redux-promise';
 
 const store = createStore(
-  rootReducer, applyMiddleware(thunk, logger())
+  rootReducer, applyMiddleware(thunk, promise, logger())
 );
 
 ReactDOM.render(

@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { browserHistory } from 'react-router';
+
 export const FETCH_ALL_POLLS = 'FETCH_ALL_POLLS';
 export const FETCH_SINGLE_POLL = 'FETCH_SINGLE_POLL';
 export const UPDATE_VOTES = 'UPDATE_VOTES';
@@ -13,6 +15,7 @@ export const FLASH_ERROR = 'FLASH_ERROR';
 export const FLASH_SUCCESS = 'FLASH_SUCCESS';
 export const FLASH_INFO = 'FLASH_INFO';
 export const DISMISS_FLASH = 'DISMISS_FLASH';
+export const DISMISS_ALL_FLASH = 'DISMISS_ALL_FLASH';
 
 export function postError (payload) {
   return {
@@ -39,6 +42,12 @@ export function dismissFlash (payload) {
   return {
     type: DISMISS_FLASH,
     payload
+  }
+}
+
+export function dismissAllFlash() {
+  return {
+    type: DISMISS_ALL_FLASH
   }
 }
 
@@ -75,11 +84,18 @@ export function loginRequest(props) {
       axios.post(`${ROOT_URL}/authenticate`, props).then(response => {
         if (response.status == 200) {
           dispatch(postSuccess('Logged in succesfully'));
+          browserHistory.push('/');
           dispatch(loginSuccess(response.data));
+          setTimeout(() => {
+            dispatch(dismissAllFlash());
+          }, 2500);
         }
       }, () => { 
         dispatch(loginError()); 
         dispatch(postError('Failed to log in'));
+        setTimeout(() => {
+          dispatch(dismissAllFlash());
+        }, 2500);
       });
     };
   }
