@@ -12,6 +12,24 @@ const config = require('../config/config');
 module.exports = function(express, app) {
   let router = express.Router();
 
+    // => GET /api/users/current (current logged in user)
+  router.get('/current', authenticateRoute, (req, res) => {
+    let loggedUser = req.decoded;
+    User.findOne({username: loggedUser.username}, (err, user) => {
+      if (err) {
+        return res.status(500).send('There was an error completing your request');
+      } else if (!user) {
+        return res.status(404).send('No user with that id');
+      }
+      let currentUser = {
+        username: user.username,
+        email: user.email,
+        _id: user._id
+      };
+      res.json(currentUser);
+    });
+  });
+
   // => GET /api/users
   router.get('/', (req, res) => {
     User.find({}, (error, users) => {
@@ -242,3 +260,4 @@ module.exports = function(express, app) {
 
   return router;
 };
+

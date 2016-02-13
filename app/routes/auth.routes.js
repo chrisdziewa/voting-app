@@ -23,7 +23,7 @@ module.exports = function(express, app) {
       // user was found, now verify correct password
       let correctPassword = user.comparePassword(req.body.password);
       if (!correctPassword) {
-       return res.json({success: false, message: 'Authentication failed. Incorrect password.'});
+       return res.status(401).json({success: false, message: 'Authentication failed. Incorrect password.'});
       }
       // Password was valid, now create a token
       let token = jwt.sign({
@@ -32,9 +32,15 @@ module.exports = function(express, app) {
       }, config.privateKey, {
         expiresIn: '7d'
       });
+      let userResponse = {
+        success: true,
+        message: 'Successfully logged in!',
+        id: user._id,
+        email: user.email,
+        username: user.username
+      }
       // set cookie for 7 days
-      res.cookie('auth_token', token, {maxAge: 604800000, path: "/"}).json({success: true,
-        message: 'Successfully logged in'});
+      res.cookie('auth_token', token, {maxAge: 604800000, path: "/"}).json(userResponse);
     });
   });
 

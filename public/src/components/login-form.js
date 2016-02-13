@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
-import { loginUser } from '../actions/index';
+import { loginRequest } from '../actions/index';
 
 class LoginForm extends Component {
   onSubmit(props) {
-    this.props.loginUser(props)
-      .then((data) => {
-    // will go to profile page
-    // TODO: create profile page
-        if (data.success) {
-          alert(data.message);
-        }
-      });
+    this.props.loginRequest(props);
   }
 
   
@@ -69,4 +62,4 @@ export default reduxForm({
   form: 'LoginForm',
   fields: ['email', 'password'],
   validate
-}, null, { loginUser })(LoginForm);
+}, null, { loginRequest })(LoginForm);

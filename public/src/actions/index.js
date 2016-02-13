@@ -4,8 +4,45 @@ export const FETCH_ALL_POLLS = 'FETCH_ALL_POLLS';
 export const FETCH_SINGLE_POLL = 'FETCH_SINGLE_POLL';
 export const UPDATE_VOTES = 'UPDATE_VOTES';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_ERROR = 'LOGIN_ERROR'
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 const ROOT_URL = 'http://localhost:3000/api';
+
+// Flash Actions
+export const FLASH_ERROR = 'FLASH_ERROR';
+export const FLASH_SUCCESS = 'FLASH_SUCCESS';
+export const FLASH_INFO = 'FLASH_INFO';
+export const DISMISS_FLASH = 'DISMISS_FLASH';
+
+export function postError (payload) {
+  return {
+    type: FLASH_ERROR,
+    payload
+  }
+}
+
+export function postSuccess (payload) {
+  return {
+    type: FLASH_SUCCESS,
+    payload
+  };
+}
+
+export function postInfo (payload) {
+  return {
+    type: FLASH_INFO,
+    payload
+  };
+}
+
+export function dismissFlash (payload) {
+  return {
+    type: DISMISS_FLASH,
+    payload
+  }
+}
+
+// End Flash Actions
 
 export function fetchAllPolls() {
   const request = axios.get(`${ROOT_URL}/polls`);
@@ -33,26 +70,32 @@ export function updateVotes(id, choice) {
 
 /* Authentication here */ 
 
-export function loginUser(props) {
-  const request = axios.post(`${ROOT_URL}/authenticate`, props).then(data => {
+export function loginRequest(props) {
+    return (dispatch) => {
+      axios.post(`${ROOT_URL}/authenticate`, props).then(response => {
+        if (response.status == 200) {
+          dispatch(postSuccess('Logged in succesfully'));
+          dispatch(loginSuccess(response.data));
+        }
+      }, () => { 
+        dispatch(loginError()); 
+        dispatch(postError('Failed to log in'));
+      });
+    };
+  }
 
-    return dispatch()
-    if (data.success) {
-      return {
-        type: LOGIN_SUCCESS,
-        payload: data
+  function loginSuccess(data) {
+    return {
+      type: LOGIN_SUCCESS,
+      payload: data
+    }
+  }
+
+  function loginError() {
+    return {
+      type: LOGIN_ERROR,
+      payload: {
+        loggedIn: false
       }
     }
-    else {
-      return {
-        LOGIN_ERROR,
-        payload: data.message
-      }
-    }
-  });
-
-  // return {
-  //   type: LOGIN_REQUEST,
-  //   payload: request
-  // }
-}
+  }

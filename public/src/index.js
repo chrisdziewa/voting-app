@@ -6,14 +6,16 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Router, browserHistory } from 'react-router';
 import logger from 'redux-logger';
-import reducers from './reducers';
+import rootReducer from './reducers';
 import routes from './routes';
 import promise from 'redux-promise';
 
-const createStoreWithMiddleware = applyMiddleware(promise, thunk, logger())(createStore);
+const store = createStore(
+  rootReducer, applyMiddleware(thunk, logger())
+);
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={store}>
     <Router history={browserHistory} routes={routes} />
   </Provider>  
 , document.querySelector('#container'));
