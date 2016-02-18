@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
+import actions from './actions/index';
 
 import App from './components/app';
 import Navbar from './components/navbar';
@@ -9,13 +10,21 @@ import LoginForm from './components/login-form';
 import AllPolls from './containers/all-polls';
 import NoMatch from './components/404';
 import PollResult from './containers/poll-result';
+import { getCurrentUser } from './actions/index';
 
-export default (
-    <Route path="/" component={App}>
-      <IndexRoute component={HomePage} />
-      <Route path="/signup" component={SignupForm} />
-      <Route path="/login" component={LoginForm} />
-      <Route path="/chart" component={PollResult} />
-      <Route path="*" component={NoMatch}/>
-    </Route>
-);
+export default function createRoutes(store) {
+  // Router Helper Functions
+  function currentUserCheck() {
+    store.dispatch(getCurrentUser());
+  }
+  
+  return (
+      <Route path="/" component={App} onEnter={currentUserCheck}>
+        <IndexRoute component={HomePage} />
+        <Route path="/signup" component={SignupForm} />
+        <Route path="/login" component={LoginForm} />
+        <Route path="/chart" component={PollResult} />
+        <Route path="*" component={NoMatch}/>
+      </Route>
+  );
+}

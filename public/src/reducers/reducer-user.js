@@ -1,7 +1,8 @@
 import { 
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
-  LOGIN_ERROR
+  LOGIN_ERROR,
+  LOGGED_OUT
 } from '../actions/index';
 
 
@@ -22,7 +23,9 @@ export default function(state = INITIAL_STATE, action) {
         return state;
       } else {
         return INITIAL_STATE;
-      }
+      } 
+    case LOGGED_OUT:
+      return INITIAL_STATE;  
     default: 
       return state;
   }

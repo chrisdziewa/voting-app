@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import { Router, browserHistory } from 'react-router';
 import logger from 'redux-logger';
 import rootReducer from './reducers';
-import routes from './routes';
+import createRoutes from './routes';
 import promise from 'redux-promise';
 
 const store = createStore(
@@ -16,6 +16,6 @@ const store = createStore(
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={browserHistory} routes={routes} />
+    <Router history={browserHistory} routes={createRoutes(store)} />
   </Provider>  
 , document.querySelector('#container'));

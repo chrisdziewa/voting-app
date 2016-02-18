@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { logoutUser } from '../actions/index';
 
 class Navbar extends Component {
+  handleLogout(e) {
+    e.preventDefault();
+    this.props.logoutUser();
+  }
+
   render() {
+    console.log(this.props.user.username);
     return (
       <div>
         <nav className="navbar-inverse">
@@ -34,7 +41,11 @@ class Navbar extends Component {
                   <li>
                     {
                       this.props.user.loggedIn ?
-                      <Link to="/logout">Logout</Link>
+                      <a 
+                        onClick={this.handleLogout.bind(this)}
+                        href="#"
+                      >
+                      logout</a>
                       : <Link to="/login">Login</Link>
                     }
                   </li>
@@ -53,4 +64,4 @@ let mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps, { logoutUser })(Navbar);
