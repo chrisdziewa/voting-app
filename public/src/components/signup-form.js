@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { reduxForm } from 'redux-form';
+import { Link } from 'react-router';
+
 
 export default class SignupForm extends Component {
   render() {
@@ -30,7 +33,7 @@ export default class SignupForm extends Component {
             <div className="input-form-group">
                <input type="submit" className="pull-left form-control btn btn-primary" value="Submit" />
             </div>
-            <p className="pull-left">Already have an account?<a href="#"> Login</a></p>
+            <p className="pull-left">Already have an account?<Link to="/login"> Login</Link></p>
           </form>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { loginRequest } from '../actions/index';
+import { Link } from 'react-router';
 
 class LoginForm extends Component {
   onSubmit(props) {
@@ -34,6 +35,7 @@ class LoginForm extends Component {
             <div className="input-form-group">
               <input type="submit" className="btn-login pull-left form-control btn btn-primary" value="Submit" />
             </div>
+            <p className="pull-left">Don't have an account yet? <Link to="/signup">Signup</Link> for free</p>
           </form>
         </div>
       </div>
