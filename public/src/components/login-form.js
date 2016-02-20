@@ -35,7 +35,8 @@ class LoginForm extends Component {
             <div className="input-form-group">
               <input type="submit" className="btn-login pull-left form-control btn btn-primary" value="Submit" />
             </div>
-            <p className="pull-left">Don't have an account yet? <Link to="/signup">Signup</Link> for free</p>
+            <p className="pull-left">Don't have an account yet?</p>
+            <p className="pull-left"><Link to="/signup"> Signup</Link> for free</p>
           </form>
         </div>
       </div>

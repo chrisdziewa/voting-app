@@ -6,18 +6,18 @@ export const FETCH_ALL_POLLS = 'FETCH_ALL_POLLS';
 export const FETCH_SINGLE_POLL = 'FETCH_SINGLE_POLL';
 export const UPDATE_VOTES = 'UPDATE_VOTES';
 
-// Auth Constants
-export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_ERROR = 'LOGIN_ERROR';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGGED_OUT = 'LOGGED_OUT';
-
 // Flash Actions
 export const FLASH_ERROR = 'FLASH_ERROR';
 export const FLASH_SUCCESS = 'FLASH_SUCCESS';
 export const FLASH_INFO = 'FLASH_INFO';
 export const DISMISS_FLASH = 'DISMISS_FLASH';
 export const DISMISS_ALL_FLASH = 'DISMISS_ALL_FLASH';
+
+// Auth Constants
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGGED_OUT = 'LOGGED_OUT';
 
 const ROOT_URL = 'http://localhost:3000/api';
 
@@ -79,6 +79,27 @@ export function updateVotes(id, choice) {
   return {
     type:  UPDATE_VOTES,
     payload: request
+  }
+}
+
+/* Signup actions */
+export function signupUser(props) {
+  return (dispatch) => {
+    let request = `${ROOT_URL}/users`;
+    axios.post(request, props).then(response => {
+      if (response.status === 200) {
+        dispatch(postSuccess(`Welcome, ${props.username}! Thanks for signing up for Sondage!`));
+        dispatch(loginRequest(props));
+        setTimeout(() => {
+          dispatch(dismissAllFlash());
+        }, 2500);
+      }
+    }, (response) => {
+      dispatch(postError(response.data.message));
+        setTimeout(() => {
+          dispatch(dismissAllFlash());
+        }, 2500);
+    });
   }
 }
 
