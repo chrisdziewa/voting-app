@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSinglePoll } from '../actions/index';
 import axios from 'axios';
+import  Chart from 'chart.js'
  
 class PollResult extends Component {
   constructor(props) {
