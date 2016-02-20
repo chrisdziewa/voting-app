@@ -62,10 +62,10 @@
         vertical-align: middle;
         width: 80%;
         max-width: 500px;
-        height: 100%;
         position: relative;
         text-align: center;
-        padding-bottom: 100px;
+        overflow: auto;
+        padding-bottom: 20px;
         h3 {
             color: rgba(230, 230, 230, 1);
         }
