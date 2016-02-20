@@ -27,6 +27,10 @@ module.exports = {
         test: /\.scss$/,
         exclude: ['node_modules', 'app'],
         loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
+      },
+      {
+        test   :  /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+        loader : 'file-loader'
       }
   ]
 },
@@ -34,7 +38,11 @@ module.exports = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new ExtractTextPlugin("./styles/main.css")
+    new ExtractTextPlugin("./styles/main.css"),
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    })
   ],
   resolve: {
     extensions: ['', '.js', '.jsx', '.scss']
