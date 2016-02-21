@@ -55,11 +55,15 @@ class Poll extends Component {
       <ul>
         <form onSubmit={this.handleSubmit.bind(this)}>
           {this.renderPollChoices()}
-          <PollChoice 
-            disabled={false} 
-            checkOption={this.handleChecked.bind(this)} 
-            currentChoice={this.state.currentChoice}
-          />
+          {
+            this.props.user.loggedIn ? 
+              <PollChoice 
+                disabled={false} 
+                checkOption={this.handleChecked.bind(this)} 
+                currentChoice={this.state.currentChoice}
+              />
+              : null
+          }
           <div className="input-form-group">
             <button 
               className="btn btn-primary form-control" 

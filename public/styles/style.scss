@@ -150,6 +150,9 @@
         padding: 100px 0;
         h1 {
             text-shadow: 1px 1px 2px white;
+            @media screen and (max-width: 400px) {
+                font-size: 3em;
+            }
         }
         .lead {
             font-size: 1.6em;
@@ -180,9 +183,8 @@
     /***** Polls *****/
     
     .well.poll {
-        margin-top: 15px;
         width: 70%;
-        margin: 15px auto;
+        margin: 30px auto 40px;
         text-align: center;
     }
     
@@ -199,6 +201,19 @@
         button {
             margin-top: 10px;
         }
+    }
+
+    .recent-polls-header {
+        text-shadow: 1px 1px 2px white;
+        width: 70%;
+        font-size: 3em;
+        text-align: center;
+        margin: 80px auto 20px; 
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(242, 242, 242, 1.0);
+        @media screen and (max-width: 400px) {
+            font-size: 2em;
+        } 
     }
     
     input[type="radio"] {

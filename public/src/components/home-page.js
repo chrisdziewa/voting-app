@@ -8,6 +8,7 @@ export default ()=> {
     <div>
       <WelcomeBanner />
       <SiteInfoBar />
+      <h2 className='recent-polls-header'>Recent Polls</h2>
       <AllPolls />
     </div>
   );

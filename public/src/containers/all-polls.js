@@ -19,7 +19,7 @@ class GetAllPolls extends Component {
       return this.props.polls.map((poll) => {
         return (
           <li className="well poll" key={poll._id}>
-            <Poll choices={Object.keys(poll.choices)} id={poll._id} question={poll.question}/>
+            <Poll choices={Object.keys(poll.choices)} user={this.props.user} id={poll._id} question={poll.question}/>
           </li>
         );
       });
@@ -40,7 +40,8 @@ class GetAllPolls extends Component {
 
 function mapStateToProps(state) {
   return {
-    polls: state.polls.all
+    polls: state.polls.all,
+    user: state.user
   }
 }
 
