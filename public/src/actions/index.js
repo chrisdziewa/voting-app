@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router';
 
 export const FETCH_ALL_POLLS = 'FETCH_ALL_POLLS';
 export const FETCH_SINGLE_POLL = 'FETCH_SINGLE_POLL';
+export const FETCH_USER_POLLS = 'FETCH_USER_POLLS';
 export const UPDATE_VOTES = 'UPDATE_VOTES';
 
 // Flash Actions
@@ -18,6 +19,9 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGGED_OUT = 'LOGGED_OUT';
+
+// Profile Constants
+export const UPDATE_USER = 'UPDATE_USER';
 
 const ROOT_URL = 'http://localhost:3000/api';
 
@@ -74,6 +78,14 @@ export function fetchSinglePoll(pollId) {
   };
 }
 
+export function fetchUserPolls(username) {
+  const request = axios.get(`${ROOT_URL}/users/${username}/polls`);
+  return {
+    type: FETCH_USER_POLLS,
+    payload: request
+  }
+}
+
 export function updateVotes(id, choice) {
   const request = axios.put(`${ROOT_URL}/polls/${id}`, {choice: choice});
   return {
@@ -103,7 +115,7 @@ export function signupUser(props) {
   }
 }
 
-/* Authentication here */ 
+/* Authentication here */
 
 // Check for existing user
     export function getCurrentUser() {
@@ -115,7 +127,7 @@ export function signupUser(props) {
           console.log(response);
           // Error getting current user
           dispatch(loggedOut());
-        }); 
+        });
       }
     }
 
@@ -130,8 +142,8 @@ export function loginRequest(props) {
             dispatch(dismissAllFlash());
           }, 2500);
         }
-      }, () => { 
-        dispatch(loginError()); 
+      }, () => {
+        dispatch(loginError());
         dispatch(postError('Failed to log in'));
         setTimeout(() => {
           dispatch(dismissAllFlash());
@@ -182,4 +194,8 @@ export function loginRequest(props) {
     }
   }
 
-
+  export function updateUser() {
+    return {
+      type: UPDATE_USER
+    }
+  }

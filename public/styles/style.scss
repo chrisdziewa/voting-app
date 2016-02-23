@@ -1,253 +1,278 @@
-    /**** Imports ****/
-    @import url("./bootstrap.min.css");
-    @import url('http://fonts.googleapis.com/css?family=Open+Sans');
+/**** Imports ****/
+@import url("./bootstrap.min.css");
+@import url('http://fonts.googleapis.com/css?family=Open+Sans');
+/**** Variables ****/
+$dark-blue: rgba(18, 62, 92, .8);
+$darkest-blue: rgba(18, 62, 92, 1.0);
+$danger-red: rgba(156, 21, 21, 1.0);
+/***** General Styling  *******/
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #67A798;
+  background-image: -moz-linear-gradient(to top right, rgba(0, 100, 130, .8) 0%, #67A798 70%);
+  background-image: -webkit-linear-gradient(to top right, rgba(0, 100, 130, .8) 0%, #67A798 70%);
+  background-image: -ms-linear-gradient(to top right, rgba(0, 100, 130, .8) 0%, #67A798 70%);
+  background-image: -o-linear-gradient(to top right, rgba(0, 100, 130, .8) 0%, #67A798 70%);
+  background-image: linear-gradient(to top right, rgba(0, 100, 130, .8) 0%, #67A798 70%);
+  background-attachment: fixed;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+}
 
-    /**** Variables ****/
-    
-    $dark-blue: rgba(18, 62, 92, .8);
-    $darkest-blue: rgba(18, 62, 92, 1.0);
-    $danger-red: rgba(156, 21, 21, 1.0);
-    /***** General Styling  *******/
-    
-    html,
-    body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        background: #67A798;
-        background-image: -moz-linear-gradient(to top right, rgba(0, 100, 130, .8) 0%, #67A798 70%);
-        background-image: -webkit-linear-gradient(to top right, rgba(0, 100, 130, .8) 0%, #67A798 70%);
-        background-image: -ms-linear-gradient(to top right, rgba(0, 100, 130, .8) 0%, #67A798 70%);
-        background-image: -o-linear-gradient(to top right, rgba(0, 100, 130, .8) 0%, #67A798 70%);
-        background-image: linear-gradient(to top right, rgba(0, 100, 130, .8) 0%, #67A798 70%);
-        background-attachment: fixed;
-        font-family: 'Open Sans', Helvetica, sans-serif;
+.app {
+  padding-bottom: 60px;
+  position: relative;
+  min-height: 100vh;
+  overflow: auto;
+}
+
+.main-content ul {
+  list-style: none;
+  padding: 0;
+}
+/**** Navigation Bar*****/
+.navbar-inverse .navbar-nav li a:hover,
+.navbar-inverse .navbar-nav li.active a {
+  background: #67A798;
+}
+
+.navbar-inverse {
+  background: rgba(40, 40, 40, 1);
+}
+/**** Buttons ****/
+.btn {
+  &.btn-primary {
+    background: $dark-blue;
+    font-size: 1.8rem;
+    padding: 5px 0;
+
+    &:hover {
+      background: $darkest-blue;
     }
-    
-    .app {
-        padding-bottom: 60px;
-        position: relative;
-        min-height: 100vh;
-        overflow: auto;
-    }
-    
-    .main-content ul {
-        list-style: none;
-        padding: 0;
-    }
-    /**** Navigation Bar*****/
-    
-    .navbar-inverse .navbar-nav li a:hover,
-    .navbar-inverse .navbar-nav li.active a {
-        background: #67A798;
-    }
-    
-    .navbar-inverse {
-        background: rgba(40, 40, 40, 1);
-    }
-    /**** Buttons ****/
-    
-    .btn {
-        &.btn-primary {
-            background: $dark-blue;
-            font-size: 1.8rem;
-            padding: 5px 0;
-            &:hover {
-                background: $darkest-blue;
-            }
-        }
-    }
-    /******* Forms *******/
-    
-    .form-container {
-        border: 3px solid rgba(230, 230, 230, .4);
-        margin: 50px auto 100px;
-        box-shadow: 2px 3px 15px rgba(0, 40, 40, 0.2), -2px 3px 15px rgba(0, 40, 40, 0.2);
-        vertical-align: middle;
-        width: 80%;
-        max-width: 500px;
-        position: relative;
-        text-align: center;
-        overflow: auto;
-        padding-bottom: 20px;
-        h3 {
-            color: rgba(230, 230, 230, 1);
-        }
-        p {
-            font-size: 1.5rem;
-            width: 80%;
-            text-align: left;
-            margin-bottom: 0; 
-            display: inline-block;
-        }
-        form {
-            margin: 0 auto;
-            width: 80%;
-            position: relative;
-            color: rgba(230,230,230,1);
-            .form-group {
-                position: relative;
-            }
-            .has-error {
-                border-color: $danger-red;
-            }
-            .text-danger {
-                color: $danger-red;
-                position: absolute;
-                bottom: -25px;
-                right: 0;
-            }
-            a {
-                color: $darkest-blue;
-                font-size: 1.6rem;
-                &:hover,
-                &:visited {
-                    color: $darkest-blue;
-                }
-            }
-            label {
-                font-size: 1.6rem;
-            }
-            input {
-                &[type="text"],
-                &[type="password"] {
-                    margin: 0 auto;
-                    width: 100%;
-                    margin-bottom: 10px;
-                    font-size: 1.8rem;
-                    background: rgba(200, 200, 200, 0.3);
-                    color: $darkest-blue;
-                }
-                &[type="submit"] {
-                    margin: 5px 0 10px;
-                    margin-top: 10px;
-                }
-            }
-        }
-    }
-    
-    div.form-group {
-        position: relative;
-    }
-    
-    div.help-text.text-danger {
-        position: absolute;
-        top: 5px;
-    }
-    /****** Flash Messages *****/
-    
-    .alert {
-        margin-bottom: 0;
-    }
-    /***** Home Page  Styling*****/
-    
-    .jumbotron {
-        background-image: url('/img/blue-background.jpg');
-        background-position: center;
-        background-repeat: no-repeat;
-        text-align: center;
-        margin-bottom: 0;
-        padding: 100px 0;
-        h1 {
-            text-shadow: 1px 1px 2px white;
-            @media screen and (max-width: 400px) {
-                font-size: 3em;
-            }
-        }
-        .lead {
-            font-size: 1.6em;
-        }
-    }
-    
-    .site-info-bar {
-        margin-top: 0;
-        margin-bottom: 0;
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background: rgba(40, 40, 40, 1);
-        text-align: center;
-        h3 {
-            color: rgba(200, 200, 200, 1);
-        }
-        .info-icon {
-            font-size: 80px;
-            color: rgba(80, 150, 150, 1);
-        }
-        p {
-            color: rgba(200, 200, 200, 1);
-            text-align: left;
-            margin: 10px auto 10px;
-            max-width: 70%;
-        }
-    }
-    /***** Polls *****/
-    
-    .well.poll {
-        width: 70%;
-        margin: 30px auto 40px;
-        text-align: center;
-    }
-    
-    .poll-content {
-        ul {
-            width: 80%;
-            margin: 10px auto;
-        }
-        h3 {
-            text-align: left;
-            width: 80%;
-            margin: 10px auto;
-        }
-        button {
-            margin-top: 10px;
-        }
+  }
+}
+/******* Forms *******/
+.form-container {
+  border: 3px solid rgba(230, 230, 230, .4);
+  margin: 50px auto 100px;
+  box-shadow: 2px 3px 15px rgba(0, 40, 40, 0.2), -2px 3px 15px rgba(0, 40, 40, 0.2);
+  vertical-align: middle;
+  width: 80%;
+  max-width: 500px;
+  position: relative;
+  text-align: center;
+  overflow: auto;
+  padding-bottom: 20px;
+
+  h3 {
+    color: rgba(230, 230, 230, 1);
+  }
+
+  p {
+    font-size: 1.5rem;
+    width: 80%;
+    text-align: left;
+    margin-bottom: 0;
+    display: inline-block;
+  }
+
+  form {
+    margin: 0 auto;
+    width: 80%;
+    position: relative;
+    color: rgba(230,230,230,1);
+
+    .form-group {
+      position: relative;
     }
 
-    .recent-polls-header {
-        text-shadow: 1px 1px 2px white;
-        width: 70%;
-        font-size: 3em;
-        text-align: center;
-        margin: 80px auto 20px; 
-        padding-bottom: 10px;
-        border-bottom: 1px solid rgba(242, 242, 242, 1.0);
-        @media screen and (max-width: 400px) {
-            font-size: 2em;
-        } 
+    .has-error {
+      border-color: $danger-red;
     }
-    
-    input[type="radio"] {
-        cursor: pointer;
+
+    .text-danger {
+      color: $danger-red;
+      position: absolute;
+      bottom: -25px;
+      right: 0;
     }
-    
-    .poll-choice {
-        background: rgba(250, 250, 250, 1);
-        cursor: pointer;
+
+    a {
+      color: $darkest-blue;
+      font-size: 1.6rem;
+
+      &:hover,
+      &:visited {
+        color: $darkest-blue;
+      }
     }
-    
-    .choice-text[type="text"]:disabled {
-        background: rgba(250, 250, 250, 1);
-        cursor: pointer;
-        &:focus {
-            background: rgba(220, 220, 220, 1);
-        }
-        &:hover {
-            background: rgba(240, 240, 240, 1);
-        }
+
+    label {
+      font-size: 1.6rem;
     }
-    /***** Footer *****/
-    
-    footer {
-        position: absolute;
+
+    input {
+      &[type="text"],
+      &[type="password"] {
+        margin: 0 auto;
         width: 100%;
-        background: rgba(40, 80, 80, 1);
-        background-image: url(/img/grey.png);
-        left: 0;
-        bottom: 0;
-        height: 60px;
-        padding: 20px 0 0;
-        margin: 0;
-        p {
-            text-align: center;
-        }
+        margin-bottom: 10px;
+        font-size: 1.8rem;
+        background: rgba(200, 200, 200, 0.3);
+        color: $darkest-blue;
+      }
+
+      &[type="submit"] {
+        margin: 10px 0;
+      }
     }
+  }
+}
+
+div.form-group {
+  position: relative;
+}
+
+div.help-text.text-danger {
+  position: absolute;
+  top: 5px;
+}
+/****** Flash Messages *****/
+.alert {
+  margin-bottom: 0;
+}
+/***** Home Page  Styling*****/
+.jumbotron {
+  background-image: url('/img/blue-background.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  text-align: center;
+  margin-bottom: 0;
+  padding: 100px 0;
+
+  h1 {
+    text-shadow: 1px 1px 2px white;
+
+    @media screen and (max-width: 400px) {
+      font-size: 3em;
+    }
+  }
+
+  .lead {
+    font-size: 1.6em;
+  }
+}
+
+.site-info-bar {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background: rgba(40, 40, 40, 1);
+  text-align: center;
+
+  h3 {
+    color: rgba(200, 200, 200, 1);
+  }
+
+  .info-icon {
+    font-size: 80px;
+    color: rgba(80, 150, 150, 1);
+  }
+
+  p {
+    color: rgba(200, 200, 200, 1);
+    text-align: left;
+    margin: 10px auto;
+    max-width: 70%;
+  }
+}
+/**** Profile Page ****/
+.profile-container {
+  margin-top: 50px;
+
+  .well {
+    margin-top: 20px;
+
+    &.poll {
+      width: 100%;
+    }
+  }
+}
+/***** Polls *****/
+.well.poll {
+  width: 70%;
+  margin: 30px auto 40px;
+  text-align: center;
+}
+
+.poll-content {
+  ul {
+    width: 80%;
+    margin: 10px auto;
+  }
+
+  h3 {
+    text-align: left;
+    width: 80%;
+    margin: 10px auto;
+  }
+
+  button {
+    margin-top: 10px;
+  }
+}
+
+.recent-polls-header {
+  text-shadow: 1px 1px 2px white;
+  width: 70%;
+  font-size: 3em;
+  text-align: center;
+  margin: 80px auto 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(242, 242, 242, 1.0);
+
+  @media screen and (max-width: 400px) {
+    font-size: 2em;
+  }
+}
+
+input[type="radio"] {
+  cursor: pointer;
+}
+
+.poll-choice {
+  background: rgba(250, 250, 250, 1);
+  cursor: pointer;
+}
+
+.choice-text[type="text"]:disabled {
+  background: rgba(250, 250, 250, 1);
+  cursor: pointer;
+
+  &:focus {
+    background: rgba(220, 220, 220, 1);
+  }
+
+  &:hover {
+    background: rgba(240, 240, 240, 1);
+  }
+}
+/***** Footer *****/
+footer {
+  position: absolute;
+  width: 100%;
+  background: rgba(40, 80, 80, 1);
+  background-image: url('/img/grey.png');
+  left: 0;
+  bottom: 0;
+  height: 60px;
+  padding: 20px 0 0;
+  margin: 0;
+
+  p {
+    text-align: center;
+  }
+}

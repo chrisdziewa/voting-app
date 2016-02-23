@@ -36,10 +36,6 @@ db.once('open', () => {
   console.log('Connected to sondage database');
 });
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
-});
-
 // ===== Import Routers ======
 const userRouter = require('./app/routes/user.routes')(express, app);
 const pollRouter = require('./app/routes/poll.routes')(express, app);

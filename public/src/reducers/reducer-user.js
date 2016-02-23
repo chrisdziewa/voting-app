@@ -1,4 +1,4 @@
-import { 
+import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
@@ -14,7 +14,7 @@ export default function(state = INITIAL_STATE, action) {
       let user = action.payload;
       return {
         loggedIn: true,
-        id: user.id,
+        id: user._id,
         username: user.username,
         email: user.email
       };
@@ -23,10 +23,10 @@ export default function(state = INITIAL_STATE, action) {
         return state;
       } else {
         return INITIAL_STATE;
-      } 
+      }
     case LOGGED_OUT:
-      return INITIAL_STATE;  
-    default: 
+      return INITIAL_STATE;
+    default:
       return state;
   }
 };

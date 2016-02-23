@@ -10,17 +10,16 @@ class Navbar extends Component {
   }
 
   render() {
-    console.log(this.props.user.username);
     return (
       <div>
         <nav className="navbar-inverse">
           <div className="container-fluid">
             <div className="navbar-header">
-              <button 
+              <button
                 className="navbar-toggle collapsed"
                 type="button"
                 data-toggle="collapse"
-                data-target="#navbar-collapse" 
+                data-target="#navbar-collapse"
                 aria-expanded="false"
               >
                 <span className="icon-bar"></span>
@@ -32,16 +31,16 @@ class Navbar extends Component {
             <div id="navbar-collapse" className="collapse navbar-collapse">
                 <ul className="nav navbar-nav navbar-right">
                   <li>
-                    { 
+                    {
                       this.props.user.loggedIn ?
-                      <Link to="/">{this.props.user.username}</Link>
+                      <Link to={`/users/${this.props.user.username}`}>{this.props.user.username}</Link>
                       : <Link to="/signup">Sign up</Link>
                     }
                   </li>
                   <li>
                     {
                       this.props.user.loggedIn ?
-                      <a 
+                      <a
                         onClick={this.handleLogout.bind(this)}
                         href="#"
                       >

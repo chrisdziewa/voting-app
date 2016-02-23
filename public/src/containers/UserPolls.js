@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchAllPolls } from '../actions/index';
+import { fetchUserPolls } from '../actions/index';
 import Poll from '../components/poll';
 
 
-class GetAllPolls extends Component {
+class GetUserPolls extends Component {
   componentWillMount() {
-    this.props.fetchAllPolls();
+    this.props.fetchUserPolls(this.props.username);
   }
   renderChoices(choices) {
     return Object.keys(choices).map(choice => {
@@ -15,13 +15,14 @@ class GetAllPolls extends Component {
   }
 
   renderPolls() {
-    if (typeof this.props.polls === 'undefined' || this.props.polls.length < 1) {
-      return (
-        <h3>There are no polls yet!</h3>
-      );
-    }
-    if (typeof this.props.polls !== 'undefined') {
-      return this.props.polls.map((poll) => {
+    let { userPolls } = this.props;
+    if (typeof userPolls !== 'undefined') {
+      if (userPolls.length < 1) {
+        return (
+          <h3>{this.props.username} has not created any polls yet</h3>
+        );
+      }
+      return userPolls.map((poll) => {
         return (
           <li className="well poll" key={poll._id}>
             <Poll choices={Object.keys(poll.choices)}
@@ -48,9 +49,9 @@ class GetAllPolls extends Component {
 
 function mapStateToProps(state) {
   return {
-    polls: state.polls.all,
+    userPolls: state.polls.userPolls,
     user: state.user
   }
 }
 
-export default connect(mapStateToProps, { fetchAllPolls })(GetAllPolls);
+export default connect(mapStateToProps, { fetchUserPolls })(GetUserPolls);
