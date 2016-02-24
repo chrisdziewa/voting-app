@@ -16,7 +16,10 @@ class ProfilePage extends Component {
               <div className="well">
                 <h1>{ username }</h1>
                 <div>
-                  <p>Description will go here</p>
+                  <div className="user-info">
+                    <p>Polls created: { this.props.polls.length }</p>
+                    <p>Description will go here</p>
+                  </div>
                   {
                     loggedUser === username ?
                       <Link to={`/users/${loggedUser}/edit`}>
@@ -41,7 +44,8 @@ class ProfilePage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
+    polls: state.polls.all
   }
 }
 

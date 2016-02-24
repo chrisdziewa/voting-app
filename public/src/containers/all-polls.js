@@ -8,11 +8,6 @@ class GetAllPolls extends Component {
   componentWillMount() {
     this.props.fetchAllPolls();
   }
-  renderChoices(choices) {
-    return Object.keys(choices).map(choice => {
-      return <li key={choice}>{choice}</li>
-    });
-  }
 
   renderPolls() {
     if (typeof this.props.polls === 'undefined' || this.props.polls.length < 1) {
