@@ -24,8 +24,9 @@ class GetAllPolls extends Component {
       return this.props.polls.map((poll) => {
         return (
           <li className="well poll" key={poll._id}>
-            <Poll choices={Object.keys(poll.choices)}
+            <Poll choices={poll.choices}
               user={this.props.user}
+              showResult={poll.showResult}
               id={poll._id} question={poll.question}
             />
           </li>

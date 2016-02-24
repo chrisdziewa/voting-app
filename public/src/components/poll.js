@@ -9,7 +9,6 @@ class Poll extends Component {
     super(props);
 
     this.state = {
-      showResult: false,
       currentChoice: null
      };
   }
@@ -24,7 +23,7 @@ class Poll extends Component {
     if (typeof this.props.choices === 'undefined') {
       return null;
     }
-    return this.props.choices.map(choice => {
+    return Object.keys(this.props.choices).map(choice => {
       return <li key={choice}>
         <PollChoice
           checkOption={this.handleChecked.bind(this)}
@@ -42,12 +41,7 @@ class Poll extends Component {
     if (!data || !data.length > 0) {
       return false;
     }
-    this.props.updateVotes(this.props.id, data)
-      .then(() => {
-        this.setState({
-          showResult: true
-        });
-      });
+    this.props.updateVotes(this.props.id, data);
   }
 
   renderPoll() {
@@ -77,9 +71,11 @@ class Poll extends Component {
   }
 
   renderPollResult() {
+    console.log('Rendering poll result with props:');
+    console.log(this.props);
     // When clicked, change state to showResult and only show result
     return (
-      <PollResult id={this.props.id} />
+      <PollResult poll={this.props} />
     );
   }
 
@@ -87,7 +83,11 @@ class Poll extends Component {
     return (
       <div className="poll-content">
         <h3>{this.props.question}</h3>
-        {this.state.showResult || this.props.showResult ? this.renderPollResult() : this.renderPoll()}
+        {
+          this.props.showResult ?
+            this.renderPollResult()
+            : this.renderPoll()
+        }
       </div>
     );
   }

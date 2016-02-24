@@ -3,20 +3,14 @@ import { connect } from 'react-redux';
 import { fetchSinglePoll } from '../actions/index';
 import axios from 'axios';
 import  Chart from 'chart.js'
- 
+
 class PollResult extends Component {
   constructor(props) {
     super(props);
-
-    this.state = ({
-      data: [{ value: 1, label: 'No votes yet', color: 'lightGrey', highlight: 'lightGrey'}]
-    });
   }
+
   componentDidMount() {
-    axios.get('http://localhost:3000/api/polls/' + this.props.id).then(data => {
-      console.log(data);
-      this.loadPoll(data.data);
-    });
+    this.loadPoll();
   }
 
   randomColor() {
@@ -30,50 +24,45 @@ class PollResult extends Component {
       }
       color += hexList[num];
       highlight += hexList[num + 2];
-    } 
+    }
     return [color, highlight];
   }
 
-  loadPoll(data) {
-    // if (typeof this.props.poll.choices === 'undefined') {
-    //   // request hasn't finished or failed
-    //   console.log('No props yet');
-    //   return;
-    // }
-    // console.log("We got the props!");
-    let choices = data.choices;
-    let newdata;
-    if (data.totalVotes === 0) {
-      newdata = [{value: 1, label: 'No votes yet', color: '#cccccc', highlight: '#eeeeee' }];
+  componentWillUpdate() {
+    this.loadPoll();
+  }
+
+  loadPoll() {
+
+    let newData = this.props.poll;
+    if (newData.totalVotes === 0) {
+      newData = [{value: 1, label: 'No votes yet', color: '#cccccc', highlight: '#eeeeee' }];
     }
     else {
-        newdata = Object.keys(choices).map(choice => {
-        // random color each time rendered
+      let choices = newData.choices;
+      newData = Object.keys(choices).map(choice => {
+      // random color each time rendered
         let colors = this.randomColor();
         console.log(colors);
         console.log('value: ', choices[choice], ', label: ', choice);
         return {value: choices[choice], label: choice, color: colors[0], highlight: colors[1]};
       });
     }
-
-    const ctx = document.getElementById("result-" + this.props.id).getContext("2d");
+    const ctx = document.getElementById("result-" + this.props.poll.id).getContext("2d");
     Chart.defaults.global.responsive = true;
-    const myPieChart = new Chart(ctx).Pie(newdata);
+    const myPieChart = new Chart(ctx).Pie(newData);
   }
+
 
   render() {
+    let chartClass = this.props.poll.id;
     return (
       <div className="result-chart">
-        <canvas id={"result-" + this.props.id} ></canvas>
+        <canvas id={"result-" + chartClass}></canvas>
       </div>
     );
+    {this.loadPoll()}
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    poll: state.polls.singlePoll
-  }
-}
-
-export default connect(mapStateToProps, { fetchSinglePoll })(PollResult)
+export default PollResult;
