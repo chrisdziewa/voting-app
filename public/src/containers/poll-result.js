@@ -28,10 +28,6 @@ class PollResult extends Component {
     return [color, highlight];
   }
 
-  componentWillUpdate() {
-    this.loadPoll();
-  }
-
   loadPoll() {
 
     let newData = this.props.poll;
