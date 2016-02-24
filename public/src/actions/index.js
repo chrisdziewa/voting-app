@@ -2,12 +2,16 @@ import axios from 'axios';
 
 import { browserHistory } from 'react-router';
 
+
+// Poll Constants
 export const FETCH_ALL_POLLS = 'FETCH_ALL_POLLS';
 export const FETCH_SINGLE_POLL = 'FETCH_SINGLE_POLL';
 export const FETCH_USER_POLLS = 'FETCH_USER_POLLS';
 export const UPDATE_VOTES = 'UPDATE_VOTES';
+export const SHOW_RESULT = 'SHOW_RESULT';
+export const HIDE_ALL_RESULTS = 'HIDE_ALL_RESULTS';
 
-// Flash Actions
+// Flash Constants
 export const FLASH_ERROR = 'FLASH_ERROR';
 export const FLASH_SUCCESS = 'FLASH_SUCCESS';
 export const FLASH_INFO = 'FLASH_INFO';
@@ -62,11 +66,28 @@ export function dismissAllFlash() {
 
 // End Flash Actions
 
+
+// Start Poll Actions
 export function fetchAllPolls() {
-  const request = axios.get(`${ROOT_URL}/polls`);
+  return (dispatch) => {
+    const request = axios.get(`${ROOT_URL}/polls`).then(response => {
+      console.log(response);
+      if (response.status === 200) {
+        dispatch(pollsRequest(response));
+      }
+    }).then((response) => {
+      dispatch(hideAllResults());
+    }, (response) => {
+      dispatch(postError('Could not get Polls'));
+    });
+
+  }
+}
+
+function pollsRequest(polls) {
   return {
     type: FETCH_ALL_POLLS,
-    payload: request
+    payload: polls
   };
 }
 
@@ -81,18 +102,38 @@ export function fetchSinglePoll(pollId) {
 export function fetchUserPolls(username) {
   const request = axios.get(`${ROOT_URL}/users/${username}/polls`);
   return {
-    type: FETCH_USER_POLLS,
+    type: FETCH_ALL_POLLS,
     payload: request
   }
 }
 
 export function updateVotes(id, choice) {
-  const request = axios.put(`${ROOT_URL}/polls/${id}`, {choice: choice});
-  return {
-    type:  UPDATE_VOTES,
-    payload: request
+  return (dispatch) => {
+    axios.put(`${ROOT_URL}/polls/${id}`, {choice: choice}).then(response => {
+      if (response.status === 200) {
+        dispatch(pollUpdated(response.data))
+      }
+    }, () => {
+      // unsuccessful, show error
+      console.log('error: ', response);
+    });
   }
 }
+
+function hideAllResults() {
+  return {
+    type: HIDE_ALL_RESULTS
+  }
+}
+
+function pollUpdated(poll) {
+  return {
+    type: UPDATE_VOTES,
+    payload: poll
+  }
+}
+
+// End Poll Actions
 
 /* Signup actions */
 export function signupUser(props) {

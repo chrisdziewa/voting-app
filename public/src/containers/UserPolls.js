@@ -49,7 +49,7 @@ class GetUserPolls extends Component {
 
 function mapStateToProps(state) {
   return {
-    userPolls: state.polls.userPolls,
+    userPolls: state.polls.all,
     user: state.user
   }
 }

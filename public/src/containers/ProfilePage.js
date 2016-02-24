@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchUserPolls } from '../actions/index';
 import UserPolls from './UserPolls';
 import { Link } from 'react-router';
 
 class ProfilePage extends Component {
-  componentWillMount() {
-    this.props.fetchUserPolls(this.props.params.username);
-  }
-
   render() {
     let { username } = this.props.params;
     let loggedUser = this.props.user.username;
@@ -46,15 +41,8 @@ class ProfilePage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
-    polls: state.polls.userPolls
+    user: state.user
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchUserPolls: bindActionCreators(fetchUserPolls, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);
+export default connect(mapStateToProps, null)(ProfilePage);
