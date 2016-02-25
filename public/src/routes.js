@@ -14,6 +14,7 @@ import { getCurrentUser } from './actions/index';
 import ProfilePage from './containers/ProfilePage';
 import EditProfile from './components/forms/EditProfile';
 import Users from './components/Users';
+import CreatePollForm from './components/forms/CreatePollForm';
 
 export default function createRoutes(store) {
   // Router Helper Functions
@@ -30,6 +31,7 @@ export default function createRoutes(store) {
         <Route path ="users" component={Users}>
          <Route path=":username" component={ProfilePage} />
          <Route path=":username/edit" component={EditProfile}/>
+         <Route path=":username/create-poll" component={CreatePollForm} />
         </Route>
         <Route path="*" component={NoMatch}/>
       </Route>

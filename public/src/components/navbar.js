@@ -33,6 +33,13 @@ class Navbar extends Component {
                   <li>
                     {
                       this.props.user.loggedIn ?
+                        <Link to={`/users/${this.props.user.username}/create-poll`}><i className="glyphicon glyphicon-plus-sign"></i> Poll</Link>
+                        : null
+                    }
+                  </li>
+                  <li>
+                    {
+                      this.props.user.loggedIn ?
                       <Link to={`/users/${this.props.user.username}`}>{this.props.user.username}</Link>
                       : <Link to="/signup">Sign up</Link>
                     }

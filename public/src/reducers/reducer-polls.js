@@ -2,7 +2,8 @@ import {
   FETCH_ALL_POLLS,
   FETCH_SINGLE_POLL,
   UPDATE_VOTES,
-  HIDE_ALL_RESULTS
+  HIDE_ALL_RESULTS,
+  CREATE_POLL
 } from '../actions/index';
 
 
@@ -30,6 +31,9 @@ export default function(state = INITIAL_STATE, action) {
         return poll;
       });
       return {...state, all: nextAllPolls};
+    case CREATE_POLL:
+      console.log(action.payload.data);
+      return {...state, all: [action.payload.data, ...state.all]};
     default:
       return state;
   }

@@ -10,6 +10,7 @@ export const FETCH_USER_POLLS = 'FETCH_USER_POLLS';
 export const UPDATE_VOTES = 'UPDATE_VOTES';
 export const SHOW_RESULT = 'SHOW_RESULT';
 export const HIDE_ALL_RESULTS = 'HIDE_ALL_RESULTS';
+export const CREATE_POLL = 'CREATE_POLL';
 
 // Flash Constants
 export const FLASH_ERROR = 'FLASH_ERROR';
@@ -62,6 +63,12 @@ export function dismissAllFlash() {
   return {
     type: DISMISS_ALL_FLASH
   }
+}
+
+function timeClearedMessages(dispatch) {
+  setTimeout(() => {
+    dispatch(dismissAllFlash());
+  }, 2000);
 }
 
 // End Flash Actions
@@ -133,6 +140,29 @@ function pollUpdated(poll) {
   }
 }
 
+export function createPoll(poll, username) {
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/polls`, poll).then(response => {
+      if (response.status === 200) {
+        dispatch(pollCreated(response));
+        browserHistory.push(`/users/${username}/${poll.question}`);
+        dispatch(postSuccess('Your has been created successfully!'));
+        timeClearedMessages(dispatch);
+      }
+    }, (response) => {
+      dispatch(postError(response.data));
+      timeClearedMessages(dispatch);
+    });
+  }
+}
+
+function pollCreated(poll) {
+  return {
+    type: CREATE_POLL,
+    payload: poll
+  }
+}
+
 // End Poll Actions
 
 /* Signup actions */
@@ -143,18 +173,15 @@ export function signupUser(props) {
       if (response.status === 200) {
         dispatch(postSuccess(`Welcome, ${props.username}! Thanks for signing up for Sondage!`));
         dispatch(loginRequest(props));
-        setTimeout(() => {
-          dispatch(dismissAllFlash());
-        }, 2500);
+        timeClearedMessages(dispatch);
       }
     }, (response) => {
       dispatch(postError(response.data.message));
-        setTimeout(() => {
-          dispatch(dismissAllFlash());
-        }, 2500);
+      timeClearedMessages(dispatch);
     });
   }
 }
+
 
 /* Authentication here */
 
@@ -179,16 +206,12 @@ export function loginRequest(props) {
           dispatch(postSuccess('Logged in succesfully'));
           browserHistory.push('/');
           dispatch(loginSuccess(response.data));
-          setTimeout(() => {
-            dispatch(dismissAllFlash());
-          }, 2500);
+          timeClearedMessages(dispatch);
         }
       }, () => {
         dispatch(loginError());
         dispatch(postError('Failed to log in'));
-        setTimeout(() => {
-          dispatch(dismissAllFlash());
-        }, 2500);
+        timeClearedMessages(dispatch);
       });
     };
   }
@@ -216,15 +239,11 @@ export function loginRequest(props) {
         dispatch(loggedOut());
         browserHistory.push('/login');
         dispatch(postSuccess("Logout was successful. We hope to see you again soon!"));
-        setTimeout(() => {
-          dispatch(dismissAllFlash());
-        }, 2500);
+        timeClearedMessages(dispatch);
       }, () => {
         browserHistory.push('/');
         dispatch(postError("There was an error logging out"));
-        setTimeout(() => {
-          dispatch(dismissAllFlash());
-        }, 2500);
+        timeClearedMessages(dispatch);
       });
     };
   }

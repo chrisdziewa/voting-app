@@ -1,23 +1,17 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchUserPolls } from '../actions/index';
 import Poll from '../components/poll';
 
 
-class GetUserPolls extends Component {
-  componentWillMount() {
-    this.props.fetchUserPolls(this.props.username);
-  }
-
+class UserPolls extends Component {
   renderPolls() {
-    let { userPolls } = this.props;
-    if (typeof userPolls !== 'undefined') {
-      if (userPolls.length < 1) {
+    let { polls } = this.props;
+    if (typeof polls !== 'undefined') {
+      if (polls.length < 1) {
         return (
           <h3>{this.props.username} has not created any polls yet</h3>
         );
       }
-      return userPolls.map((poll) => {
+      return polls.map((poll) => {
         return (
           <li className="well poll" key={poll._id}>
             <Poll choices={poll.choices}
@@ -43,11 +37,4 @@ class GetUserPolls extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    userPolls: state.polls.all,
-    user: state.user
-  }
-}
-
-export default connect(mapStateToProps, { fetchUserPolls })(GetUserPolls);
+export default UserPolls;
