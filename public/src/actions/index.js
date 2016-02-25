@@ -28,9 +28,26 @@ export const LOGGED_OUT = 'LOGGED_OUT';
 // Profile Constants
 export const UPDATE_USER = 'UPDATE_USER';
 
+// Loader Constants
+export const SHOW_LOADER = 'SHOW_LOADER';
+export const HIDE_LOADER = 'HIDE_LOADER';
+
 const ROOT_URL = 'http://localhost:3000/api';
 
+// Loader Actions
+function showLoader() {
+  return {
+    type: SHOW_LOADER
+  }
+}
 
+function hideLoader() {
+  return {
+    type: HIDE_LOADER
+  }
+}
+
+// Flash Actions
 export function postError(payload) {
   return {
     type: FLASH_ERROR,
@@ -77,6 +94,7 @@ function timeClearedMessages(dispatch) {
 // Start Poll Actions
 export function fetchAllPolls() {
   return (dispatch) => {
+    dispatch(showLoader);
     const request = axios.get(`${ROOT_URL}/polls`).then(response => {
       console.log(response);
       if (response.status === 200) {
@@ -84,10 +102,11 @@ export function fetchAllPolls() {
       }
     }).then((response) => {
       dispatch(hideAllResults());
+      dispatch(hideLoader());
     }, (response) => {
       dispatch(postError('Could not get Polls'));
+      dispatch(hideLoader());
     });
-
   }
 }
 
@@ -142,14 +161,17 @@ function pollUpdated(poll) {
 
 export function createPoll(poll, username) {
   return (dispatch) => {
+    dispatch(showLoader());
     axios.post(`${ROOT_URL}/polls`, poll).then(response => {
       if (response.status === 200) {
+        dispatch(hideLoader());
         dispatch(pollCreated(response));
         browserHistory.push(`/users/${username}/${poll.question}`);
         dispatch(postSuccess('Your has been created successfully!'));
         timeClearedMessages(dispatch);
       }
     }, (response) => {
+      dispatch(hideLoader());
       dispatch(postError(response.data));
       timeClearedMessages(dispatch);
     });
@@ -168,14 +190,17 @@ function pollCreated(poll) {
 /* Signup actions */
 export function signupUser(props) {
   return (dispatch) => {
+    dispatch(showLoader());
     let request = `${ROOT_URL}/users`;
     axios.post(request, props).then(response => {
       if (response.status === 200) {
+        dispatch(hideLoader());
         dispatch(postSuccess(`Welcome, ${props.username}! Thanks for signing up for Sondage!`));
         dispatch(loginRequest(props));
         timeClearedMessages(dispatch);
       }
     }, (response) => {
+      dispatch(hideLoader());
       dispatch(postError(response.data.message));
       timeClearedMessages(dispatch);
     });
@@ -188,11 +213,13 @@ export function signupUser(props) {
 // Check for existing user
     export function getCurrentUser() {
       return (dispatch) => {
+        dispatch(showLoader());
         let request = `${ROOT_URL}/users/current`;
         axios.get(request).then(response => {
+          dispatch(hideLoader());
           dispatch(loginSuccess(response.data));
         }, (response) => {
-          console.log(response);
+          dispatch(hideLoader());
           // Error getting current user
           dispatch(loggedOut());
         });
@@ -201,14 +228,17 @@ export function signupUser(props) {
 
 export function loginRequest(props) {
     return (dispatch) => {
+      dispatch(showLoader());
       axios.post(`${ROOT_URL}/authenticate`, props).then(response => {
         if (response.status == 200) {
+          dispatch(hideLoader());
           dispatch(postSuccess('Logged in succesfully'));
           browserHistory.push('/');
           dispatch(loginSuccess(response.data));
           timeClearedMessages(dispatch);
         }
       }, () => {
+        dispatch(hideLoader());
         dispatch(loginError());
         dispatch(postError('Failed to log in'));
         timeClearedMessages(dispatch);
@@ -234,13 +264,16 @@ export function loginRequest(props) {
 
   export function logoutUser() {
     return (dispatch) => {
+      dispatch(showLoader());
       let request = `${ROOT_URL}/authenticate`;
       axios.delete(request).then(response => {
         dispatch(loggedOut());
         browserHistory.push('/login');
+        dispatch(hideLoader());
         dispatch(postSuccess("Logout was successful. We hope to see you again soon!"));
         timeClearedMessages(dispatch);
       }, () => {
+        dispatch(hideLoader());
         browserHistory.push('/');
         dispatch(postError("There was an error logging out"));
         timeClearedMessages(dispatch);

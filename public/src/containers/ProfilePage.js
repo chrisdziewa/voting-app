@@ -36,9 +36,10 @@ class ProfilePage extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-sm-8 text-center">
+            <div className='col-sm-8 text-center'>
               <h2>Recent Polls</h2>
               <UserPolls
+                username={this.props.params.username}
                 user={this.props.user}
                 polls={this.props.polls}/>
             </div>

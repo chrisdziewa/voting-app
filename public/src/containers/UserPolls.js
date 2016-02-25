@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Poll from '../components/poll';
 
-
 class UserPolls extends Component {
   renderPolls() {
     let { polls } = this.props;
