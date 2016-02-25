@@ -82,30 +82,46 @@ export function dismissAllFlash() {
   }
 }
 
-function timeClearedMessages(dispatch) {
-  setTimeout(() => {
-    dispatch(dismissAllFlash());
-  }, 2000);
+function timeClearedMessages() {
+  return (dispatch) => {
+    setTimeout(() => {
+      dispatch(dismissAllFlash());
+    }, 2000);
+  }
 }
 
 // End Flash Actions
 
 
 // Start Poll Actions
-export function fetchAllPolls() {
+export function fetchAllPolls(username = null) {
+  let url;
+  if (username) {
+    url = `${ROOT_URL}/users/${username}/polls`;
+  }
+
+  else {
+    url = `${ROOT_URL}/polls`;
+  }
   return (dispatch) => {
-    dispatch(showLoader);
-    const request = axios.get(`${ROOT_URL}/polls`).then(response => {
-      console.log(response);
+    dispatch(showLoader());
+    const request = axios.get(url).then(response => {
+      dispatch(hideLoader());
       if (response.status === 200) {
         dispatch(pollsRequest(response));
       }
     }).then((response) => {
       dispatch(hideAllResults());
-      dispatch(hideLoader());
     }, (response) => {
-      dispatch(postError('Could not get Polls'));
-      dispatch(hideLoader());
+      if (response.status === 404 && typeof username !== null) {
+        dispatch(postError(username + ' does not exist'));
+      }
+      else {
+        dispatch(postError('Could not get Polls'));
+      }
+      browserHistory.push('/');
+      dispatch(showLoader());
+      dispatch(timeClearedMessages(dispatch));
     });
   }
 }

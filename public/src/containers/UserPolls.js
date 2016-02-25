@@ -4,6 +4,7 @@ import Poll from '../components/poll';
 class UserPolls extends Component {
   renderPolls() {
     let { polls } = this.props;
+    console.log(polls);
     if (typeof polls !== 'undefined') {
       if (polls.length < 1) {
         return (

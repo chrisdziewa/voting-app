@@ -11,11 +11,7 @@ class App extends Component {
         <Navbar />
         <FlashMessage />
         <div className="main-content">
-          {
-            this.props.isLoading ?
-              <div className="loader"></div>
-              : this.props.children
-          }
+          {this.props.children}
         </div>
         <Footer />
       </div>

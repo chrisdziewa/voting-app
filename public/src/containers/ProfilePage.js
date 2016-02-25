@@ -2,17 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import UserPolls from './UserPolls';
-import { fetchUserPolls } from '../actions/index';
+import { fetchAllPolls } from '../actions/index';
 import { Link } from 'react-router';
 
 class ProfilePage extends Component {
   componentWillMount() {
-    this.props.fetchUserPolls(this.props.params.username);
+    this.props.fetchAllPolls(this.props.params.username);
   }
 
   render() {
     let { username } = this.props.params;
     let loggedUser = this.props.user.username;
+    if (this.props.isLoading) {
+      return (
+        <div className="loader"></div>
+      );
+    }
     return (
       <div className="profile-page">
         <div className="container">
@@ -41,7 +46,8 @@ class ProfilePage extends Component {
               <UserPolls
                 username={this.props.params.username}
                 user={this.props.user}
-                polls={this.props.polls}/>
+                polls={this.props.polls}
+              />
             </div>
           </div>
         </div>
@@ -53,8 +59,9 @@ class ProfilePage extends Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
-    polls: state.polls.all
+    polls: state.polls.all,
+    isLoading: state.loader.isLoading
   }
 }
 
-export default connect(mapStateToProps, { fetchUserPolls })(ProfilePage);
+export default connect(mapStateToProps, { fetchAllPolls })(ProfilePage);
