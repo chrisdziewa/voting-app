@@ -9,7 +9,7 @@ module.exports = function(express, app) {
 
   // Get all posts
   router.get('/', (req, res) => {
-    Poll.find({}, (err, polls) => {
+    Poll.find({}).sort({_id: 'desc'}).exec((err, polls) => {
       if (err) {
         return res.status(500).send('There was an error processing your request');
       } else {
@@ -51,7 +51,7 @@ module.exports = function(express, app) {
       }
       // Everything is good, create poll and put reference to user
       validAttributes.user_id = user._id;
-      
+
       let poll = new Poll(validAttributes);
       poll.totalVotes = 0;
       poll.save((err) => {
@@ -63,7 +63,7 @@ module.exports = function(express, app) {
     });
   });
 
-  // Get single poll 
+  // Get single poll
   router.get('/:id', (req, res) => {
     let pollId = req.params.id;
 
@@ -74,7 +74,7 @@ module.exports = function(express, app) {
         return res.status(500).send('There was an error completing your request');
       }
       if (!poll) {
-        // No poll found 
+        // No poll found
         res.status(404).json({
           message: 'No poll with that id found'
         });

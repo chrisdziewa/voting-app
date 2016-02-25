@@ -165,7 +165,7 @@ module.exports = function(express, app) {
         return res.status(401).send('You can only delete your own account');
       }
 
-      // User is the valid user, now delete user 
+      // User is the valid user, now delete user
       User.remove({
         _id: userId
       }, (err, obj) => {
@@ -218,7 +218,7 @@ module.exports = function(express, app) {
       // User found now find their polls
       Poll.find({
         user_id: user._id
-      }, (err, polls) => {
+      }).sort({_id: 'desc'}).exec((err, polls) => {
         if (err) {
           res.status(500).send('Could not process your request');
         }
@@ -260,4 +260,3 @@ module.exports = function(express, app) {
 
   return router;
 };
-
