@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import Poll from '../components/poll';
+import Poll from './poll';
 
-class UserPolls extends Component {
+class PollsList extends Component {
   renderPolls() {
     let { polls } = this.props;
-    console.log(polls);
     if (typeof polls !== 'undefined') {
       if (polls.length < 1) {
         return (
@@ -28,13 +27,11 @@ class UserPolls extends Component {
 
   render() {
     return (
-      <div className="container-fluid">
         <ul>
           {this.renderPolls()}
         </ul>
-      </div>
     );
   }
 }
 
-export default UserPolls;
+export default PollsList;

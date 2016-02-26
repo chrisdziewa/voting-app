@@ -4,10 +4,9 @@ import actions from './actions/index';
 
 import App from './components/app';
 import Navbar from './components/navbar';
-import HomePage from './components/home-page';
+import HomePage from './containers/HomePage';
 import SignupForm from './components/signup-form';
 import LoginForm from './components/login-form';
-import AllPolls from './containers/all-polls';
 import NoMatch from './components/404';
 import PollResult from './containers/poll-result';
 import { getCurrentUser } from './actions/index';

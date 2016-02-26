@@ -184,12 +184,12 @@ export function createPoll(poll, username) {
         dispatch(pollCreated(response));
         browserHistory.push(`/users/${username}/${poll.question}`);
         dispatch(postSuccess('Your has been created successfully!'));
-        timeClearedMessages(dispatch);
+        dispatch(timeClearedMessages());
       }
     }, (response) => {
       dispatch(hideLoader());
       dispatch(postError(response.data));
-      timeClearedMessages(dispatch);
+      dispatch(timeClearedMessages());
     });
   }
 }
@@ -210,15 +210,14 @@ export function signupUser(props) {
     let request = `${ROOT_URL}/users`;
     axios.post(request, props).then(response => {
       if (response.status === 200) {
-        dispatch(hideLoader());
         dispatch(postSuccess(`Welcome, ${props.username}! Thanks for signing up for Sondage!`));
-        dispatch(loginRequest(props));
-        timeClearedMessages(dispatch);
+        dispatch(loginRequest(props, true));
+        dispatch(timeClearedMessages());
       }
     }, (response) => {
       dispatch(hideLoader());
       dispatch(postError(response.data.message));
-      timeClearedMessages(dispatch);
+      dispatch(timeClearedMessages());
     });
   }
 }
@@ -242,22 +241,23 @@ export function signupUser(props) {
       }
     }
 
-export function loginRequest(props) {
+export function loginRequest(props, signup = false) {
     return (dispatch) => {
-      dispatch(showLoader());
+      if (!signup) {
+        dispatch(showLoader());
+      }
       axios.post(`${ROOT_URL}/authenticate`, props).then(response => {
         if (response.status == 200) {
-          dispatch(hideLoader());
           dispatch(postSuccess('Logged in succesfully'));
           browserHistory.push('/');
           dispatch(loginSuccess(response.data));
-          timeClearedMessages(dispatch);
+          dispatch(timeClearedMessages());
         }
       }, () => {
         dispatch(hideLoader());
         dispatch(loginError());
         dispatch(postError('Failed to log in'));
-        timeClearedMessages(dispatch);
+        dispatch(timeClearedMessages());
       });
     };
   }
@@ -285,14 +285,13 @@ export function loginRequest(props) {
       axios.delete(request).then(response => {
         dispatch(loggedOut());
         browserHistory.push('/login');
-        dispatch(hideLoader());
         dispatch(postSuccess("Logout was successful. We hope to see you again soon!"));
-        timeClearedMessages(dispatch);
-      }, () => {
         dispatch(hideLoader());
+        dispatch(timeClearedMessages());
+      }, () => {
         browserHistory.push('/');
         dispatch(postError("There was an error logging out"));
-        timeClearedMessages(dispatch);
+        dispatch(timeClearedMessages());
       });
     };
   }

@@ -8,8 +8,13 @@ class LoginForm extends Component {
     this.props.loginRequest(props);
   }
 
-  
+
   render() {
+    if (this.props.isLoading) {
+      return (
+        <div className="loader"></div>
+      );
+    }
     const { fields: { email, password }, handleSubmit} = this.props;
     return (
       <div className="login-page">
@@ -59,6 +64,12 @@ function validate(values) {
   }
 
   return errors;
+}
+
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.loader.isLoading
+  }
 }
 
 export default reduxForm({

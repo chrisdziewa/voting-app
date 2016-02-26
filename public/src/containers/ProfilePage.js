@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import UserPolls from './UserPolls';
+import PollsList from '../components/PollsList';
 import { fetchAllPolls } from '../actions/index';
 import { Link } from 'react-router';
 
@@ -22,9 +22,9 @@ class ProfilePage extends Component {
       <div className="profile-page">
         <div className="container">
           <div className="row profile-container">
-            <div className="col-sm-4 text-center">
+            <div className="col-md-4 text-center">
               <div className="well">
-                <h1>{ username }</h1>
+                <h4>{ username }</h4>
                 <div>
                   <div className="user-info">
                     <p>Polls created: { this.props.polls.length }</p>
@@ -41,9 +41,9 @@ class ProfilePage extends Component {
                 </div>
               </div>
             </div>
-            <div className='col-sm-8 text-center'>
-              <h2>Recent Polls</h2>
-              <UserPolls
+            <div className='col-md-8 text-center'>
+              <h2 className="recent-polls-header">Recent Polls</h2>
+              <PollsList
                 username={this.props.params.username}
                 user={this.props.user}
                 polls={this.props.polls}

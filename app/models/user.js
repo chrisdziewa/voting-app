@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 let usernameValidator = [
   validate({
     validator: 'isLength',
-    arguments: [3, 50],
+    arguments: [3, 32],
     message: 'Name should be between {ARGS[0]} and {ARGS[1]} characters'
   }),
   validate({

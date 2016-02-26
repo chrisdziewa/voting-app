@@ -9,6 +9,11 @@ export default class SignupForm extends Component {
   }
 
   render() {
+    if (this.props.isLoading) {
+      return (
+        <div className="loader"></div>
+      );
+    }
     const { fields: { username, email, password, passwordConfirmation }, handleSubmit } = this.props;
     return (
       <div className="signup-page">
@@ -97,9 +102,14 @@ else if (values.password.length < 6 || values.password.length > 32) {
   return errors;
 }
 
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.loader.isLoading
+  }
+}
+
 export default reduxForm({
   form: 'SignupForm',
   fields: ['username', 'email', 'password', 'passwordConfirmation'],
   validate
-}, null, { signupUser })(SignupForm);
-
+}, mapStateToProps, { signupUser })(SignupForm);

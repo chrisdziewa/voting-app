@@ -127,6 +127,11 @@ class CreatePollForm extends Component {
   }
 
   render() {
+    if (this.props.isLoading) {
+      return (
+        <div className="loader"></div>
+      );
+    }
     return (
       <div className="new-poll-page">
         <div className="form-container">
@@ -170,5 +175,10 @@ class CreatePollForm extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    isLoading: state.loader.isLoading
+  }
+}
 
-export default connect(null, { createPoll })(CreatePollForm);
+export default connect(mapStateToProps, { createPoll })(CreatePollForm);
