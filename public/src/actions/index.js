@@ -35,13 +35,13 @@ export const HIDE_LOADER = 'HIDE_LOADER';
 const ROOT_URL = 'http://localhost:3000/api';
 
 // Loader Actions
-function showLoader() {
+export function showLoader() {
   return {
     type: SHOW_LOADER
   }
 }
 
-function hideLoader() {
+export function hideLoader() {
   return {
     type: HIDE_LOADER
   }
@@ -233,10 +233,12 @@ export function signupUser(props) {
         axios.get(request).then(response => {
           dispatch(hideLoader());
           dispatch(loginSuccess(response.data));
+          return true;
         }, (response) => {
           dispatch(hideLoader());
           // Error getting current user
           dispatch(loggedOut());
+          return false;
         });
       }
     }
@@ -302,8 +304,30 @@ export function loginRequest(props, signup = false) {
     }
   }
 
-  export function updateUser() {
+  function updateUser(user) {
     return {
-      type: UPDATE_USER
+      type: UPDATE_USER,
+      payload: user
+    }
+  }
+
+  export function updateAccount(id, props) {
+    const url = `${ROOT_URL}/users/${id}`;
+    return (dispatch) => {
+      dispatch(showLoader());
+      axios.put(url, props).then(response => {
+        if (response.status === 200) {
+          console.log(response);
+          dispatch(updateUser(response.data));
+          dispatch(getCurrentUser());
+          dispatch(hideLoader());
+          dispatch(postSuccess('Profile has been updated!'));
+          dispatch(timeClearedMessages());
+        }
+      }, (error) => {
+        dispatch(postError(error.data.message));
+        dispatch(hideLoader());
+        dispatch(timeClearedMessages());
+      });
     }
   }

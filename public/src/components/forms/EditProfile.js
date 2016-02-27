@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
-import { Link } from 'react-router';
-import { updateUser } from '../../actions/index';
+import { Link, browserHistory } from 'react-router';
+import { updateAccount } from '../../actions/index';
+
 
 class EditProfile extends Component {
   onSubmit(props) {
-    this.props.updateUser(props);
+    this.props.updateAccount(this.props.user.id, props);
   }
 
   render() {
-    const { fields: { username, email, password, passwordConfirmation }, handleSubmit } = this.props;
+    const { fields: { username, email, bio, password, passwordConfirmation, currentPassword }, handleSubmit } = this.props;
     let loggedUser = this.props.user;
-    console.log(loggedUser);
+
+    if (this.props.isLoading) {
+      return (
+        <div className="loader"></div>
+      );
+    }
     return (
       <div className="edit-page">
         <div className="form-container">
@@ -22,7 +28,7 @@ class EditProfile extends Component {
               <br/>
               <input type="text" id="username" className="form-control" {...username}/>
               <div className="text-help text-danger">
-                  {username.touched ? username.error : ''}
+                {username.touched ? username.error : ''}
               </div>
             </div>
             <div className={`form-group ${email.touched && email.invalid ? 'has-error' : ''}`}>
@@ -30,7 +36,15 @@ class EditProfile extends Component {
               <br/>
               <input type="text" id="email" className="form-control" {...email}/>
               <div className="text-help text-danger">
-                  {email.touched ? email.error : ''}
+                {email.touched ? email.error : ''}
+              </div>
+            </div>
+            <div className={`form-group ${bio.touched && bio.invalid ? 'has-error' : ''}`}>
+              <label htmlFor="bio" className="pull-left">Bio</label>
+              <br/>
+              <textarea id="bio" className="form-control" {...bio}></textarea>
+              <div className="text-help text-danger">
+                {bio.touched ? bio.error : ''}
               </div>
             </div>
             <div className={`form-group ${password.touched && password.invalid ? 'has-error' : ''}`}>
@@ -38,7 +52,7 @@ class EditProfile extends Component {
               <br/>
               <input type="password" id="password" className="form-control" {...password}/>
               <div className="text-help text-danger">
-                  {password.touched ? password.error : ''}
+                {password.touched ? password.error : ''}
               </div>
             </div>
             <div className={`form-group ${password.valid && passwordConfirmation.touched && passwordConfirmation.invalid ? 'has-error' : ''}`}>
@@ -46,13 +60,22 @@ class EditProfile extends Component {
               <br/>
               <input type="password" id="confirm" className="form-control" {...passwordConfirmation}/>
               <div className="text-help text-danger">
-                  {passwordConfirmation.touched ? passwordConfirmation.error : ''}
+                {passwordConfirmation.touched ? passwordConfirmation.error : ''}
               </div>
             </div>
-            <div className="form-group">
-               <input type="submit" className="pull-left btn btn-primary" value="Save Changes" />
-               <Link to={`/users/${this.props.params.username}`} className="btn btn-default">Cancel</Link>
+            <div className={`form-group ${currentPassword.touched && currentPassword.invalid ? 'has-error' : ''}`}>
+              <label htmlFor="currentPassword" className="pull-left">Current Password</label>
+              <br/>
+              <input type="password" id="currentPassword" className="form-control" {...currentPassword}/>
+              <div className="text-help text-danger">
+                {currentPassword.touched ? currentPassword.error : ''}
+              </div>
             </div>
+            <div className="btn-group">
+              <input type="submit" className="btn btn-primary" value="Save Changes" />
+              <Link to={`/users/${this.props.user.username}`} className="btn btn-default btn-cancel">Cancel</Link>
+            </div>
+            <Link to={`/users/${this.props.user.username}`} className="btn back-link"> Back to Profile</Link>
           </form>
         </div>
       </div>
@@ -72,23 +95,20 @@ function validate(values) {
   }
 
   if (!values.email) {
-    errors.email = 'Enter your email address';
+    errors.email = 'Enter an email';
   }
   else if (!/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/.test(values.email)) {
     errors.email = 'Email is invalid';
   }
 
-  if (!values.password) {
-    errors.password = 'Enter your password';
+  if (values.password && (values.password.length > 0 &&
+      (values.password.length < 6 || values.password.length > 32))) {
+        errors.password = 'Passwords must be between 6 and 32 characters';
   }
 
-else if (values.password.length < 6 || values.password.length > 32) {
-  errors.password = 'Passwords must be between 6 and 32 characters';
-}
-
   else {
-    if (!values.passwordConfirmation) {
-      errors.passwordConfirmation = 'Confirm your password';
+    if (values.password && values.password.length > 0 && !values.passwordConfirmation) {
+      errors.passwordConfirmation = 'Confirm your new password';
     }
 
     else if (values.password !== values.passwordConfirmation) {
@@ -96,18 +116,36 @@ else if (values.password.length < 6 || values.password.length > 32) {
     }
   }
 
+  if (!values.currentPassword) {
+    errors.currentPassword = 'Current password required to make changes'
+  }
+
+  if (values.bio && values.bio.length > 500) {
+    errors.bio = 'Bio must be no more than 500 characters';
+  }
+
   return errors;
 }
 
 const mapStateToProps = (state) => {
-  return {
+  let data = {
     username: state.user.username,
+    email: state.user.email,
+    bio: state.user.bio,
+    password: '',
+    passwordConfirmation: '',
+    currentPassword: ''
+  }
 
+  return {
+    isLoading: state.loader.isLoading,
+    user: state.user,
+    initialValues: data
   }
 }
 
 export default reduxForm({
   form: 'EditForm',
-  fields: ['username', 'email', 'password', 'passwordConfirmation'],
+  fields: ['username', 'email', 'bio', 'password', 'passwordConfirmation', 'currentPassword'],
   validate
-}, mapStateToProps, { updateUser })(EditProfile);
+}, mapStateToProps, { updateAccount })(EditProfile);

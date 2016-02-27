@@ -24,7 +24,8 @@ module.exports = function(express, app) {
       let currentUser = {
         username: user.username,
         email: user.email,
-        _id: user._id
+        _id: user._id,
+        bio: user.bio
       };
       res.json(currentUser);
     });
@@ -97,22 +98,33 @@ module.exports = function(express, app) {
   // => PUT /api/users/:id
   router.put('/:id', authenticateRoute, (req, res) => {
     let userId = req.params.id;
-    let validAttributes = _.pick(req.body, 'username', 'email', 'password');
+    let validAttributes = _.pick(req.body, 'username', 'email', 'password', 'bio', 'currentPassword');
     User.findById({
       _id: userId
-    }, (err, user) => {
+    }, 'username email password bio', (err, user) => {
       if (err) {
-        return res.status(500).send('There was an error completing your request');
+        return res.status(500).json({success: false, message: err});
       }
       if (user) {
         // If not the current logged in user
         if (user.username !== req.decoded.username) {
           return res.status(401).send('You may not update other profiles');
         }
+        console.log(user);
+
+        let correctPassword = user.comparePassword(validAttributes.currentPassword);
+        if (!correctPassword) {
+          return res.status(400).json({
+            success: false,
+            message: 'The password you entered does not match the current password for your account.'
+          });
+        }
+
         // If user found, set only the new attributes
         if (validAttributes.username) user.username = validAttributes.username;
         if (validAttributes.email) user.email = validAttributes.email;
         if (validAttributes.password) user.password = validAttributes.password;
+        if (validAttributes.bio) user.bio = validAttributes.bio;
       } else {
         return res.status(404).send('Could not find user with that id');
       }
@@ -120,7 +132,8 @@ module.exports = function(express, app) {
       // All is well, now save user
       user.save((err) => {
         if (err) {
-          res.status(500).send('Could not update user');
+          console.log(err);
+          return res.status(500).send('Could not update user');
         } else {
           // create new token
           let token = jwt.sign({

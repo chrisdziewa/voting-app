@@ -13,7 +13,7 @@ module.exports = function(express, app) {
     }
     User.findOne({
       email: req.body.email.toLowerCase()
-    }).select('username email password').exec((err, user) => {
+    }).select('username email password bio').exec((err, user) => {
       if (err) {
         return res.status(500).send('An error occurred while authenticating user');
       }
@@ -37,7 +37,8 @@ module.exports = function(express, app) {
         message: 'Successfully logged in!',
         id: user._id,
         email: user.email,
-        username: user.username
+        username: user.username,
+        bio: user.bio
       }
       // set cookie for 7 days
       res.cookie('auth_token', token, {maxAge: 604800000, path: "/"}).json(userResponse);
