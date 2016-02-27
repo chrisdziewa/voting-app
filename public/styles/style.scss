@@ -288,17 +288,18 @@ div.help-text.text-danger {
     text-align: left;
     width: 100%;
     margin: 17px auto 0;
+    &.profile-info {
+      h3 {
+        border-bottom: 1px solid $dark-blue;
+        margin: 10px auto;
+      }
+    }
+
     h3 {
       color: $darkest-blue;
       width: 100%;
-      margin: 10px auto;
-      border-bottom: 1px solid $dark-blue;
+      margin: 10px auto 0;
       padding-bottom: 10px;
-    }
-
-    h4 {
-      text-align: left;
-      color: $darkest-blue;
     }
 
     &.poll {
