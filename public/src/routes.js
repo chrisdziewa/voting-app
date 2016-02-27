@@ -35,10 +35,10 @@ export default function createRoutes(store) {
         <Route path="signup" component={SignupForm} />
         <Route path="login" component={LoginForm} />
         <Route path="chart" component={PollResult} />
+        <Route path="polls/create-poll" component={CreatePollForm} />
         <Route path ="users" component={Users}>
           <Route path="edit-user" component={EditProfile} onEnter={checkAuth}/>
           <Route path=":username" component={ProfilePage} />
-          <Route path=":username" component={CreatePollForm} />
         </Route>
         <Route path="*" component={NoMatch}/>
       </Route>

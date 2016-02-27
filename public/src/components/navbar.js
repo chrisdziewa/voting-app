@@ -29,11 +29,11 @@ class Navbar extends Component {
               <Link to="/" className="navbar-brand">Sondage</Link>
             </div>
             <div id="navbar-collapse" className="collapse navbar-collapse">
-                <ul className="nav navbar-nav navbar-right">
-                  <li>
-                    {
-                      this.props.user.loggedIn ?
-                        <Link to={`/users/${this.props.user.username}/create-poll`}><i className="glyphicon glyphicon-plus-sign"></i> Poll</Link>
+              <ul className="nav navbar-nav navbar-right">
+                <li>
+                  {
+                    this.props.user.loggedIn ?
+                      <Link to={'/polls/create-poll'}><i className="glyphicon glyphicon-plus-sign"></i> Poll</Link>
                         : null
                     }
                   </li>
