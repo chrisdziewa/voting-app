@@ -24,20 +24,20 @@ class ProfilePage extends Component {
           <div className="row profile-container">
             <div className="col-md-4 text-center">
               <div className="well">
-                <h3>{ username }</h3>
+                <h4>{ username }</h4>
                 <div>
                   <div className="user-info">
                     <p>Polls created: { this.props.polls.length }</p>
-                    <p>{ this.props.user.bio }</p>
-                    {
-                      loggedUser === username ?
-                        <Link to={`/users/edit-user`}>
-                        <i className='glyphicon glyphicon-cog'></i>
+                    <p>Description will go here</p>
+                  </div>
+                  {
+                    loggedUser === username ?
+                      <Link to={`/users/edit-user`}>
+                      <i className='glyphicon glyphicon-cog'></i>
                         <span> edit account</span>
                       </Link>
                       : null
-                    }
-                  </div>
+                  }
                 </div>
               </div>
             </div>
