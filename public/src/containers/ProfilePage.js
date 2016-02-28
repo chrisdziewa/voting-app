@@ -37,25 +37,34 @@ class ProfilePage extends Component {
                   <div className="user-info">
                     <p>Polls created: { this.props.polls.length }</p>
                     <p>Description will go here</p>
+                    {
+                      loggedUser === username ?
+                        <Link to={`/users/edit-user`}>
+                        <i className='glyphicon glyphicon-cog'></i>
+                        <span> edit account</span>
+                      </Link>
+                      : null
+                    }
                   </div>
-                  {
-                    loggedUser === username ?
-                      <Link to={`/users/edit-user`}>
-                      <i className='glyphicon glyphicon-cog'></i>
-                      <span> edit account</span>
-                    </Link>
-                    : null
-                  }
                 </div>
               </div>
             </div>
             <div className='col-md-8 text-center'>
-              <h2 className="recent-polls-header">Recent Polls</h2>
-              <PollsList
-                username={this.props.params.username}
-                user={this.props.user}
-                polls={this.props.polls}
-              />
+              <h2
+                className="recent-polls-header">
+                {loggedUser === username ? 'My Polls' : 'Recent Polls'}
+              </h2>
+
+              {
+                loggedUser === username ?
+                  <TitleList polls={this.props.polls} username={loggedUser}/>
+                :
+                <PollsList
+                  username={this.props.params.username}
+                  user={this.props.user}
+                  polls={this.props.polls}
+                />
+              }
             </div>
           </div>
         </div>

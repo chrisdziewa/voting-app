@@ -289,6 +289,9 @@ div.help-text.text-danger {
     width: 100%;
     margin: 17px auto 0;
     &.profile-info {
+      background: rgba(240,240,240,1);
+      box-shadow: 0 8px 20px rgba(40,40,40,.5);
+      margin-top: 9px;
       h3 {
         border-bottom: 1px solid $dark-blue;
         margin: 10px auto;
@@ -304,9 +307,12 @@ div.help-text.text-danger {
 
     &.poll {
       width: 100%;
+      background: rgba(240,240,240,1);
+      box-shadow: 0 4px 20px rgba(40,40,40,.7);
     }
 
     .recent-polls-header {
+      border-top: 2px solid rgba(240,240,240,1);
       width: 100%;
     }
 
@@ -316,10 +322,69 @@ div.help-text.text-danger {
       text-align: center;
       p {
         text-align: left;
+        font-size: 1.5rem;
+      }
+
+      a {
+        display: inline-block;
+        font-size: 2rem;
+        &:hover {
+          text-decoration: none;
+        }
+        i {
+          display: inline-block;
+          font-size: 2.4rem;
+          top: 6px;
+
+        }
+      }
+    }
+  }
+
+  .current-user-polls {
+    text-align: left;
+    width: 100%;
+    background: rgba(240,240,240,1);
+    tr {
+      &:hover {
+        background: rgba(230,230,230,1);
+      }
+
+      td {
+        vertical-align: middle;
+        padding: 5px;
+
+        h3 {
+          margin: 0;
+
+          @media only screen and (max-width: 600px) {
+            font-size: 2rem;
+          }
+        }
+
+        a {
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+
+    button {
+      &.btn-danger {
+
       }
     }
   }
 }
+
+.panel {
+  padding: 10px;
+  box-shadow: 0 10px 30px rgba(40,40,40,.6);
+  background: rgba(240,240,240,1);
+}
+
+
 /***** Polls *****/
 .well.poll {
   width: 90%;

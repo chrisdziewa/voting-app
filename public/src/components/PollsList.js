@@ -7,7 +7,7 @@ class PollsList extends Component {
     if (typeof polls !== 'undefined') {
       if (polls.length < 1) {
         return (
-          <h3>{this.props.username} has not created any polls yet</h3>
+          <div></div>
         );
       }
       return polls.map((poll) => {
