@@ -12,6 +12,7 @@ import ProfilePage from './containers/ProfilePage';
 import EditProfile from './components/forms/EditProfile';
 import Users from './components/Users';
 import CreatePollForm from './components/forms/CreatePollForm';
+import SinglePollPage from './containers/SinglePollPage';
 import axios from 'axios';
 
 export default function createRoutes(store) {
@@ -38,6 +39,7 @@ export default function createRoutes(store) {
         <Route path="polls/create-poll" component={CreatePollForm} />
         <Route path ="users" component={Users}>
           <Route path="edit-user" component={EditProfile} onEnter={checkAuth}/>
+          <Route path=":username/:question" component={SinglePollPage} />
           <Route path=":username" component={ProfilePage} />
         </Route>
         <Route path="*" component={NoMatch}/>

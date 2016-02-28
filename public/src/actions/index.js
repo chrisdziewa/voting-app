@@ -133,11 +133,25 @@ function pollsRequest(polls) {
   };
 }
 
-export function fetchSinglePoll(pollId) {
-  const request = axios.get(`${ROOT_URL}/polls/${pollId}`);
+export function fetchSinglePoll(username, question) {
+  return (dispatch) => {
+    dispatch(showLoader());
+    axios.get(`${ROOT_URL}/users/${username}/polls/${question}`).then(response => {
+      if (response.status === 200) {
+        dispatch(singlePollSuccess(response.data));
+        dispatch(hideLoader());
+      }
+    }, () => {
+      browserHistory.push('/');
+      dispatch(postError('Poll not found'));
+    });
+  }
+}
+
+function singlePollSuccess(poll) {
   return {
     type: FETCH_SINGLE_POLL,
-    payload: request
+    payload: poll
   };
 }
 
