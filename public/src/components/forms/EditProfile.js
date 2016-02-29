@@ -48,7 +48,7 @@ class EditProfile extends Component {
               </div>
             </div>
             <div className={`form-group ${password.touched && password.invalid ? 'has-error' : ''}`}>
-              <label htmlFor="password" className="pull-left">Password</label>
+              <label htmlFor="password" className="pull-left">New Password</label>
               <br/>
               <input type="password" id="password" className="form-control" {...password}/>
               <div className="text-help text-danger">
@@ -56,7 +56,7 @@ class EditProfile extends Component {
               </div>
             </div>
             <div className={`form-group ${password.valid && passwordConfirmation.touched && passwordConfirmation.invalid ? 'has-error' : ''}`}>
-              <label htmlFor="confirm" className="pull-left">Confirm Password</label>
+              <label htmlFor="confirm" className="pull-left">Confirm New Password</label>
               <br/>
               <input type="password" id="confirm" className="form-control" {...passwordConfirmation}/>
               <div className="text-help text-danger">
