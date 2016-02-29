@@ -197,10 +197,11 @@ export function createPoll(poll, username) {
       if (response.status === 200) {
         dispatch(hideLoader());
         dispatch(pollCreated(response));
-        dispatch(postSuccess('Your poll has been created successfully!'));
-        browserHistory.push(`/users/${username}/${poll.question}`);
-        dispatch(timeClearedMessages());
       }
+    }).then(() =>  {
+      dispatch(postSuccess('Your poll has been created successfully!'));
+      browserHistory.push(`/users/${username}/${poll.question}`);
+      dispatch(timeClearedMessages());
     }, (response) => {
       dispatch(hideLoader());
       dispatch(postError(response.data));

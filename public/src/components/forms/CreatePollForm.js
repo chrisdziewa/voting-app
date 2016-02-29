@@ -37,7 +37,6 @@ class CreatePollForm extends Component {
     }
 
 
-    console.log(errors);
     this.setState({
       errors: errors
     });
@@ -63,7 +62,7 @@ class CreatePollForm extends Component {
         question: question,
         choices: filteredChoices
       }
-      this.props.createPoll(newPoll);
+      this.props.createPoll(newPoll, this.props.username);
     }
   }
 
@@ -177,7 +176,8 @@ class CreatePollForm extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isLoading: state.loader.isLoading
+    isLoading: state.loader.isLoading,
+    username: state.user.username
   }
 }
 
