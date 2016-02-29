@@ -57,7 +57,11 @@ class ProfilePage extends Component {
 
               {
                 loggedUser === username ?
-                  <TitleList polls={this.props.polls} username={loggedUser}/>
+                  <TitleList
+                  polls={this.props.polls}
+                  username={loggedUser}
+                  dispatch={this.props.dispatch}
+                />
                 :
                 <PollsList
                   username={this.props.params.username}
@@ -81,4 +85,11 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { fetchAllPolls })(ProfilePage);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchAllPolls: bindActionCreators(fetchAllPolls, dispatch),
+    dispatch
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

@@ -3,7 +3,8 @@ import {
   FETCH_SINGLE_POLL,
   UPDATE_VOTES,
   HIDE_ALL_RESULTS,
-  CREATE_POLL
+  CREATE_POLL,
+  DELETE_POLL
 } from '../actions/index';
 
 
@@ -50,8 +51,12 @@ export default function(state = INITIAL_STATE, action) {
       });
       return Object.assign({}, ...state, {all: nextAllPolls}, {singlePoll: nextSinglePoll});
     case CREATE_POLL:
-      console.log(action.payload.data);
       return Object.assign({}, ...state, {all: [action.payload.data, ...state.all]});
+    case DELETE_POLL:
+      let remaining = state.all.filter(poll => {
+        return poll._id !== action.payload;
+      });
+      return Object.assign({}, ...state, {all: remaining});
     default:
       return state;
   }

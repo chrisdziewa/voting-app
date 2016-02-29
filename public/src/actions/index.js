@@ -11,6 +11,7 @@ export const UPDATE_VOTES = 'UPDATE_VOTES';
 export const SHOW_RESULT = 'SHOW_RESULT';
 export const HIDE_ALL_RESULTS = 'HIDE_ALL_RESULTS';
 export const CREATE_POLL = 'CREATE_POLL';
+export const DELETE_POLL = 'DELETE_POLL';
 
 // Flash Constants
 export const FLASH_ERROR = 'FLASH_ERROR';
@@ -196,8 +197,8 @@ export function createPoll(poll, username) {
       if (response.status === 200) {
         dispatch(hideLoader());
         dispatch(pollCreated(response));
+        dispatch(postSuccess('Your poll has been created successfully!'));
         browserHistory.push(`/users/${username}/${poll.question}`);
-        dispatch(postSuccess('Your has been created successfully!'));
         dispatch(timeClearedMessages());
       }
     }, (response) => {
@@ -212,6 +213,27 @@ function pollCreated(poll) {
   return {
     type: CREATE_POLL,
     payload: poll
+  }
+}
+
+export function deletePoll(pollId) {
+  return (dispatch) => {
+    axios.delete(`${ROOT_URL}/polls/${pollId}`).then(response => {
+      if (response.status === 200) {
+        dispatch(pollDeleted(pollId));
+        dispatch(postSuccess('Poll has been deleted'));
+        dispatch(timeClearedMessages());
+      }
+    }, () => {
+      dispatch(postError('Could not delete poll'));
+    });
+  }
+}
+
+function pollDeleted(pollId) {
+  return {
+    type: DELETE_POLL,
+    payload: pollId
   }
 }
 

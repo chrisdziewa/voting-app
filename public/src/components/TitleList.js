@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import PollTitle from './PollTitle';
 
 export default class TitleList extends Component {
   renderTitles() {
@@ -9,24 +9,13 @@ export default class TitleList extends Component {
 
     let list = this.props.polls.map((pollInfo) => {
       return (
-        <tr
-          className='title-list-item'
+        <PollTitle
+          _id={pollInfo._id}
           key={pollInfo._id}
-          id={pollInfo._id}
-        >
-          <td>
-            <Link
-              to={`/users/${this.props.username}/${pollInfo.question}`}
-            >
-              <h3>
-                {pollInfo.question}
-              </h3>
-              </Link>
-            </td>
-          <td>
-            <button className="btn btn-danger">Delete</button>
-          </td>
-        </tr>
+          question={pollInfo.question}
+          dispatch={this.props.dispatch}
+          username={this.props.username}
+        />
       );
     });
 
