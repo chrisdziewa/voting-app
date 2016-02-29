@@ -7,6 +7,10 @@ import  Chart from 'chart.js'
 class PollResult extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      legendData: []
+    }
   }
 
   componentDidMount() {
@@ -39,22 +43,56 @@ class PollResult extends Component {
       newData = Object.keys(choices).map(choice => {
       // random color each time rendered
         let colors = this.randomColor();
-        console.log(colors);
-        console.log('value: ', choices[choice], ', label: ', choice);
         return {value: choices[choice], label: choice, color: colors[0], highlight: colors[1]};
       });
     }
+    this.setState({
+      legendData: newData
+    });
+
     const ctx = document.getElementById("result-" + this.props.poll.id).getContext("2d");
     Chart.defaults.global.responsive = true;
     const myPieChart = new Chart(ctx).Pie(newData);
   }
 
+  renderLegend() {
+    if (!this.state.legendData || this.state.legendData.length === 0) {
+      return null;
+    }
+
+    let legend = this.state.legendData.map(pollItem => {
+      let itemStyle = {
+        background: pollItem.color,
+      };
+      return (
+        <li
+          className="legend-item"
+          key={pollItem.label}>
+          <div
+            className="legend-color"
+            style={itemStyle}
+          >
+          </div>
+          <div className="legend-label">
+            {pollItem.label}
+          </div>
+        </li>
+      );
+    });
+
+    return legend;
+  }
 
   render() {
     let chartClass = this.props.poll.id;
     return (
       <div className="result-chart">
         <canvas id={"result-" + chartClass}></canvas>
+        <div className="poll-legend-container">
+          <ul className="poll-legend">
+            {this.renderLegend()}
+          </ul>
+        </div>
       </div>
     );
     {this.loadPoll()}

@@ -63,7 +63,6 @@ body {
     margin-top: 3px;
   }
 }
-
 /******* Forms *******/
 .form-container {
   border: 3px solid rgba(230, 230, 230, .4);
@@ -78,6 +77,7 @@ body {
   padding-left: 10px;
   padding-right: 10px;
   padding-bottom: 20px;
+
   @media only screen and (max-width: 650px) {
     width: 100%;
   }
@@ -137,7 +137,7 @@ body {
     input {
       &[type="text"],
       &[type="password"],
-      {
+       {
         margin: 0 auto;
         width: 100%;
         margin-bottom: 10px;
@@ -166,7 +166,7 @@ body {
       position: absolute;
       left: -40px;
       bottom: 0;
-      padding: 2px 10px 2px;
+      padding: 2px 10px;
 
       @media only screen and (max-width: 450px) {
         position: relative;
@@ -189,14 +189,11 @@ div.help-text.text-danger {
   top: 5px;
 }
 /**** End Forms ****/
-
 /****** Flash Messages *****/
 .alert {
   margin-bottom: 0;
 }
-
 /**** Shared Page Styling ****/
-
 .recent-polls-header {
   text-shadow: 1px 1px 2px white;
   font-size: 3em;
@@ -210,10 +207,7 @@ div.help-text.text-danger {
     width: 100%;
   }
 }
-
 /**** End Shared Page Styling ****/
-
-
 /***** Home Page  Styling*****/
 .home-page {
   .recent-polls-header {
@@ -274,24 +268,25 @@ div.help-text.text-danger {
     max-width: 70%;
   }
 }
-
 /**** End Home Page Styling ****/
-
 /**** Profile Page ****/
 .profile-container {
   margin-top: 50px;
   border-radius: 15px;
   margin-bottom: 30px;
   padding: 10px;
+
   .well {
     word-wrap: break-word;
     text-align: left;
     width: 100%;
     margin: 17px auto 0;
+
     &.profile-info {
       background: rgba(240,240,240,1);
       box-shadow: 0 8px 20px rgba(40,40,40,.5);
       margin-top: 9px;
+
       h3 {
         border-bottom: 1px solid $dark-blue;
         margin: 10px auto;
@@ -320,6 +315,7 @@ div.help-text.text-danger {
       width: 100%;
       margin: 10px auto;
       text-align: center;
+
       p {
         text-align: left;
         font-size: 1.5rem;
@@ -328,14 +324,15 @@ div.help-text.text-danger {
       a {
         display: inline-block;
         font-size: 2rem;
+
         &:hover {
           text-decoration: none;
         }
+
         i {
           display: inline-block;
           font-size: 2.4rem;
           top: 6px;
-
         }
       }
     }
@@ -345,6 +342,7 @@ div.help-text.text-danger {
     text-align: left;
     width: 100%;
     background: rgba(240,240,240,1);
+
     tr {
       &:hover {
         background: rgba(230,230,230,1);
@@ -371,9 +369,7 @@ div.help-text.text-danger {
     }
 
     button {
-      &.btn-danger {
-
-      }
+      &.btn-danger {}
     }
   }
 }
@@ -383,17 +379,11 @@ div.help-text.text-danger {
   box-shadow: 0 10px 30px rgba(40,40,40,.6);
   background: rgba(240,240,240,1);
 }
-
-
 /**** Single Poll Page ****/
-
 .single-poll-page {
   margin-top: 50px;
 }
-
-
 /**** End Single Poll Page ****/
-
 /***** Polls *****/
 .well.poll {
   width: 90%;
@@ -412,6 +402,7 @@ div.help-text.text-danger {
     text-align: left;
     width: 100%;
     margin: 10px auto;
+
     @media only screen and (max-width: 500px) {
       font-size: 1.8rem;
     }
@@ -443,6 +434,58 @@ input[type="radio"] {
     background: rgba(240, 240, 240, 1);
   }
 }
+
+.poll-legend-container {
+  width: 95%;
+  margin: 10px auto;
+
+  .poll-legend {
+    text-align: left;
+    width: 100%;
+    margin: 10px auto;
+
+    li {
+      &.legend-item {
+        display: inline-block;
+        margin: 0 10px;
+
+        @media only screen and (max-width: 700px) {
+          margin: 5px 0;
+        }
+
+        .legend-label {
+          display: inline;
+          margin-right: 10px;
+
+          @media only screen and (min-width: 1000px) {
+            font-size: 2rem;
+          }
+        }
+
+        .legend-color {
+          display: inline-block;
+          width: 25px;
+          height: 25px;
+          margin-right: 5px;
+          top: 8px;
+          border-radius: 50%;
+          position: relative;
+
+          @media only screen and (max-width: 800px) {
+            width: 10px;
+            height: 10px;
+            top: 0;
+          }
+
+          @media only screen and (min-width: 1000px) {
+            width: 30px;
+            height: 30px;
+          }
+        }
+      }
+    }
+  }
+}
 /***** Footer *****/
 footer {
   position: absolute;
@@ -459,12 +502,9 @@ footer {
     text-align: center;
   }
 }
-
-
 /**** Loader Icon ****/
 // Made by luke haas
 // http://projects.lukehaas.me/css-loaders/
-
 .loader,
 .loader:before,
 .loader:after {
@@ -474,17 +514,20 @@ footer {
   width: 1em;
   height: 3em;
 }
+
 .loader:before,
 .loader:after {
   position: absolute;
   top: 0;
   content: '';
 }
+
 .loader:before {
   left: -1.5em;
   -webkit-animation-delay: -0.32s;
   animation-delay: -0.32s;
 }
+
 .loader {
   text-indent: -9999em;
   margin: 175px auto 0;
@@ -496,9 +539,11 @@ footer {
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
 }
+
 .loader:after {
   left: 1.5em;
 }
+
 @-webkit-keyframes load1 {
   0%,
   80%,
@@ -506,11 +551,13 @@ footer {
     box-shadow: 0 0 #ffffff;
     height: 3em;
   }
+
   40% {
     box-shadow: 0 -2em #ffffff;
     height: 4em;
   }
 }
+
 @keyframes load1 {
   0%,
   80%,
@@ -518,6 +565,7 @@ footer {
     box-shadow: 0 0 #ffffff;
     height: 3em;
   }
+
   40% {
     box-shadow: 0 -1em #ffffff;
     height: 4em;
