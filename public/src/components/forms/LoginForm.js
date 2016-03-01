@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
-import { loginRequest } from '../actions/index';
+import { loginRequest } from '../../actions/index';
 import { Link } from 'react-router';
 
 class LoginForm extends Component {

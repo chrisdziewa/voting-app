@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import WelcomeBanner from '../components/welcome-banner';
-import SiteInfoBar from '../components/site-info-bar';
-import PollsList from '../components/PollsList';
+import WelcomeBanner from '../components/layout/WelcomeBanner';
+import SiteInfoBar from '../components/layout/SiteInfoBar';
+import PollsList from '../components/polls/PollsList';
 import { connect } from 'react-redux';
 import { fetchAllPolls } from '../actions/index';
 

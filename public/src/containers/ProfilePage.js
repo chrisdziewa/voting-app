@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import PollsList from '../components/PollsList';
-import { fetchAllPolls } from '../actions/index';
 import { Link } from 'react-router';
-import TitleList from '../components/TitleList';
+import PollsList from '../components/polls/PollsList';
+import { fetchAllPolls } from '../actions/index';
+import TitleList from '../components/layout/TitleList';
 
 class ProfilePage extends Component {
   componentWillMount() {

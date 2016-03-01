@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PollTitle from './PollTitle';
+import PollTitle from '../polls/PollTitle';
 
 export default class TitleList extends Component {
   renderTitles() {

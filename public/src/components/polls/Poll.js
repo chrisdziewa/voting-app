@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import PollChoice from './poll-choice';
-import PollResult from '../containers/poll-result';
+import PollChoice from './PollChoice';
+import PollResult from './PollResult';
 import { connect} from 'react-redux';
-import { updateVotes } from '../actions/index';
+import { updateVotes } from '../../actions/index';
 
 class Poll extends Component {
   constructor(props) {

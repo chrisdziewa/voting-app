@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { Link } from 'react-router';
-import { signupUser } from '../actions/index';
+import { signupUser } from '../../actions/index';
 
 export default class SignupForm extends Component {
   onSubmit(props) {

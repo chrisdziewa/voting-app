@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import { deletePoll } from '../actions/index';
+import { deletePoll } from '../../actions/index';
 
 export default class PollTitle extends Component {
   handleDelete() {

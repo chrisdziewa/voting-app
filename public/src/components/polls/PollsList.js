@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Poll from './poll';
+import Poll from './Poll';
 
 class PollsList extends Component {
   renderPolls() {

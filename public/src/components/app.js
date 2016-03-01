@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Navbar from './navbar';
-import Footer from './footer';
+import Navbar from '../containers/Navbar';
+import Footer from './layout/Footer';
 import FlashMessage from './flash/FlashMessage';
 import { connect } from 'react-redux';
 
