@@ -71,8 +71,6 @@ class Poll extends Component {
   }
 
   renderPollResult() {
-    console.log('Rendering poll result with props:');
-    console.log(this.props);
     // When clicked, change state to showResult and only show result
     return (
       <PollResult poll={this.props} />
@@ -90,6 +88,12 @@ class Poll extends Component {
         }
       </div>
     );
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+
   }
 }
 

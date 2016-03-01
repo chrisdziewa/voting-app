@@ -39,6 +39,7 @@ class PollResult extends Component {
       newData = [{value: 1, label: 'No votes yet', color: '#cccccc', highlight: '#eeeeee' }];
     }
     else {
+
       let choices = newData.choices;
       newData = Object.keys(choices).map(choice => {
       // random color each time rendered
@@ -50,9 +51,12 @@ class PollResult extends Component {
       legendData: newData
     });
 
-    const ctx = document.getElementById("result-" + this.props.poll.id).getContext("2d");
-    Chart.defaults.global.responsive = true;
-    const myPieChart = new Chart(ctx).Pie(newData);
+
+    setTimeout(() => {
+      const ctx = document.getElementById("result-" + this.props.poll.id).getContext("2d");
+      Chart.defaults.global.responsive = true;
+      const myPieChart = new Chart(ctx).Pie(newData);
+    }, 40);
   }
 
   renderLegend() {
