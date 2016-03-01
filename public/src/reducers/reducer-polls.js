@@ -15,7 +15,8 @@ const INITIAL_STATE = {
     showResult: false,
     _id: null,
     choices: [],
-    totalVotes: 0
+    totalVotes: 0,
+    author: null
   }
 };
 

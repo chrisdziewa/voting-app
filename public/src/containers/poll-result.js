@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchSinglePoll } from '../actions/index';
 import axios from 'axios';
-import  Chart from 'chart.js'
+import Chart from 'chart.js'
+import { Link } from 'react-router';
 
 class PollResult extends Component {
   constructor(props) {
@@ -56,7 +55,14 @@ class PollResult extends Component {
       const ctx = document.getElementById("result-" + this.props.poll.id).getContext("2d");
       Chart.defaults.global.responsive = true;
       const myPieChart = new Chart(ctx).Pie(newData);
-    }, 40);
+    }, 200);
+  }
+
+  tweetPoll() {
+    let { author, question } = this.props.poll;
+    let link = encodeURIComponent(`http://localhost:3000/users/${author}/${question}`);
+    window.open(`https://twitter.com/share?url="${link}"&text=${question} ${link}&menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600`);
+    return false;
   }
 
   renderLegend() {
@@ -96,6 +102,21 @@ class PollResult extends Component {
           <ul className="poll-legend">
             {this.renderLegend()}
           </ul>
+        </div>
+        <div className="poll-footer">
+          <span>Poll by: </span>
+          <Link
+            to={`/users/${this.props.poll.author}`}
+            className="poll-author"
+          >
+            {this.props.poll.author}
+          </Link>
+          <button
+            onClick={this.tweetPoll.bind(this)}
+            className="twitter btn btn-primary"
+          >
+            Share on Twitter
+          </button>
         </div>
       </div>
     );

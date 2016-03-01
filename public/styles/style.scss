@@ -384,6 +384,7 @@ div.help-text.text-danger {
   margin-top: 50px;
 }
 /**** End Single Poll Page ****/
+
 /***** Polls *****/
 .well.poll {
   width: 90%;
@@ -391,6 +392,27 @@ div.help-text.text-danger {
   max-width: 800px;
   text-align: center;
   box-shadow: 0 10px 30px rgba(40,40,40,.6);
+}
+
+.result-chart {
+  text-align: left;
+
+  .poll-footer {
+    span {
+      display: inline-block;
+      top: 8px;
+      position: relative;
+    }
+
+    a {
+      display: inline-block;
+      top: 8px;
+      position: relative;
+    }
+    .twitter {
+      margin-left: 20px;
+    }
+  }
 }
 
 .poll-content {
@@ -439,6 +461,8 @@ input[type="radio"] {
 .poll-legend-container {
   width: 95%;
   margin: 10px auto;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(220,220,220,1);
 
   .poll-legend {
     text-align: left;
@@ -487,6 +511,7 @@ input[type="radio"] {
     }
   }
 }
+
 /***** Footer *****/
 footer {
   position: absolute;

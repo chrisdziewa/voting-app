@@ -79,7 +79,22 @@ module.exports = function(express, app) {
           message: 'No poll with that id found'
         });
       }
-      res.json(poll);
+      // Add Username to response
+      User.findById(poll.user_id, (err, user) => {
+        if (err) {
+          return res.status(500).send('There was an error completing your request');
+        }
+
+        else if (!user) {
+          return res.status(404).send('Could not find user for poll');
+        }
+
+        // User found now add it to response and send to user
+        // turn query into object
+        poll = poll.toJSON();
+        poll.author = user.username;
+        res.json(poll);
+      });
     });
   });
 
@@ -117,7 +132,24 @@ module.exports = function(express, app) {
         if (err || obj.n !== 1) {
           return res.status(500).send('Could not cast your vote');
         }
-        res.json(poll);
+
+        // Add Username to response
+        User.findById(poll.user_id, (err, user) => {
+          if (err) {
+            return res.status(500).send('There was an error completing your request');
+          }
+
+          else if (!user) {
+            return res.status(404).send('Could not find user for poll');
+          }
+
+          // User found now add it to response and send to user
+          // turn query into object
+          poll = poll.toJSON();
+          poll.author = user.username;
+
+          res.json(poll);
+        });
       });
     });
   });

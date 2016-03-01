@@ -13,6 +13,7 @@ class Poll extends Component {
      };
   }
 
+
   handleChecked(choice) {
     this.setState({
       currentChoice: choice
@@ -52,11 +53,11 @@ class Poll extends Component {
           {
             this.props.user.loggedIn ?
               <PollChoice
-                disabled={false}
-                checkOption={this.handleChecked.bind(this)}
-                currentChoice={this.state.currentChoice}
-              />
-              : null
+              disabled={false}
+              checkOption={this.handleChecked.bind(this)}
+              currentChoice={this.state.currentChoice}
+            />
+            : null
           }
           <div className="input-form-group">
             <button
@@ -88,12 +89,6 @@ class Poll extends Component {
         }
       </div>
     );
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-
   }
 }
 

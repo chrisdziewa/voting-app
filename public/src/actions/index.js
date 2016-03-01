@@ -12,6 +12,7 @@ export const SHOW_RESULT = 'SHOW_RESULT';
 export const HIDE_ALL_RESULTS = 'HIDE_ALL_RESULTS';
 export const CREATE_POLL = 'CREATE_POLL';
 export const DELETE_POLL = 'DELETE_POLL';
+export const GET_POLL_AUTHOR = 'GET_POLL_AUTHOR';
 
 // Flash Constants
 export const FLASH_ERROR = 'FLASH_ERROR';
@@ -160,6 +161,14 @@ export function fetchUserPolls(username) {
   const request = axios.get(`${ROOT_URL}/users/${username}/polls`);
   return {
     type: FETCH_ALL_POLLS,
+    payload: request
+  }
+}
+
+export function getPollAuthor(pollId) {
+  const request = axios.get(`${ROOT_URL}/polls/${pollId}`);
+  return {
+    type: GET_POLL_AUTHOR,
     payload: request
   }
 }
