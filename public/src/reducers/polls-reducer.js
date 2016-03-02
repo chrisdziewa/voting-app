@@ -26,7 +26,6 @@ export default function(state = INITIAL_STATE, action) {
       return Object.assign({}, ...state, {all: action.payload.data}, {singlePoll: INITIAL_STATE.singlePoll});
     case FETCH_SINGLE_POLL:
       let fetchedPoll = Object.assign({}, {showResult: false}, action.payload);
-      console.log('fetchedPoll: ', fetchedPoll);
       return Object.assign({}, {all: state.all}, {singlePoll: fetchedPoll});
     case HIDE_ALL_RESULTS:
       let hiddenSinglePoll = state.singlePoll;

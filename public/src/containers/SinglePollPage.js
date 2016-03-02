@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Poll from '../components/polls/poll.js';
+import Poll from '../components/polls/Poll.js';
 import { fetchSinglePoll } from '../actions/index';
 
 class SinglePollPage extends Component {

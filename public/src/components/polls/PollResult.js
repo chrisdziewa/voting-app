@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Chart from 'chart.js'
+import Chart from 'chart.js';
 import { Link } from 'react-router';
+Chart.defaults.global.responsive = true;
 
 class PollResult extends Component {
   constructor(props) {
@@ -46,16 +47,13 @@ class PollResult extends Component {
         return {value: choices[choice], label: choice, color: colors[0], highlight: colors[1]};
       });
     }
+
     this.setState({
       legendData: newData
     });
 
-
-    setTimeout(() => {
-      const ctx = document.getElementById("result-" + this.props.poll.id).getContext("2d");
-      Chart.defaults.global.responsive = true;
-      const myPieChart = new Chart(ctx).Pie(newData);
-    }, 200);
+    const ctx = document.getElementById("result-" + this.props.poll.id).getContext("2d");
+    const myPieChart = new Chart(ctx).Pie(newData);
   }
 
   tweetPoll() {
