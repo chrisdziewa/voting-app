@@ -35,12 +35,33 @@ body {
 /**** Navigation Bar*****/
 .navbar-inverse .navbar-nav li a:hover,
 .navbar-inverse .navbar-nav li.active a {
-  background: #67A798;
+  background: rgb(103, 167, 152);
+}
+
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,
+.navbar-inverse .navbar-nav>.open>a:focus {
+  background: rgba(50,50,50,1);
 }
 
 .navbar-inverse {
   background: rgba(40, 40, 40, 1);
+
+  .dropdown-toggle {
+    cursor: pointer;
+  }
+
+  .dropdown-menu {
+    background: rgba(50,50,50,1);
+    cursor: pointer;
+
+    a {
+      color: rgba(200, 200,200, 1);
+    }
+  }
 }
+
+/**** End Navigation Bar****/
+
 /**** Buttons ****/
 .btn {
   &.btn-primary {

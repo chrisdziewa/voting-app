@@ -31,6 +31,20 @@ class Navbar extends Component {
             <div id="navbar-collapse" className="collapse navbar-collapse">
               <ul className="nav navbar-nav navbar-right">
                 <li>
+                  <a className="dropdown-toggle"
+                    id="browse-menu"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="true">
+                    Browse
+                    <span className="caret"></span>
+                  </a>
+                  <ul className="dropdown-menu" aria-labelledby="browse-menu">
+                    <li><Link to="/users">users</Link></li>
+                    <li><Link to="/polls">polls</Link></li>
+                  </ul>
+                </li>
+                <li>
                   {
                     this.props.user.loggedIn ?
                       <Link to={'/polls/create-poll'}><i className="glyphicon glyphicon-plus-sign"></i> Poll</Link>
