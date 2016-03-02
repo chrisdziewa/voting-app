@@ -16,6 +16,7 @@ import EditProfile from './components/forms/EditProfile';
 import CreatePollForm from './components/forms/CreatePollForm';
 import SinglePollPage from './containers/SinglePollPage';
 import UsersPage from './containers/UsersPage';
+import PollsPage from './containers/PollsPage';
 
 export default function createRoutes(store) {
   // Router Helper Functions
@@ -37,7 +38,9 @@ export default function createRoutes(store) {
         <IndexRoute component={HomePage} />
         <Route path="signup" component={SignupForm} />
         <Route path="login" component={LoginForm} />
-        <Route path="polls/create-poll" component={CreatePollForm} />
+        <Route path="polls" component={PollsPage}>
+          <Route path="polls/create-poll" component={CreatePollForm} />
+        </Route>
         <Route path ="users" component={UsersPage}>
           <Route path="edit-user" component={EditProfile} onEnter={checkAuth}/>
           <Route path=":username/:question" component={SinglePollPage} />

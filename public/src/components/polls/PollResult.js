@@ -102,13 +102,15 @@ class PollResult extends Component {
           </ul>
         </div>
         <div className="poll-footer">
-          <span>Poll by: </span>
-          <Link
-            to={`/users/${this.props.poll.author}`}
-            className="poll-author"
-          >
-            {this.props.poll.author}
-          </Link>
+          <div className="author-info">
+            <span>Poll by: </span>
+            <Link
+              to={`/users/${this.props.poll.author}`}
+              className="poll-author"
+            >
+              {this.props.poll.author}
+            </Link>
+          </div>
           <button
             onClick={this.tweetPoll.bind(this)}
             className="twitter btn btn-primary"
