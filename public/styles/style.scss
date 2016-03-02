@@ -413,6 +413,19 @@ div.help-text.text-danger {
 
 /**** End Users Page ****/
 
+/**** Polls Page ****/
+.polls-page {
+  .container {
+    max-width: 800px;
+  }
+
+  .well.poll {
+    width: 100%;
+  }
+}
+
+/**** End Polls Page ****/
+
 /***** Polls *****/
 .well.poll {
   width: 90%;
@@ -528,19 +541,52 @@ input[type="radio"] {
 
   .poll-footer {
     text-align: left;
-    span {
-      display: inline-block;
-      top: 8px;
-      position: relative;
+    width: 90%;
+    margin: 0 auto;
+
+    @media only screen and (max-width: 420px) {
+      text-align: center;
     }
 
-    a {
+    .author-info {
       display: inline-block;
-      top: 8px;
-      position: relative;
+      span {
+        display: inline-block;
+        top: 8px;
+        position: relative;
+        margin-right: 5px;
+      }
+
+      a {
+        display: inline-block;
+        top: 8px;
+        position: relative;
+      }
+
+      @media only screen and (max-width: 420px) {
+        display: block;
+        width: 90%;
+        margin: 5px auto;
+
+        a {
+          top: 0;
+        }
+
+        span {
+          top: 0;
+        }
+      }
     }
+
     .twitter {
       margin-left: 20px;
+
+      @media only screen and (max-width: 420px) {
+        text-align: center;
+        display: block;
+        width: 80%;
+        margin: 5px auto;
+      }
     }
   }
 }
