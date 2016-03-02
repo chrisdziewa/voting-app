@@ -39,7 +39,7 @@ export default function createRoutes(store) {
         <Route path="signup" component={SignupForm} />
         <Route path="login" component={LoginForm} />
         <Route path="polls" component={PollsPage}>
-          <Route path="polls/create-poll" component={CreatePollForm} />
+          <Route path="create-poll" component={CreatePollForm} />
         </Route>
         <Route path ="users" component={UsersPage}>
           <Route path="edit-user" component={EditProfile} onEnter={checkAuth}/>
