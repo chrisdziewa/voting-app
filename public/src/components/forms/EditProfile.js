@@ -129,9 +129,9 @@ function validate(values) {
 
 const mapStateToProps = (state) => {
   let data = {
-    username: state.user.username,
-    email: state.user.email,
-    bio: state.user.bio,
+    username: state.user.current.username,
+    email: state.user.current.email,
+    bio: state.user.current.bio,
     password: '',
     passwordConfirmation: '',
     currentPassword: ''
@@ -139,7 +139,7 @@ const mapStateToProps = (state) => {
 
   return {
     isLoading: state.loader.isLoading,
-    user: state.user,
+    user: state.user.current,
     initialValues: data
   }
 }

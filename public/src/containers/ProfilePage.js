@@ -51,7 +51,7 @@ class ProfilePage extends Component {
             </div>
             <div className='col-md-8 text-center'>
               <h2
-                className="recent-polls-header">
+                className="list-header">
                 {loggedUser === username ? 'My Polls' : 'Recent Polls'}
               </h2>
 
@@ -79,7 +79,7 @@ class ProfilePage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
+    user: state.user.current,
     polls: state.polls.all,
     isLoading: state.loader.isLoading
   }

@@ -34,25 +34,25 @@ class Navbar extends Component {
                   {
                     this.props.user.loggedIn ?
                       <Link to={'/polls/create-poll'}><i className="glyphicon glyphicon-plus-sign"></i> Poll</Link>
-                        : null
-                    }
-                  </li>
-                  <li>
-                    {
-                      this.props.user.loggedIn ?
+                    : null
+                  }
+                </li>
+                <li>
+                  {
+                    this.props.user.loggedIn ?
                       <Link to={`/users/${this.props.user.username}`}>{this.props.user.username}</Link>
-                      : <Link to="/signup">Sign up</Link>
-                    }
-                  </li>
-                  <li>
-                    {
-                      this.props.user.loggedIn ?
+                    : <Link to="/signup">Sign up</Link>
+                  }
+                </li>
+                <li>
+                  {
+                    this.props.user.loggedIn ?
                       <a
-                        onClick={this.handleLogout.bind(this)}
-                        href="#"
-                      >
-                      logout</a>
-                      : <Link to="/login">Login</Link>
+                      onClick={this.handleLogout.bind(this)}
+                      href="#"
+                    >
+                    logout</a>
+                    : <Link to="/login">Login</Link>
                     }
                   </li>
                 </ul>
@@ -66,7 +66,7 @@ class Navbar extends Component {
 
 let mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user.current
   }
 }
 

@@ -27,8 +27,9 @@ export const LOGIN_ERROR = 'LOGIN_ERROR';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGGED_OUT = 'LOGGED_OUT';
 
-// Profile Constants
+// User Constants
 export const UPDATE_USER = 'UPDATE_USER';
+export const GET_ALL_USERS = 'GET_ALL_USERS';
 
 // Loader Constants
 export const SHOW_LOADER = 'SHOW_LOADER';
@@ -248,6 +249,31 @@ function pollDeleted(pollId) {
 }
 
 // End Poll Actions
+
+/* All User actions */
+export function getAllUsers() {
+  return (dispatch) => {
+    dispatch(showLoader());
+    axios.get(`${ROOT_URL}/users`).then(response => {
+      dispatch(hideLoader());
+      if (response.status === 200) {
+        dispatch(getUsersSuccess(response.data));
+      }
+    }, () => {
+      dispatch(hideLoader());
+      dispatch(postError('Could not retrieve users'));
+    });
+  }
+}
+
+function getUsersSuccess(users) {
+  return {
+    type: GET_ALL_USERS,
+    payload: users
+  }
+}
+
+// End All User Actions
 
 /* Signup actions */
 export function signupUser(props) {

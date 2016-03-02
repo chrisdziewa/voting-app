@@ -39,7 +39,7 @@ class SinglePollPage extends Component {
 const mapStateToProps = (state) => {
   return {
     singlePoll: state.polls.singlePoll,
-    user: state.user,
+    user: state.user.current,
     isLoading: state.loader.isLoading
   }
 }

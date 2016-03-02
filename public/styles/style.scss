@@ -386,6 +386,33 @@ div.help-text.text-danger {
 }
 /**** End Single Poll Page ****/
 
+
+/**** Users Page ****/
+
+.user-page {
+  .container {
+    max-width: 800px;
+  }
+  tr {
+    padding: 0;
+  }
+  .user-link {
+    padding: 0;
+    text-decoration: none;
+    font-size: 2rem;
+    a {
+      text-decoration: none;
+      display: block;
+      padding: 3px;
+      &:hover {
+        background: rgba(230,230,230,1);
+      }
+    }
+  }
+}
+
+/**** End Users Page ****/
+
 /***** Polls *****/
 .well.poll {
   width: 90%;

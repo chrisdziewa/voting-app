@@ -110,7 +110,6 @@ module.exports = function(express, app) {
         if (user.username !== req.decoded.username) {
           return res.status(401).send('You may not update other profiles');
         }
-        console.log(user);
 
         let correctPassword = user.comparePassword(validAttributes.currentPassword);
         if (!correctPassword) {
@@ -132,7 +131,6 @@ module.exports = function(express, app) {
       // All is well, now save user
       user.save((err) => {
         if (err) {
-          console.log(err);
           return res.status(500).send('Could not update user');
         } else {
           // create new token

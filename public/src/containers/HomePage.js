@@ -20,7 +20,7 @@ class HomePage extends Component {
       <div className="home-page">
         <WelcomeBanner />
         <SiteInfoBar />
-        <h2 className='recent-polls-header'>Recent Polls</h2>
+        <h2 className='list-header'>Recent Polls</h2>
         <PollsList
           user={this.props.user}
           polls={this.props.polls}
@@ -33,7 +33,7 @@ class HomePage extends Component {
 const mapStateToProps = (state) => {
   return {
     isLoading: state.loader.isLoading,
-    user: state.user,
+    user: state.user.current,
     polls: state.polls.all
   }
 }

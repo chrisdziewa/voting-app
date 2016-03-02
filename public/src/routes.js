@@ -1,5 +1,9 @@
 import React from 'react';
 import { Route, IndexRoute, browserHistory } from 'react-router';
+import { getCurrentUser, postError, showLoader, hideLoader } from './actions/index';
+import axios from 'axios';
+
+// Components
 import App from './components/App';
 import Navbar from './containers/Navbar';
 import HomePage from './containers/HomePage';
@@ -7,13 +11,11 @@ import SignupForm from './components/forms/SignupForm';
 import LoginForm from './components/forms/LoginForm';
 import NoMatch from './components/404';
 import PollResult from './components/polls/PollResult';
-import { getCurrentUser, postError, showLoader, hideLoader } from './actions/index';
 import ProfilePage from './containers/ProfilePage';
 import EditProfile from './components/forms/EditProfile';
-import Users from './components/Users';
 import CreatePollForm from './components/forms/CreatePollForm';
 import SinglePollPage from './containers/SinglePollPage';
-import axios from 'axios';
+import UsersPage from './containers/UsersPage';
 
 export default function createRoutes(store) {
   // Router Helper Functions
@@ -36,7 +38,7 @@ export default function createRoutes(store) {
         <Route path="signup" component={SignupForm} />
         <Route path="login" component={LoginForm} />
         <Route path="polls/create-poll" component={CreatePollForm} />
-        <Route path ="users" component={Users}>
+        <Route path ="users" component={UsersPage}>
           <Route path="edit-user" component={EditProfile} onEnter={checkAuth}/>
           <Route path=":username/:question" component={SinglePollPage} />
           <Route path=":username" component={ProfilePage} />

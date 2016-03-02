@@ -177,7 +177,7 @@ class CreatePollForm extends Component {
 const mapStateToProps = (state) => {
   return {
     isLoading: state.loader.isLoading,
-    username: state.user.username
+    username: state.user.current.username
   }
 }
 
