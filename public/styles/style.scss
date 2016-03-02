@@ -269,6 +269,7 @@ div.help-text.text-danger {
   }
 }
 /**** End Home Page Styling ****/
+
 /**** Profile Page ****/
 .profile-container {
   margin-top: 50px;
@@ -394,26 +395,6 @@ div.help-text.text-danger {
   box-shadow: 0 10px 30px rgba(40,40,40,.6);
 }
 
-.result-chart {
-  text-align: left;
-
-  .poll-footer {
-    span {
-      display: inline-block;
-      top: 8px;
-      position: relative;
-    }
-
-    a {
-      display: inline-block;
-      top: 8px;
-      position: relative;
-    }
-    .twitter {
-      margin-left: 20px;
-    }
-  }
-}
 
 .poll-content {
   ul {
@@ -457,6 +438,8 @@ input[type="radio"] {
     background: rgba(240, 240, 240, 1);
   }
 }
+
+/**** Poll Results ****/
 
 .poll-legend-container {
   width: 95%;
@@ -510,6 +493,34 @@ input[type="radio"] {
       }
     }
   }
+}
+
+.result-chart {
+  text-align: center;
+  position: relative;
+
+  .poll-footer {
+    text-align: left;
+    span {
+      display: inline-block;
+      top: 8px;
+      position: relative;
+    }
+
+    a {
+      display: inline-block;
+      top: 8px;
+      position: relative;
+    }
+    .twitter {
+      margin-left: 20px;
+    }
+  }
+}
+
+canvas {
+  width: 80%;
+  margin: 10px auto;
 }
 
 /***** Footer *****/
