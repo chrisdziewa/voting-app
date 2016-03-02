@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
+import { Link, IndexLink } from 'react-router';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/index';
 
@@ -26,7 +26,7 @@ class Navbar extends Component {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-              <Link to="/" className="navbar-brand">Sondage</Link>
+              <IndexLink to="/" activeStyle={{color: 'white'}} className="navbar-brand">Sondage</IndexLink>
             </div>
             <div id="navbar-collapse" className="collapse navbar-collapse">
               <ul className="nav navbar-nav navbar-right">
@@ -40,22 +40,22 @@ class Navbar extends Component {
                     <span className="caret"></span>
                   </a>
                   <ul className="dropdown-menu" aria-labelledby="browse-menu">
-                    <li><Link to="/users">users</Link></li>
-                    <li><Link to="/polls">polls</Link></li>
+                    <li><IndexLink to="/users" activeClassName="active">users</IndexLink></li>
+                    <li><IndexLink to="/polls" activeClassName="active">polls</IndexLink></li>
                   </ul>
                 </li>
                 <li>
                   {
                     this.props.user.loggedIn ?
-                      <Link to={'/polls/create-poll'}><i className="glyphicon glyphicon-plus-sign"></i> Poll</Link>
+                      <Link to={'/polls/create-poll'} activeClassName="active"><i className="glyphicon glyphicon-plus-sign"></i> Poll</Link>
                     : null
                   }
                 </li>
                 <li>
                   {
                     this.props.user.loggedIn ?
-                      <Link to={`/users/${this.props.user.username}`}>{this.props.user.username}</Link>
-                    : <Link to="/signup">Sign up</Link>
+                      <Link to={`/users/${this.props.user.username}`} activeClassName="active">{this.props.user.username}</Link>
+                    : <Link to="/signup" activeClassName="active">Sign up</Link>
                   }
                 </li>
                 <li>
@@ -66,8 +66,8 @@ class Navbar extends Component {
                       href="#"
                     >
                     logout</a>
-                    : <Link to="/login">Login</Link>
-                    }
+                    : <Link to="/login" activeClassName="active">Login</Link>
+                  }
                   </li>
                 </ul>
               </div>

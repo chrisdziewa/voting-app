@@ -33,9 +33,13 @@ body {
   padding: 0;
 }
 /**** Navigation Bar*****/
-.navbar-inverse .navbar-nav li a:hover,
-.navbar-inverse .navbar-nav li.active a {
+.navbar-inverse .navbar-nav li a:hover {
   background: rgb(103, 167, 152);
+}
+
+.navbar-inverse .navbar-nav li a.active {
+  background: rgb(103, 167, 152);
+  color: rgba(250,250,250,1);
 }
 
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,
