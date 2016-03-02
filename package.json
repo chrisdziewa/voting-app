@@ -29,7 +29,7 @@
     "bcrypt": "^0.8.5",
     "body-parser": "^1.14.2",
     "bootstrap": "^3.3.6",
-    "chart.js": "^1.0.2",
+    "chart.js": "https://github.com/chrisdziewa/Chart.js/tarball/master",
     "cookie-parser": "^1.4.1",
     "express": "^4.13.3",
     "file-loader": "^0.8.5",
