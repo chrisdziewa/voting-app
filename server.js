@@ -54,6 +54,6 @@ app.get('*', function (request, response){
   response.sendFile(__dirname + '/public/index.html');
 });
 
-app.listen(process.env.PORT || 300, () => {
-  console.log('Server running on port ' + port);
+app.listen(process.env.PORT || 3000, () => {
+  console.log('Server running');
 });
