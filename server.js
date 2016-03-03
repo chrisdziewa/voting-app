@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use(express.static(__dirname + 'public'));
+app.use(express.static(process.cwd() + 'public'));
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
@@ -51,7 +51,7 @@ app.use('/api/', authRouter);
 
 // For all other requests, use React Router
 app.get('*', function (request, response){
-  response.sendFile(__dirname + '/public/index.html');
+  response.sendFile(process.cwd() + '/public/index.html');
 });
 
 app.listen(process.env.PORT || 3000, () => {
