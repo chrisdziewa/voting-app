@@ -35,7 +35,7 @@ export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const SHOW_LOADER = 'SHOW_LOADER';
 export const HIDE_LOADER = 'HIDE_LOADER';
 
-const ROOT_URL = 'http://sondage-me.herokuapp.comapi';
+const ROOT_URL = 'https://sondage-me.herokuapp.com/api';
 
 // Loader Actions
 export function showLoader() {

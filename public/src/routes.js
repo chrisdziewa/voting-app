@@ -31,7 +31,7 @@ export default function createRoutes(store) {
   }
 
   function checkAuth() {
-    axios.get('http://sondage-me.herokuapp.comapi/users/current')
+    axios.get('http://sondage-me.herokuapp.com/api/users/current')
       .then((response) => {
 
       }, () => {

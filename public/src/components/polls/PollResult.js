@@ -58,7 +58,7 @@ class PollResult extends Component {
 
   tweetPoll() {
     let { author, question } = this.props.poll;
-    let link = encodeURIComponent(`http://sondage-me.herokuapp.comusers/${author}/${question}`);
+    let link = encodeURIComponent(`http://sondage-me.herokuapp.com/users/${author}/${question}`);
     window.open(`https://twitter.com/share?url="${link}"&text=${question} ${link}&menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600`);
     return false;
   }
