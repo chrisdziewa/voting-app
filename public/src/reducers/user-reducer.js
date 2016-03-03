@@ -14,8 +14,7 @@ const INITIAL_STATE = {
     loggedIn: false,
     id: null,
     username: null,
-    email: null,
-    bio: ''
+    email: null
   }
 };
 
@@ -28,8 +27,7 @@ export default function(state = INITIAL_STATE, action) {
           loggedIn: true,
           id: user._id,
           username: user.username,
-          email: user.email,
-          bio: user.bio
+          email: user.email
         }
       });
     case LOGIN_ERROR:
@@ -48,8 +46,7 @@ export default function(state = INITIAL_STATE, action) {
         current: {
           id: updated._id,
           username: updated.username,
-          email: updated.email,
-          bio: updated.bio
+          email: updated.email
         }
       });
     case GET_ALL_USERS:

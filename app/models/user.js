@@ -17,14 +17,6 @@ let usernameValidator = [
   })
 ];
 
-let bioValidator = [
-  validate({
-    validator: 'isLength',
-    arguments: [0, 500],
-    message: 'Bio should be no more than {ARGS[1]} characters'
-  })
-];
-
 let emailValidator = [
   validate({
     validator: 'isEmail',
@@ -68,11 +60,6 @@ let userSchema = mongoose.Schema({
     type: String,
     required: true,
     select: false
-  },
-  bio: {
-    type: String,
-    required: false,
-    validate: bioValidator
   }
 });
 

@@ -10,7 +10,7 @@ class EditProfile extends Component {
   }
 
   render() {
-    const { fields: { username, email, bio, password, passwordConfirmation, currentPassword }, handleSubmit } = this.props;
+    const { fields: { username, email, password, passwordConfirmation, currentPassword }, handleSubmit } = this.props;
     let loggedUser = this.props.user;
 
     if (this.props.isLoading) {
@@ -37,14 +37,6 @@ class EditProfile extends Component {
               <input type="text" id="email" className="form-control" {...email}/>
               <div className="text-help text-danger">
                 {email.touched ? email.error : ''}
-              </div>
-            </div>
-            <div className={`form-group ${bio.touched && bio.invalid ? 'has-error' : ''}`}>
-              <label htmlFor="bio" className="pull-left">Bio</label>
-              <br/>
-              <textarea id="bio" className="form-control" {...bio}></textarea>
-              <div className="text-help text-danger">
-                {bio.touched ? bio.error : ''}
               </div>
             </div>
             <div className={`form-group ${password.touched && password.invalid ? 'has-error' : ''}`}>
@@ -120,10 +112,6 @@ function validate(values) {
     errors.currentPassword = 'Current password required to make changes'
   }
 
-  if (values.bio && values.bio.length > 500) {
-    errors.bio = 'Bio must be no more than 500 characters';
-  }
-
   return errors;
 }
 
@@ -131,7 +119,6 @@ const mapStateToProps = (state) => {
   let data = {
     username: state.user.current.username,
     email: state.user.current.email,
-    bio: state.user.current.bio,
     password: '',
     passwordConfirmation: '',
     currentPassword: ''
@@ -146,6 +133,6 @@ const mapStateToProps = (state) => {
 
 export default reduxForm({
   form: 'EditForm',
-  fields: ['username', 'email', 'bio', 'password', 'passwordConfirmation', 'currentPassword'],
+  fields: ['username', 'email', 'password', 'passwordConfirmation', 'currentPassword'],
   validate
 }, mapStateToProps, { updateAccount })(EditProfile);

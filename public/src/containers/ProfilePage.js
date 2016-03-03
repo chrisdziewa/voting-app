@@ -36,7 +36,6 @@ class ProfilePage extends Component {
                 <div>
                   <div className="user-info">
                     <p>Polls created: { this.props.polls.length }</p>
-                    <p>Description will go here</p>
                     {
                       loggedUser === username ?
                         <Link to={`/users/edit-user`}>

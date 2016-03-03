@@ -24,8 +24,7 @@ module.exports = function(express, app) {
       let currentUser = {
         username: user.username,
         email: user.email,
-        _id: user._id,
-        bio: user.bio
+        _id: user._id
       };
       res.json(currentUser);
     });
@@ -98,10 +97,10 @@ module.exports = function(express, app) {
   // => PUT /api/users/:id
   router.put('/:id', authenticateRoute, (req, res) => {
     let userId = req.params.id;
-    let validAttributes = _.pick(req.body, 'username', 'email', 'password', 'bio', 'currentPassword');
+    let validAttributes = _.pick(req.body, 'username', 'email', 'password', 'currentPassword');
     User.findById({
       _id: userId
-    }, 'username email password bio', (err, user) => {
+    }, 'username email password', (err, user) => {
       if (err) {
         return res.status(500).json({success: false, message: err});
       }
@@ -123,7 +122,6 @@ module.exports = function(express, app) {
         if (validAttributes.username) user.username = validAttributes.username;
         if (validAttributes.email) user.email = validAttributes.email;
         if (validAttributes.password) user.password = validAttributes.password;
-        if (validAttributes.bio) user.bio = validAttributes.bio;
       } else {
         return res.status(404).send('Could not find user with that id');
       }

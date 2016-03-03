@@ -85,7 +85,7 @@ export function dismissAllFlash() {
   }
 }
 
-function timeClearedMessages() {
+export function timeClearedMessages() {
   return (dispatch) => {
     setTimeout(() => {
       dispatch(dismissAllFlash());
