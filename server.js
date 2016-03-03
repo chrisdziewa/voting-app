@@ -18,8 +18,13 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 // Allow access from different Origins
 
-app.options('*', cors());
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
+app.options('*', cors());
 
 app.use(express.static('public'));
 
