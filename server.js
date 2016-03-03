@@ -51,7 +51,7 @@ app.use('/api/', authRouter);
 
 // For all other requests, use React Router
 app.get('*', function (request, response){
-  response.sendFile(__dirname + '/index.html');
+  response.sendFile(__dirname + '/public/index.html');
 });
 
 app.listen(process.env.PORT || 3000, () => {
