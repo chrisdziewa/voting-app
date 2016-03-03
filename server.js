@@ -4,22 +4,28 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
+const env = process.env.NODE_ENV || "development";
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const config = require('./app/config/config.js');
 
-//==== Webpack development setup ====//
-const webpackConfig = require('./webpack.config.js');
-const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
+if (env === "development") {
 
-const compiler = webpack(webpackConfig);
+  //==== Webpack development setup ====//
+  const webpackConfig = require('./webpack.config.js');
+  const webpack = require('webpack');
+  const webpackDevMiddleware = require('webpack-dev-middleware');
+  const webpackHotMiddleware = require('webpack-hot-middleware');
 
-app.use(webpackDevMiddleware(compiler, {noInfo: true, publicPath: webpackConfig.output.publicPath}));
-app.use(webpackHotMiddleware(compiler));
+  const compiler = webpack(webpackConfig);
 
-//==== End Webpack Setup ==== //
+  app.use(webpackDevMiddleware(compiler, {noInfo: true, publicPath: webpackConfig.output.publicPath}));
+  app.use(webpackHotMiddleware(compiler));
+
+  //==== End Webpack Setup ==== //
+}
+
+
 
 // Establish connection with MongoDB
 mongoose.connect(config.db.connectString);

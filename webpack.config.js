@@ -2,8 +2,10 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var path = require('path');
 
+var PRODUCTION = JSON.parse(process.env.PROD_ENV || false);
+
 module.exports = {
-  devtool: 'inline-source-map',
+  devtool: PRODUCTION ? '' : 'inline-source-map',
   entry: [
     'webpack-hot-middleware/client',
     './public/src/index.js'
@@ -34,14 +36,32 @@ module.exports = {
       }
   ]
 },
-  plugins: [
+  plugins: PRODUCTION ? [
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new ExtractTextPlugin("./styles/main.css"),
     new webpack.ProvidePlugin({
       $: "jquery",
       jQuery: "jquery"
+    })
+  ] : [
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    }),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+    new ExtractTextPlugin("./styles/main.css"),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      sourceMap: false,
+      mangle: false
     })
   ],
   resolve: {
