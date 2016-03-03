@@ -7,7 +7,6 @@ var PRODUCTION = JSON.parse(process.env.PROD_ENV || false);
 module.exports = {
   devtool: PRODUCTION ? '' : 'inline-source-map',
   entry: [
-    'webpack-hot-middleware/client',
     './public/src/index.js'
   ],
   output: {
@@ -50,7 +49,6 @@ module.exports = {
       jQuery: "jquery"
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new ExtractTextPlugin("./styles/main.css"),
     new webpack.DefinePlugin({

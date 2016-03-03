@@ -9,24 +9,6 @@ const cookieParser = require('cookie-parser');
 const config = require('./app/config/config.js');
 process.env.PWD = process.cwd();
 
-if (env === "development") {
-
-  //==== Webpack development setup ====//
-  const webpackConfig = require('./webpack.config.js');
-  const webpack = require('webpack');
-  const webpackDevMiddleware = require('webpack-dev-middleware');
-  const webpackHotMiddleware = require('webpack-hot-middleware');
-
-  const compiler = webpack(webpackConfig);
-
-  app.use(webpackDevMiddleware(compiler, {noInfo: true, publicPath: webpackConfig.output.publicPath}));
-  app.use(webpackHotMiddleware(compiler));
-
-  //==== End Webpack Setup ==== //
-}
-
-
-
 // Establish connection with MongoDB
 mongoose.connect(config.db.connectString);
 
