@@ -7,6 +7,7 @@ const env = process.env.NODE_ENV || "development";
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const config = require('./app/config/config.js');
+const cors = require('cors');
 process.env.PWD = process.cwd();
 
 // Establish connection with MongoDB
@@ -16,11 +17,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 // Allow access from different Origins
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+
+app.options('*', cors());
 
 
 app.use(express.static('public'));
