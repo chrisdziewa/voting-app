@@ -1,6 +1,12 @@
 import React from 'react';
 import { Route, IndexRoute, browserHistory } from 'react-router';
-import { getCurrentUser, postError, showLoader, hideLoader } from './actions/index';
+import {
+  getCurrentUser,
+  postError,
+  showLoader,
+  hideLoader,
+  timeClearedMessages
+} from './actions/index';
 import axios from 'axios';
 
 // Components
@@ -29,7 +35,9 @@ export default function createRoutes(store) {
       .then((response) => {
 
       }, () => {
-        browserHistory.push('/');
+        browserHistory.push('/login');
+        store.dispatch(postError('Must be logged in'));
+        store.dispatch(timeClearedMessages());
       });
   }
 
@@ -39,7 +47,7 @@ export default function createRoutes(store) {
         <Route path="signup" component={SignupForm} />
         <Route path="login" component={LoginForm} />
         <Route path="polls" component={PollsPage}>
-          <Route path="create-poll" component={CreatePollForm} />
+          <Route path="create-poll" component={CreatePollForm} onEnter={checkAuth} />
         </Route>
         <Route path ="users" component={UsersPage}>
           <Route path="edit-user" component={EditProfile} onEnter={checkAuth}/>

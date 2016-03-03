@@ -26,7 +26,13 @@ class Navbar extends Component {
                 <span className="icon-bar"></span>
                 <span className="icon-bar"></span>
               </button>
-              <IndexLink to="/" activeStyle={{color: 'white'}} className="navbar-brand">Sondage</IndexLink>
+              <IndexLink
+                to="/"
+                className="navbar-brand"
+                activeStyle={{color: 'white'}}
+              >
+                Sondage
+              </IndexLink>
             </div>
             <div id="navbar-collapse" className="collapse navbar-collapse">
               <ul className="nav navbar-nav navbar-right">
@@ -40,14 +46,17 @@ class Navbar extends Component {
                     <span className="caret"></span>
                   </a>
                   <ul className="dropdown-menu" aria-labelledby="browse-menu">
-                    <li><IndexLink to="/users" activeClassName="active">users</IndexLink></li>
-                    <li><IndexLink to="/polls" activeClassName="active">polls</IndexLink></li>
+                    <li><Link to="/users">users</Link></li>
+                    <li><Link to="/polls">polls</Link></li>
                   </ul>
                 </li>
                 <li>
                   {
                     this.props.user.loggedIn ?
-                      <Link to={'/polls/create-poll'} activeClassName="active"><i className="glyphicon glyphicon-plus-sign"></i> Poll</Link>
+                      <Link to={'/polls/create-poll'} activeClassName="active">
+                      <i className="glyphicon glyphicon-plus-sign"></i>
+                      Poll
+                    </Link>
                     : null
                   }
                 </li>
