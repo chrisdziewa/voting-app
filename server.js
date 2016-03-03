@@ -7,6 +7,7 @@ const env = process.env.NODE_ENV || "development";
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const config = require('./app/config/config.js');
+process.env.PWD = process.cwd();
 
 if (env === "development") {
 
@@ -33,7 +34,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use(express.static(process.cwd() + 'public'));
+app.use(express.static(process.env.PWD + 'public'));
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
@@ -51,7 +52,7 @@ app.use('/api/', authRouter);
 
 // For all other requests, use React Router
 app.get('*', function (request, response){
-  response.sendFile(process.cwd() + '/public/index.html');
+  response.sendFile(process.env.PWD + '/public/index.html');
 });
 
 app.listen(process.env.PORT || 3000, () => {
