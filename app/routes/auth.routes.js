@@ -37,8 +37,7 @@ module.exports = function(express, app) {
         message: 'Successfully logged in!',
         id: user._id,
         email: user.email,
-        username: user.username,
-        bio: user.bio
+        username: user.username
       }
       // set cookie for 7 days
       res.cookie('auth_token', token, {maxAge: 604800000, path: "/"}).json(userResponse);
