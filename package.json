@@ -36,7 +36,6 @@
     "bootstrap": "^3.3.6",
     "chart.js": "https://github.com/chrisdziewa/Chart.js/tarball/master",
     "cookie-parser": "^1.4.1",
-    "cors": "^2.7.1",
     "express": "^4.13.3",
     "file-loader": "^0.8.5",
     "history": "^1.17.0",
