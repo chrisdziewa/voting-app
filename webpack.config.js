@@ -5,7 +5,7 @@ var path = require('path');
 var PRODUCTION = JSON.parse(process.env.PROD_ENV || false);
 
 module.exports = {
-  devtool: PRODUCTION ? '' : 'inline-source-map',
+  devtool: PRODUCTION ? 'eval' : 'inline-source-map',
   entry: [
     './public/src/index.js'
   ],
@@ -35,7 +35,7 @@ module.exports = {
       }
   ]
 },
-  plugins: PRODUCTION ? [
+  plugins: !PRODUCTION ? [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoErrorsPlugin(),
     new ExtractTextPlugin("./styles/main.css"),
@@ -55,11 +55,6 @@ module.exports = {
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
       }
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-      sourceMap: false,
-      mangle: false
     })
   ],
   resolve: {
