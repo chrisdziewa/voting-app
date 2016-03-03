@@ -3,7 +3,6 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const port = process.env.PORT || 3000;
 const env = process.env.NODE_ENV || "development";
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
@@ -55,6 +54,6 @@ app.get('*', function (request, response){
   response.sendFile(__dirname + '/public/index.html');
 });
 
-app.listen(port, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log('Server running on port ' + port);
 });
