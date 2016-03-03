@@ -569,7 +569,7 @@ input[type="radio"] {
     width: 90%;
     margin: 0 auto;
 
-    @media only screen and (max-width: 420px) {
+    @media only screen and (max-width: 550px) {
       text-align: center;
     }
 
@@ -588,7 +588,7 @@ input[type="radio"] {
         position: relative;
       }
 
-      @media only screen and (max-width: 420px) {
+      @media only screen and (max-width: 550px) {
         display: block;
         width: 90%;
         margin: 5px auto;
@@ -606,7 +606,7 @@ input[type="radio"] {
     .twitter {
       margin-left: 20px;
 
-      @media only screen and (max-width: 420px) {
+      @media only screen and (max-width: 550px) {
         text-align: center;
         display: block;
         width: 80%;
