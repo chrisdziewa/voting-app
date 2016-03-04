@@ -42,7 +42,8 @@ body {
   color: rgba(250,250,250,1);
 }
 
-.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,
+.navbar-inverse .navbar-nav>.open>a,
+.navbar-inverse .navbar-nav>.open>a:hover,
 .navbar-inverse .navbar-nav>.open>a:focus {
   background: rgba(50,50,50,1);
 }
@@ -63,9 +64,7 @@ body {
     }
   }
 }
-
 /**** End Navigation Bar****/
-
 /**** Buttons ****/
 .btn {
   &.btn-primary {
@@ -215,8 +214,12 @@ div.help-text.text-danger {
 }
 /**** End Forms ****/
 /****** Flash Messages *****/
-.alert {
+div.alert {
+  position: fixed;
+  width: 100vw;
   margin-bottom: 0;
+  z-index: 8000;
+  top: 0;
 }
 /**** Shared Page Styling ****/
 .list-header {
@@ -294,7 +297,6 @@ div.help-text.text-danger {
   }
 }
 /**** End Home Page Styling ****/
-
 /**** Profile Page ****/
 .profile-container {
   margin-top: 50px;
@@ -377,6 +379,9 @@ div.help-text.text-danger {
       td {
         vertical-align: middle;
         padding: 5px;
+        &:nth-child(2) {
+          text-align: right;
+        }
 
         h3 {
           margin: 0;
@@ -410,34 +415,33 @@ div.help-text.text-danger {
   margin-top: 50px;
 }
 /**** End Single Poll Page ****/
-
-
 /**** Users Page ****/
-
 .user-page {
   .container {
     max-width: 800px;
   }
+
   tr {
     padding: 0;
   }
+
   .user-link {
     padding: 0;
     text-decoration: none;
     font-size: 2rem;
+
     a {
       text-decoration: none;
       display: block;
       padding: 3px;
+
       &:hover {
         background: rgba(230,230,230,1);
       }
     }
   }
 }
-
 /**** End Users Page ****/
-
 /**** Polls Page ****/
 .polls-page {
   .container {
@@ -448,9 +452,7 @@ div.help-text.text-danger {
     width: 100%;
   }
 }
-
 /**** End Polls Page ****/
-
 /***** Polls *****/
 .well.poll {
   width: 90%;
@@ -459,7 +461,6 @@ div.help-text.text-danger {
   text-align: center;
   box-shadow: 0 10px 30px rgba(40,40,40,.6);
 }
-
 
 .poll-content {
   ul {
@@ -503,9 +504,7 @@ input[type="radio"] {
     background: rgba(240, 240, 240, 1);
   }
 }
-
 /**** Poll Results ****/
-
 .poll-legend-container {
   width: 95%;
   margin: 10px auto;
@@ -575,6 +574,7 @@ input[type="radio"] {
 
     .author-info {
       display: inline-block;
+
       span {
         display: inline-block;
         top: 8px;
@@ -620,7 +620,6 @@ canvas {
   width: 80%;
   margin: 10px auto;
 }
-
 /***** Footer *****/
 footer {
   position: absolute;
@@ -640,6 +639,7 @@ footer {
 /**** Loader Icon ****/
 // Made by luke haas
 // http://projects.lukehaas.me/css-loaders/
+
 .loader,
 .loader:before,
 .loader:after {

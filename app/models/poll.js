@@ -35,8 +35,7 @@ let pollSchema = mongoose.Schema({
   },
   user_id: { type: String, ref: 'User' },
   voter_ips: {
-    type: Array,
-    required: true  
+    type: Array
   }
 });
 

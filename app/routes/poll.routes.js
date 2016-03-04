@@ -113,48 +113,58 @@ module.exports = function(express, app) {
       if (!poll) {
         return res.status(404).send('No poll exists with that id');
       }
-      // Poll found now update it
+      // Poll found now check ip doesn't exist or is invalid
       let choice = req.body.choice.trim();
 
-      verifyIp().then(response => {
-        console.log('Ip ' + response + ' voted');
-      });
-      let newItem = true;
-      Object.keys(poll.choices).forEach((propertyName) => {
-        if (propertyName.toLowerCase() === choice.toLowerCase() && newItem) {
-          poll.choices[propertyName] = poll.choices[propertyName] + 1;
-          newItem = false;
-        }
-      });
-      if (newItem) {
-        poll.choices[choice] = 1;
-      }
-
-      poll.totalVotes = poll.totalVotes + 1;
-      Poll.update({
-        _id: pollId
-      }, poll, (err, obj) => {
-        if (err || obj.n !== 1) {
-          return res.status(500).send('Could not cast your vote');
+      verifyIp().then(ip => {
+        console.log('Ip ' + ip + ' voted');
+        if (poll.voter_ips.indexOf(ip) !== -1) {
+          return res.status(400).send("You can only vote once per poll!");
         }
 
-        // Add Username to response
-        User.findById(poll.user_id, (err, user) => {
-          if (err) {
-            return res.status(500).send('There was an error completing your request');
+        // Ip was valid so update and store ip
+
+        poll.voter_ips.push(ip);
+        let newItem = true;
+        Object.keys(poll.choices).forEach((propertyName) => {
+          if (propertyName.toLowerCase() === choice.toLowerCase() && newItem) {
+            poll.choices[propertyName] = poll.choices[propertyName] + 1;
+            newItem = false;
           }
-
-          else if (!user) {
-            return res.status(404).send('Could not find user for poll');
-          }
-
-          // User found now add it to response and send to user
-          // turn query into object
-          poll = poll.toJSON();
-          poll.author = user.username;
-
-          res.json(poll);
         });
+        if (newItem) {
+          poll.choices[choice] = 1;
+        }
+
+        poll.totalVotes = poll.totalVotes + 1;
+        Poll.update({
+          _id: pollId
+        }, poll, (err, obj) => {
+          if (err || obj.n !== 1) {
+            return res.status(500).send('Could not cast your vote');
+          }
+
+          // Add Username to response
+          User.findById(poll.user_id, (err, user) => {
+            if (err) {
+              return res.status(500).send('There was an error completing your request');
+            }
+
+            else if (!user) {
+              return res.status(404).send('Could not find user for poll');
+            }
+
+            // User found now add it to response and send to user
+            // turn query into object
+            poll = poll.toJSON();
+            poll.author = user.username;
+
+            res.json(poll);
+          });
+        });
+      }, (response) => {
+        // IP couldn't be found or possible hack so return error
+        return res.status(400).send('Could not place vote');
       });
     });
   });

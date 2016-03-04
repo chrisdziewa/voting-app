@@ -180,9 +180,10 @@ export function updateVotes(id, choice) {
       if (response.status === 200) {
         dispatch(pollUpdated(response.data))
       }
-    }, () => {
+    }, (error) => {
       // unsuccessful, show error
-      console.log('error: ', response);
+      dispatch(postError(error.data));
+      dispatch(timeClearedMessages(dispatch));
     });
   }
 }
