@@ -36,11 +36,20 @@ app.use(allowCrossDomain);
 
 app.use(express.static('public'));
 
+
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
 db.once('open', () => {
   console.log('Connected to sondage database');
 });
+
+/* At the top, with other redirect methods before other routes */
+app.get('*',function(req,res,next){
+  if(req.headers['x-forwarded-proto']!='https')
+    res.redirect('https://sondage-me.herokuapp.com'+req.url)
+  else
+    next() /* Continue to other routes if we're not redirecting */
+})
 
 // ===== Import Routers ======
 const userRouter = require('./app/routes/user.routes')(express, app);
