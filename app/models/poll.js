@@ -23,7 +23,7 @@ let pollSchema = mongoose.Schema({
   question: {
     type: String,
     required: true,
-    validate: questionValidator    
+    validate: questionValidator
   },
   choices: {
     type: Object,
@@ -33,7 +33,11 @@ let pollSchema = mongoose.Schema({
   totalVotes: {
     type: Number,
   },
-  user_id: { type: String, ref: 'User' }
+  user_id: { type: String, ref: 'User' },
+  voter_ips: {
+    type: Array,
+    required: true  
+  }
 });
 
 let Poll = mongoose.model('Poll', pollSchema);

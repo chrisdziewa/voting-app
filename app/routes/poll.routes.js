@@ -2,6 +2,7 @@
 const Poll = require('../models/poll');
 const User = require('../models/user');
 const _ = require('underscore');
+const verifyIp = require('../helpers/ip-helper');
 const authenticateRoute = require('../middleware/auth-middleware');
 
 module.exports = function(express, app) {
@@ -54,6 +55,7 @@ module.exports = function(express, app) {
 
       let poll = new Poll(validAttributes);
       poll.totalVotes = 0;
+      poll.voter_ips = [];
       poll.save((err) => {
         if (err) {
           return res.status(500).send(err);
@@ -114,6 +116,9 @@ module.exports = function(express, app) {
       // Poll found now update it
       let choice = req.body.choice.trim();
 
+      verifyIp().then(response => {
+        console.log('Ip ' + response + ' voted');
+      });
       let newItem = true;
       Object.keys(poll.choices).forEach((propertyName) => {
         if (propertyName.toLowerCase() === choice.toLowerCase() && newItem) {
