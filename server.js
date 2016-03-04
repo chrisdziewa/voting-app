@@ -58,7 +58,7 @@ let forceSsl = function (req, res, next) {
     }
 
     // other configurations etc for express go here...
-}
+});
 // ===== Import Routers ======
 const userRouter = require('./app/routes/user.routes')(express, app);
 const pollRouter = require('./app/routes/poll.routes')(express, app);
