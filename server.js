@@ -43,14 +43,7 @@ db.once('open', () => {
   console.log('Connected to sondage database');
 });
 
-// Force https
-app.use(function (req, res, next) {
-    if (req.header('x-forwarded-proto') == 'http') {
-      res.redirect(301, 'https://' + 'sondage-me.herokuapp.com' + req.url)
-      return
-    }
-    next()
-  })
+
 // ===== Import Routers ======
 const userRouter = require('./app/routes/user.routes')(express, app);
 const pollRouter = require('./app/routes/poll.routes')(express, app);
