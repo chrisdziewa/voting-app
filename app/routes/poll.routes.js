@@ -117,7 +117,6 @@ module.exports = function(express, app) {
       let choice = req.body.choice.trim();
 
       verifyIp().then(ip => {
-        console.log('Ip ' + ip + ' voted');
         if (poll.voter_ips.indexOf(ip) !== -1) {
           return res.status(400).send("You can only vote once per poll!");
         }
