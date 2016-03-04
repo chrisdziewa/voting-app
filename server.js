@@ -7,6 +7,7 @@ const env = process.env.NODE_ENV || "development";
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const config = require('./app/config/config.js');
+const sslRedirect = require('heroku-ssl-redirect');
 process.env.PWD = process.cwd();
 
 // Establish connection with MongoDB
