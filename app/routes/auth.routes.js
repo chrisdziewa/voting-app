@@ -40,7 +40,11 @@ module.exports = function(express, app) {
         username: user.username
       }
       // set cookie for 7 days
-      res.cookie('auth_token', token, {maxAge: 604800000, path: "/"}).json(userResponse);
+      res.cookie('auth_token', token, {
+        maxAge: 604800000,
+        httpOnly: false,
+        path: "/"}
+      ).json(userResponse);
     });
   });
 
