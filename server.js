@@ -12,6 +12,7 @@ process.env.PWD = process.cwd();
 // Establish connection with MongoDB
 mongoose.connect(config.db.connectString);
 
+app.use(cookieParser());
 
 // Allowing X-domain request
 var allowCrossDomain = function(req, res, next) {
@@ -27,11 +28,11 @@ var allowCrossDomain = function(req, res, next) {
       next();
     }
 };
-app.use(allowCrossDomain);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cookieParser());
+
+app.use(allowCrossDomain);
 
 app.use(express.static('public'));
 
