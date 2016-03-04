@@ -12,6 +12,8 @@ process.env.PWD = process.cwd();
 // Establish connection with MongoDB
 mongoose.connect(config.db.connectString);
 
+app.use(sslRedirect());
+
 app.use(cookieParser());
 
 // Allowing X-domain request
