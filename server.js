@@ -43,14 +43,22 @@ db.once('open', () => {
   console.log('Connected to sondage database');
 });
 
-/* At the top, with other redirect methods before other routes */
-app.get('*',function(req,res,next){
-  if(req.headers['x-forwarded-proto']!='https')
-    res.redirect('https://sondage-me.herokuapp.com'+req.url)
-  else
-    next() /* Continue to other routes if we're not redirecting */
-})
+// Force https
+let forceSsl = function (req, res, next) {
+    if (req.headers['x-forwarded-proto'] !== 'https') {
+        return res.redirect(['https://', req.get('Host'), req.url].join(''));
+    }
+    return next();
+ };
 
+ app.configure(function () {
+
+    if (env === 'production') {
+        app.use(forceSsl);
+    }
+
+    // other configurations etc for express go here...
+}
 // ===== Import Routers ======
 const userRouter = require('./app/routes/user.routes')(express, app);
 const pollRouter = require('./app/routes/poll.routes')(express, app);
