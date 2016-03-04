@@ -26,7 +26,7 @@ class LoginForm extends Component {
               <br />
               <input type="text" id="email" className="form-control" {...email}/>
               <div className="text-help text-danger">
-                  {email.touched ? email.error : ''}
+                {email.touched ? email.error : ''}
               </div>
             </div>
             <div className={`form-group ${password.touched && password.invalid ? 'has-error' : ''}`}>
@@ -41,7 +41,7 @@ class LoginForm extends Component {
               <input type="submit" className="btn-login pull-left form-control btn btn-primary" value="Submit" />
             </div>
             <p className="pull-left">Don't have an account yet?</p>
-            <p className="pull-left"><Link to="/signup"> Signup</Link> for free</p>
+            <p className="pull-left"><Link to="/users/signup"> Signup</Link> for free</p>
           </form>
         </div>
       </div>

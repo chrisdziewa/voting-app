@@ -9,8 +9,8 @@ class App extends Component {
     return (
       <div className="app">
         <Navbar />
-        <FlashMessage />
         <div className="main-content">
+          <FlashMessage />
           {this.props.children}
         </div>
         <Footer />

@@ -25,7 +25,7 @@ export default class SignupForm extends Component {
               <br/>
               <input type="text" id="username" className="form-control" {...username}/>
               <div className="text-help text-danger">
-                  {username.touched ? username.error : ''}
+                {username.touched ? username.error : ''}
               </div>
             </div>
             <div className={`form-group ${email.touched && email.invalid ? 'has-error' : ''}`}>
@@ -33,7 +33,7 @@ export default class SignupForm extends Component {
               <br/>
               <input type="text" id="email" className="form-control" {...email}/>
               <div className="text-help text-danger">
-                  {email.touched ? email.error : ''}
+                {email.touched ? email.error : ''}
               </div>
             </div>
             <div className={`form-group ${password.touched && password.invalid ? 'has-error' : ''}`}>
@@ -41,7 +41,7 @@ export default class SignupForm extends Component {
               <br/>
               <input type="password" id="password" className="form-control" {...password}/>
               <div className="text-help text-danger">
-                  {password.touched ? password.error : ''}
+                {password.touched ? password.error : ''}
               </div>
             </div>
             <div className={`form-group ${password.valid && passwordConfirmation.touched && passwordConfirmation.invalid ? 'has-error' : ''}`}>
@@ -49,13 +49,13 @@ export default class SignupForm extends Component {
               <br/>
               <input type="password" id="confirm" className="form-control" {...passwordConfirmation}/>
               <div className="text-help text-danger">
-                  {passwordConfirmation.touched ? passwordConfirmation.error : ''}
+                {passwordConfirmation.touched ? passwordConfirmation.error : ''}
               </div>
             </div>
             <div className="form-group">
-               <input type="submit" className="pull-left form-control btn btn-primary" value="Submit" />
+              <input type="submit" className="pull-left form-control btn btn-primary" value="Submit" />
             </div>
-            <p className="pull-left">Already have an account?<Link to="/login"> Login</Link></p>
+            <p className="pull-left">Already have an account?<Link to="/users/login"> Login</Link></p>
           </form>
         </div>
       </div>
