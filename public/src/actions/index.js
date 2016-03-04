@@ -35,7 +35,7 @@ export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const SHOW_LOADER = 'SHOW_LOADER';
 export const HIDE_LOADER = 'HIDE_LOADER';
 
-const ROOT_URL = 'https://sondage-me.herokuapp.com/api';
+// const ROOT_URL = 'https://sondage-me.herokuapp.com/api';
 
 // Loader Actions
 export function showLoader() {
@@ -100,11 +100,11 @@ export function timeClearedMessages() {
 export function fetchAllPolls(username = null) {
   let url;
   if (username) {
-    url = `${ROOT_URL}/users/${username}/polls`;
+    url = `/api/users/${username}/polls`;
   }
 
   else {
-    url = `${ROOT_URL}/polls`;
+    url = `/api/polls`;
   }
   return (dispatch) => {
     dispatch(showLoader());
@@ -139,7 +139,7 @@ function pollsRequest(polls) {
 export function fetchSinglePoll(username, question) {
   return (dispatch) => {
     dispatch(showLoader());
-    axios.get(`${ROOT_URL}/users/${username}/polls/${question}`).then(response => {
+    axios.get(`/api/users/${username}/polls/${question}`).then(response => {
       if (response.status === 200) {
         dispatch(singlePollSuccess(response.data));
         dispatch(hideLoader());
@@ -159,7 +159,7 @@ function singlePollSuccess(poll) {
 }
 
 export function fetchUserPolls(username) {
-  const request = axios.get(`${ROOT_URL}/users/${username}/polls`);
+  const request = axios.get(`/api/users/${username}/polls`);
   return {
     type: FETCH_ALL_POLLS,
     payload: request
@@ -167,7 +167,7 @@ export function fetchUserPolls(username) {
 }
 
 export function getPollAuthor(pollId) {
-  const request = axios.get(`${ROOT_URL}/polls/${pollId}`);
+  const request = axios.get(`/api/polls/${pollId}`);
   return {
     type: GET_POLL_AUTHOR,
     payload: request
@@ -176,7 +176,7 @@ export function getPollAuthor(pollId) {
 
 export function updateVotes(id, choice) {
   return (dispatch) => {
-    axios.put(`${ROOT_URL}/polls/${id}`, {choice: choice}).then(response => {
+    axios.put(`/api/polls/${id}`, {choice: choice}).then(response => {
       if (response.status === 200) {
         dispatch(pollUpdated(response.data))
       }
@@ -203,7 +203,7 @@ function pollUpdated(poll) {
 export function createPoll(poll, username) {
   return (dispatch) => {
     dispatch(showLoader());
-    axios.post(`${ROOT_URL}/polls`, poll).then(response => {
+    axios.post(`/api/polls`, poll).then(response => {
       if (response.status === 200) {
         dispatch(hideLoader());
         dispatch(pollCreated(response));
@@ -229,7 +229,7 @@ function pollCreated(poll) {
 
 export function deletePoll(pollId) {
   return (dispatch) => {
-    axios.delete(`${ROOT_URL}/polls/${pollId}`).then(response => {
+    axios.delete(`/api/polls/${pollId}`).then(response => {
       if (response.status === 200) {
         dispatch(pollDeleted(pollId));
         dispatch(postSuccess('Poll has been deleted'));
@@ -254,7 +254,7 @@ function pollDeleted(pollId) {
 export function getAllUsers() {
   return (dispatch) => {
     dispatch(showLoader());
-    axios.get(`${ROOT_URL}/users`).then(response => {
+    axios.get(`/api/users`).then(response => {
       dispatch(hideLoader());
       if (response.status === 200) {
         dispatch(getUsersSuccess(response.data));
@@ -279,7 +279,7 @@ function getUsersSuccess(users) {
 export function signupUser(props) {
   return (dispatch) => {
     dispatch(showLoader());
-    let request = `${ROOT_URL}/users`;
+    let request = `/api/users`;
     axios.post(request, props).then(response => {
       if (response.status === 200) {
         dispatch(postSuccess(`Welcome, ${props.username}! Thanks for signing up for Sondage!`));
@@ -301,7 +301,7 @@ export function signupUser(props) {
     export function getCurrentUser() {
       return (dispatch) => {
         dispatch(showLoader());
-        let request = `${ROOT_URL}/users/current`;
+        let request = `/api/users/current`;
         axios.get(request).then(response => {
           dispatch(hideLoader());
           dispatch(loginSuccess(response.data));
@@ -320,7 +320,7 @@ export function loginRequest(props, signup = false) {
       if (!signup) {
         dispatch(showLoader());
       }
-      axios.post(`${ROOT_URL}/authenticate`, props).then(response => {
+      axios.post(`/api/authenticate`, props).then(response => {
         if (response.status == 200) {
           dispatch(postSuccess('Logged in succesfully'));
           browserHistory.push('/');
@@ -355,7 +355,7 @@ export function loginRequest(props, signup = false) {
   export function logoutUser() {
     return (dispatch) => {
       dispatch(showLoader());
-      let request = `${ROOT_URL}/authenticate`;
+      let request = `/api/authenticate`;
       axios.delete(request).then(response => {
         dispatch(loggedOut());
         browserHistory.push('/login');
@@ -384,7 +384,7 @@ export function loginRequest(props, signup = false) {
   }
 
   export function updateAccount(id, props) {
-    const url = `${ROOT_URL}/users/${id}`;
+    const url = `/api/users/${id}`;
     return (dispatch) => {
       dispatch(showLoader());
       axios.put(url, props).then(response => {
