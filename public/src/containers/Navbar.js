@@ -64,7 +64,7 @@ class Navbar extends Component {
                   {
                     this.props.user.loggedIn ?
                       <Link to={`/users/${this.props.user.username}`} activeClassName="active">{this.props.user.username}</Link>
-                    : <Link to="/signup" activeClassName="active">Sign up</Link>
+                    : <Link to="/users/signup" activeClassName="active">Sign up</Link>
                   }
                 </li>
                 <li>
@@ -75,7 +75,7 @@ class Navbar extends Component {
                       href="#"
                     >
                     logout</a>
-                    : <Link to="/login" activeClassName="active">Login</Link>
+                    : <Link to="/users/login" activeClassName="active">Login</Link>
                   }
                   </li>
                 </ul>
