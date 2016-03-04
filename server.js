@@ -44,21 +44,13 @@ db.once('open', () => {
 });
 
 // Force https
-let forceSsl = function (req, res, next) {
-    if (req.headers['x-forwarded-proto'] !== 'https') {
-        return res.redirect(['https://', req.get('Host'), req.url].join(''));
+app.use(function (req, res, next) {
+    if (req.header('x-forwarded-proto') == 'http') {
+      res.redirect(301, 'https://' + 'sondage-me.herokuapp.com' + req.url)
+      return
     }
-    return next();
- };
-
- app.configure(function () {
-
-    if (env === 'production') {
-        app.use(forceSsl);
-    }
-
-    // other configurations etc for express go here...
-});
+    next()
+  })
 // ===== Import Routers ======
 const userRouter = require('./app/routes/user.routes')(express, app);
 const pollRouter = require('./app/routes/poll.routes')(express, app);
