@@ -35,7 +35,7 @@ export default function createRoutes(store) {
       .then((response) => {
 
       }, () => {
-        browserHistory.push('/login');
+        browserHistory.push('/users/login');
         store.dispatch(postError('Must be logged in'));
         store.dispatch(timeClearedMessages());
       });
