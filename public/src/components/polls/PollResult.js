@@ -35,11 +35,13 @@ class PollResult extends Component {
   loadPoll() {
 
     let newData = this.props.poll;
-    if (newData.totalVotes === 0) {
+
+    console.log('newData', newData);
+    if (!newData || newData.totalVotes == 0) {
       newData = [{value: 1, label: 'No votes yet', color: '#cccccc', highlight: '#eeeeee' }];
     }
-    else {
 
+    else {
       let choices = newData.choices;
       newData = Object.keys(choices).map(choice => {
       // random color each time rendered

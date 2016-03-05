@@ -11,12 +11,22 @@ import rootReducer from './reducers';
 import createRoutes from './routes';
 import promise from 'redux-promise';
 
-const store = createStore(
-  rootReducer, applyMiddleware(thunk, promise, logger())
-);
+let store;
+
+if (process.env.NODE_ENV) {
+  store = createStore(
+    rootReducer, applyMiddleware(thunk, promise)
+  );
+}
+
+else {
+  store = createStore(
+    rootReducer, applyMiddleware(thunk, promise, logger())
+  );
+}
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory} routes={createRoutes(store)} />
-  </Provider>  
+  </Provider>
 , document.querySelector('#container'));

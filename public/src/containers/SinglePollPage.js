@@ -26,6 +26,7 @@ class SinglePollPage extends Component {
             choices={poll.choices}
             user={this.props.user}
             showResult={poll.showResult}
+            totalVotes={poll.totalVotes}
             author={poll.author}
             id={poll._id}
             question={poll.question}

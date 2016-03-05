@@ -22,7 +22,6 @@ class Poll extends Component {
   }
 
   handleShowResult(event) {
-    console.log('clicked');
     this.props.skipToResult(this.props.id);
   }
 

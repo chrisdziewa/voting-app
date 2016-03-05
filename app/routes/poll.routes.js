@@ -8,7 +8,7 @@ const authenticateRoute = require('../middleware/auth-middleware');
 module.exports = function(express, app) {
   let router = express.Router();
 
-  // Get all posts
+  // Get all polls
   router.get('/', (req, res) => {
     Poll.find({}).sort({_id: 'desc'}).exec((err, polls) => {
       if (err) {
@@ -90,7 +90,6 @@ module.exports = function(express, app) {
         else if (!user) {
           return res.status(404).send('Could not find user for poll');
         }
-
         // User found now add it to response and send to user
         // turn query into object
         poll = poll.toJSON();

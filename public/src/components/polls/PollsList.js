@@ -17,6 +17,7 @@ class PollsList extends Component {
               user={this.props.user}
               showResult={poll.showResult}
               author={ poll.author || null }
+              totalVotes={ poll.totalVotes }
               id={poll._id} question={poll.question}
             />
           </li>
