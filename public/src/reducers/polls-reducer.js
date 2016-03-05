@@ -29,7 +29,6 @@ export default function(state = INITIAL_STATE, action) {
       let fetchedPoll = Object.assign({}, {showResult: false}, action.payload);
       return Object.assign({}, {all: state.all}, {singlePoll: fetchedPoll});
     case SHOW_RESULT:
-      console.log('show result');
       let singlePoll = Object.assign({}, state.singlePoll);
       if (singlePoll._id === action.payload._id) {
         singlePoll = action.payload;
