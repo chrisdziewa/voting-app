@@ -13,15 +13,15 @@ import promise from 'redux-promise';
 
 let store;
 
-if (process.env.NODE_ENV) {
+if (process.env.NODE_ENV !== 'production') {
   store = createStore(
-    rootReducer, applyMiddleware(thunk, promise)
+    rootReducer, applyMiddleware(thunk, promise, logger())
   );
 }
 
 else {
   store = createStore(
-    rootReducer, applyMiddleware(thunk, promise, logger())
+    rootReducer, applyMiddleware(thunk, promise)
   );
 }
 
