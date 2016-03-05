@@ -202,7 +202,6 @@ function showResult(poll) {
 }
 
 export function skipToResult(pollId) {
-  console.log('called skipToResult in actions file')
   return (dispatch) => {
     axios.get(`/api/polls/${pollId}`).then(response => {
       dispatch(showResult(response.data));
@@ -409,7 +408,6 @@ export function loginRequest(props, signup = false) {
       dispatch(showLoader());
       axios.put(url, props).then(response => {
         if (response.status === 200) {
-          console.log(response);
           dispatch(updateUser(response.data));
           dispatch(getCurrentUser());
           dispatch(hideLoader());
