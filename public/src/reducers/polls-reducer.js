@@ -4,7 +4,8 @@ import {
   UPDATE_VOTES,
   HIDE_ALL_RESULTS,
   CREATE_POLL,
-  DELETE_POLL
+  DELETE_POLL,
+  SHOW_RESULT
 } from '../actions/index';
 
 
@@ -27,6 +28,22 @@ export default function(state = INITIAL_STATE, action) {
     case FETCH_SINGLE_POLL:
       let fetchedPoll = Object.assign({}, {showResult: false}, action.payload);
       return Object.assign({}, {all: state.all}, {singlePoll: fetchedPoll});
+    case SHOW_RESULT:
+      console.log('show result');
+      let singlePoll = Object.assign({}, state.singlePoll);
+      if (singlePoll._id === action.payload._id) {
+        singlePoll.showResult = true;
+      }
+      let allPollList = [...state.all];
+    allPollList = allPollList.map(poll => {
+      console.log('poll._id: ', poll._id);
+      console.log('matching payload._id: ', action.payload._id);
+        if (poll._id === action.payload._id) {
+          poll.showResult = true;
+        }
+        return poll;
+      });
+      return Object.assign({}, state, {all: allPollList}, {singlePoll: singlePoll});
     case HIDE_ALL_RESULTS:
       let hiddenSinglePoll = state.singlePoll;
       hiddenSinglePoll.showResult = false;

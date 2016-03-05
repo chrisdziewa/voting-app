@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PollChoice from './PollChoice';
 import PollResult from './PollResult';
 import { connect} from 'react-redux';
-import { updateVotes } from '../../actions/index';
+import { bindActionCreators } from 'redux';
+import { updateVotes, skipToResult } from '../../actions/index';
 
 class Poll extends Component {
   constructor(props) {
@@ -18,6 +19,13 @@ class Poll extends Component {
     this.setState({
       currentChoice: choice
     });
+  }
+
+  handleShowResult(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log('clicked');
+    this.props.skipToResult(this.props.id);
   }
 
   renderPollChoices() {
@@ -47,27 +55,32 @@ class Poll extends Component {
 
   renderPoll() {
     return (
-      <ul>
         <form onSubmit={this.handleSubmit.bind(this)}>
-          {this.renderPollChoices()}
-          {
-            this.props.user.loggedIn ?
-              <PollChoice
-              disabled={false}
-              checkOption={this.handleChecked.bind(this)}
-              currentChoice={this.state.currentChoice}
-            />
-            : null
-          }
-          <div className="input-form-group">
-            <button
-              className="btn btn-primary form-control"
-            >
-              Vote
-            </button>
-          </div>
+          <ul>
+            {this.renderPollChoices()}
+            {
+              this.props.user.loggedIn ?
+                <PollChoice
+                disabled={false}
+                checkOption={this.handleChecked.bind(this)}
+                currentChoice={this.state.currentChoice}
+              />
+              : null
+            }
+            <div className="input-form-group">
+              <button
+                className="btn btn-primary form-control"
+              >
+                Vote
+              </button>
+            </div>
+          </ul>
+          <a
+            className="skip-to-result"
+            onCLick={this.handleShowResult.bind(this)}
+          >Skip to result
+          </a>
         </form>
-      </ul>
     );
   }
 
@@ -84,12 +97,12 @@ class Poll extends Component {
         <h3>{this.props.question}</h3>
         {
           this.props.showResult ?
-            this.renderPollResult()
-            : this.renderPoll()
+          this.renderPollResult()
+          : this.renderPoll()
         }
       </div>
     );
   }
 }
 
-export default connect(null, { updateVotes })(Poll);
+export default connect(null, { updateVotes, skipToResult })(Poll);
