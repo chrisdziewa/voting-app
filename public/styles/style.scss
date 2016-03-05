@@ -624,6 +624,8 @@ input[type="radio"] {
 }
 
 canvas {
+  min-width: 200;
+  min-height: 100;
   width: 80%;
   margin: 10px auto;
 }

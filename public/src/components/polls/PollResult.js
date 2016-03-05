@@ -97,8 +97,6 @@ class PollResult extends Component {
     return (
       <div className="result-chart">
         <canvas
-          width={300}
-          height={400}
           id={"result-" + chartClass}></canvas>
         <div className="poll-legend-container">
           <ul className="poll-legend">
