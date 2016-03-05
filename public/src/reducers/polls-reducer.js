@@ -32,13 +32,13 @@ export default function(state = INITIAL_STATE, action) {
       console.log('show result');
       let singlePoll = Object.assign({}, state.singlePoll);
       if (singlePoll._id === action.payload._id) {
+        singlePoll = action.payload;
         singlePoll.showResult = true;
       }
       let allPollList = [...state.all];
     allPollList = allPollList.map(poll => {
-      console.log('poll._id: ', poll._id);
-      console.log('matching payload._id: ', action.payload._id);
         if (poll._id === action.payload._id) {
+          poll = action.payload
           poll.showResult = true;
         }
         return poll;

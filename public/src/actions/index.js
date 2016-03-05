@@ -202,10 +202,9 @@ function showResult(poll) {
 }
 
 export function skipToResult(pollId) {
+  console.log('called skipToResult in actions file')
   return (dispatch) => {
     axios.get(`/api/polls/${pollId}`).then(response => {
-      console.log('got poll');
-      console.log(response);
       dispatch(showResult(response.data));
     }, () => {
       dispatch(postError('There was an error showing your result'));

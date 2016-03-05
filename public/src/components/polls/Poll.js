@@ -22,8 +22,6 @@ class Poll extends Component {
   }
 
   handleShowResult(event) {
-    event.preventDefault();
-    event.stopPropagation();
     console.log('clicked');
     this.props.skipToResult(this.props.id);
   }
@@ -77,7 +75,7 @@ class Poll extends Component {
           </ul>
           <a
             className="skip-to-result"
-            onCLick={this.handleShowResult.bind(this)}
+            onClick={this.handleShowResult.bind(this)}
           >Skip to result
           </a>
         </form>

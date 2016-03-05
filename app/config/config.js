@@ -18,7 +18,7 @@ if (process.env.PRIVATE_KEY && process.env.USER && process.env.PASSWORD) {
 // Local development
 else {
   config.privateKey = 'hkjfs676sf9(*#&kh';
-  config.db.connectString = 'mongodb://localhost/myapp';
+  config.db.connectString = 'mongodb://localhost/sondage';
 }
 
 module.exports = config;
