@@ -36,7 +36,6 @@ class PollResult extends Component {
 
     let newData = this.props.poll;
 
-    console.log('newData', newData);
     if (!newData || newData.totalVotes == 0) {
       newData = [{value: 1, label: 'No votes yet', color: '#cccccc', highlight: '#eeeeee' }];
     }
@@ -97,7 +96,10 @@ class PollResult extends Component {
     let chartClass = this.props.poll.id;
     return (
       <div className="result-chart">
-        <canvas id={"result-" + chartClass}></canvas>
+        <canvas
+          width={300}
+          height={400}
+          id={"result-" + chartClass}></canvas>
         <div className="poll-legend-container">
           <ul className="poll-legend">
             {this.renderLegend()}
