@@ -52,7 +52,7 @@ class Navbar extends Component {
                 <li>
                   {
                     this.props.user.loggedIn ?
-                      <Link to={'polls/create-poll'} >
+                      <Link to='/polls/create-poll' >
                       <i className="glyphicon glyphicon-plus-sign"></i>
                       Poll
                     </Link>
