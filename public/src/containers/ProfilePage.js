@@ -20,7 +20,6 @@ class ProfilePage extends Component {
   render() {
     let { username } = this.props.params;
     let loggedUser = this.props.user.username;
-
     if (this.props.isLoading) {
       return (
         <div className="loader"></div>

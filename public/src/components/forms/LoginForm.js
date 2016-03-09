@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { loginRequest } from '../../actions/index';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 
 class LoginForm extends Component {
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.loggedIn) {
+      browserHistory.push('/');
+    }
+  }
+
   onSubmit(props) {
     this.props.loginRequest(props);
   }
@@ -41,7 +48,7 @@ class LoginForm extends Component {
               <input type="submit" className="btn-login pull-left form-control btn btn-primary" value="Submit" />
             </div>
             <p className="pull-left">Don't have an account yet?</p>
-            <p className="pull-left"><Link to="/users/signup"> Signup</Link> for free</p>
+            <p className="pull-left"><Link to="/signup"> Signup</Link> for free</p>
           </form>
         </div>
       </div>
@@ -68,7 +75,8 @@ function validate(values) {
 
 const mapStateToProps = (state) => {
   return {
-    isLoading: state.loader.isLoading
+    isLoading: state.loader.isLoading,
+    loggedIn: state.user.current.loggedIn
   }
 }
 
@@ -76,4 +84,4 @@ export default reduxForm({
   form: 'LoginForm',
   fields: ['email', 'password'],
   validate
-}, null, { loginRequest })(LoginForm);
+}, mapStateToProps, { loginRequest })(LoginForm);

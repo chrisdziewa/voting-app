@@ -9,6 +9,11 @@ class PollsPage extends Component {
   }
 
   render() {
+    if (this.props.isLoading) {
+      return (
+        <div className="loader"></div>
+      );
+    }
     return (
       <div>
         {
@@ -34,7 +39,8 @@ class PollsPage extends Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user.current,
-    polls: state.polls.all
+    polls: state.polls.all,
+    isLoading: state.loader.isLoading
   }
 }
 

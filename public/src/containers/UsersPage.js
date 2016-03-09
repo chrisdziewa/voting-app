@@ -8,6 +8,12 @@ class UsersPage extends Component {
     this.props.getAllUsers();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.params.username !== this.props.params.username) {
+      console.log('different');
+    }
+  }
+
   renderUsers() {
     let rendered = this.props.users.map(user => {
       return (
@@ -23,6 +29,16 @@ class UsersPage extends Component {
   }
 
   render() {
+    if (this.props.children) {
+      return (
+        this.props.children
+      );
+    }
+    if (this.props.isLoading) {
+      return (
+        <div className="loader"></div>
+      );
+    }
     return (
       <div>
         {
@@ -49,7 +65,8 @@ class UsersPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    users: state.user.all
+    users: state.user.all,
+    isLoading: state.loader.isLoading
   }
 }
 

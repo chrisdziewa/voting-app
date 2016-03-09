@@ -35,7 +35,7 @@ export default function createRoutes(store) {
       .then((response) => {
 
       }, () => {
-        browserHistory.push('/users/login');
+        browserHistory.push('/login');
         store.dispatch(postError('Must be logged in'));
         store.dispatch(timeClearedMessages());
       });
@@ -47,10 +47,11 @@ export default function createRoutes(store) {
         <Route path="polls" component={PollsPage}>
           <Route path="create-poll" component={CreatePollForm} onEnter={checkAuth} />
         </Route>
-        <Route path ="users" component={UsersPage}>
-          <Route path="signup" component={SignupForm} />
-          <Route path="login" component={LoginForm} />
-          <Route path="edit-user" component={EditProfile} onEnter={checkAuth}/>
+        <Route path="/signup" component={SignupForm}/>
+        <Route path="/login" component={LoginForm} />
+        <Route path="/edit-user" component={EditProfile} onEnter={checkAuth}/>
+        <Route path ="/users">
+          <IndexRoute component={UsersPage}/>
           <Route path=":username/:question" component={SinglePollPage} />
           <Route path=":username" component={ProfilePage} />
         </Route>

@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { signupUser } from '../../actions/index';
 
-export default class SignupForm extends Component {
+class SignupForm extends Component {
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.loggedIn) {
+      browserHistory.push('/');
+    }
+  }
+
   onSubmit(props) {
     this.props.signupUser(props);
   }
@@ -55,7 +62,7 @@ export default class SignupForm extends Component {
             <div className="form-group">
               <input type="submit" className="pull-left form-control btn btn-primary" value="Submit" />
             </div>
-            <p className="pull-left">Already have an account?<Link to="/users/login"> Login</Link></p>
+            <p className="pull-left">Already have an account?<Link to="/login"> Login</Link></p>
           </form>
         </div>
       </div>
@@ -104,7 +111,8 @@ else if (values.password.length < 6 || values.password.length > 32) {
 
 const mapStateToProps = (state) => {
   return {
-    isLoading: state.loader.isLoading
+    isLoading: state.loader.isLoading,
+    loggedIn: state.user.current.loggedIn
   }
 }
 

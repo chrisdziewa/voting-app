@@ -377,7 +377,7 @@ export function loginRequest(props, signup = false) {
       let request = `/api/authenticate`;
       axios.delete(request).then(response => {
         dispatch(loggedOut());
-        browserHistory.push('/users/login');
+        browserHistory.push('/login');
         dispatch(postSuccess("Logout was successful. We hope to see you again soon!"));
         dispatch(hideLoader());
         dispatch(timeClearedMessages());
