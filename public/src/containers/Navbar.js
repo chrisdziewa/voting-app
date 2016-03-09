@@ -29,8 +29,6 @@ class Navbar extends Component {
               <IndexLink
                 to='/'
                 className='navbar-brand'
-                activeStyle={{color: 'white'}}
-                onlyActiveOnIndex
               >
                 Sondage
               </IndexLink>
@@ -47,14 +45,14 @@ class Navbar extends Component {
                     <span className='caret'></span>
                   </a>
                   <ul className='dropdown-menu' aria-labelledby='browse-menu'>
-                    <li><Link to='/users' onlyActiveOnIndex>users</Link></li>
+                    <li><Link to='/users'>users</Link></li>
                     <li><Link to='/polls'>polls</Link></li>
                   </ul>
                 </li>
                 <li>
                   {
                     this.props.user.loggedIn ?
-                      <Link to={'polls/create-poll'} activeClassName="active">
+                      <Link to={'polls/create-poll'} >
                       <i className="glyphicon glyphicon-plus-sign"></i>
                       Poll
                     </Link>
@@ -66,11 +64,10 @@ class Navbar extends Component {
                     this.props.user.loggedIn ?
                       <Link
                       to={`/users/${this.props.user.username}`}
-                      activeClassName='active'
                     >
                       {this.props.user.username}
                     </Link>
-                    : <Link to='/signup' activeClassName='active'>Sign up</Link>
+                    : <Link to='/signup' >Sign up</Link>
                   }
                 </li>
                 <li>
@@ -81,7 +78,7 @@ class Navbar extends Component {
                       href='#'
                     >
                     logout</a>
-                    : <Link to='/login' onlyActiveOnIndex activeClassName='active'>Login</Link>
+                    : <Link to='/login'>Login</Link>
                   }
                   </li>
                 </ul>
