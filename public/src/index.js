@@ -10,6 +10,7 @@ import logger from 'redux-logger';
 import rootReducer from './reducers';
 import createRoutes from './routes';
 import promise from 'redux-promise';
+import CustomJs from '../js/custom';
 
 let store;
 

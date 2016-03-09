@@ -10,6 +10,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  padding-top: 50px;
   height: 100%;
   background: #67A798;
   background-image: -moz-linear-gradient(to top right, rgba(0, 100, 130, .8) 0%, #67A798 70%);
@@ -50,10 +51,12 @@ body {
 
 .navbar-inverse {
   background: rgba(40, 40, 40, 1);
-
   .dropdown-toggle {
     cursor: pointer;
   }
+  &.navbar-fixed-top {
+    border-bottom-width: 0;
+  } 
 
   .dropdown-menu {
     background: rgba(50,50,50,1);

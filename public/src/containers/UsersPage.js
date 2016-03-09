@@ -10,7 +10,6 @@ class UsersPage extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.params.username !== this.props.params.username) {
-      console.log('different');
     }
   }
 

@@ -12,8 +12,8 @@ class Navbar extends Component {
   render() {
     return (
       <div>
-        <nav className='navbar-inverse'>
-          <div className='container-fluid'>
+        <nav className='navbar navbar-inverse navbar-fixed-top'>
+          <div className='container'>
             <div className='navbar-header'>
               <button
                 className='navbar-toggle collapsed'
