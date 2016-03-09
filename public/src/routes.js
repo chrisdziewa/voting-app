@@ -49,9 +49,8 @@ export default function createRoutes(store) {
         </Route>
         <Route path="/signup" component={SignupForm}/>
         <Route path="/login" component={LoginForm} />
-        <Route path="/edit-user" component={EditProfile} onEnter={checkAuth}/>
-        <Route path ="/users">
-          <IndexRoute component={UsersPage}/>
+        <Route path="/users" component={UsersPage}>
+          <Route path="edit-user" component={EditProfile} onEnter={checkAuth}/>
           <Route path=":username/:question" component={SinglePollPage} />
           <Route path=":username" component={ProfilePage} />
         </Route>
